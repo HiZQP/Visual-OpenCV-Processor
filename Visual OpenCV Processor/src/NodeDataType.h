@@ -5,8 +5,6 @@
 #include <memory>
 #include <string>
 
-#define QUTF8(s) QString::fromUtf8(s)
-
 class ImageData : public QtNodes::NodeData
 {
 private:
@@ -35,7 +33,7 @@ class StringData : public QtNodes::NodeData
 private:
 	QString _string;
 public:
-	StringData() : _string(QUTF8("")) {}
+	StringData() : _string("") {}
 	StringData(const QString& str) : _string(str) {}
 	QtNodes::NodeDataType type() const override { return QtNodes::NodeDataType{ "String", "str" }; }
 	QString get() const { return _string; }

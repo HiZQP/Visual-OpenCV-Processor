@@ -5,27 +5,26 @@
 
 #include <QLineEdit>
 #include <QComboBox>
-#include <QLabel>
+#include <QSpinBox>
+#include <QCheckBox>
 
-
-class ImageResizeModel : public QtNodes::NodeDelegateModel
+class ImageCannyModel : public QtNodes::NodeDelegateModel 
 {
 	Q_OBJECT
 private:
 	QWidget* _widget;
-	QLineEdit* _width;
-	QLineEdit* _height;
-	QComboBox* _interpolation;
+	QSpinBox* _threshold1;
+	QSpinBox* _threshold2;
+	QCheckBox* _L2gradient;
 
 	cv::Mat _originalImage;
-	cv::Mat _resizedImage;
+	cv::Mat _cannyImage;
 	void calculate();
 public:
-	ImageResizeModel();
-	virtual ~ImageResizeModel() override {}
-
-	QString caption() const override { return "图像缩放组件"; }
-	QString name() const override { return "缩放"; }
+	ImageCannyModel();
+	virtual ~ImageCannyModel() override {}
+	QString caption() const override { return "图像Canny边缘检测组件"; }
+	QString name() const override { return "Canny边缘检测"; }
 	unsigned int nPorts(QtNodes::PortType portType) const override;
 	QtNodes::NodeDataType dataType(QtNodes::PortType portType, QtNodes::PortIndex portIndex) const override;
 	void setInData(std::shared_ptr<QtNodes::NodeData> nodeData, QtNodes::PortIndex portIndex) override;

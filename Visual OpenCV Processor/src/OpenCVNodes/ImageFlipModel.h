@@ -2,30 +2,23 @@
 #include <opencv2/opencv.hpp>
 #include "NodeDataType.h"
 #include <QtNodes/NodeDelegateModel>
-
-#include <QLineEdit>
 #include <QComboBox>
-#include <QLabel>
 
-
-class ImageResizeModel : public QtNodes::NodeDelegateModel
+class ImageFlipModel : public QtNodes::NodeDelegateModel
 {
 	Q_OBJECT
 private:
 	QWidget* _widget;
-	QLineEdit* _width;
-	QLineEdit* _height;
-	QComboBox* _interpolation;
+	QComboBox* _flipCodeComboBox;
 
 	cv::Mat _originalImage;
-	cv::Mat _resizedImage;
+	cv::Mat _flippedImage;
 	void calculate();
 public:
-	ImageResizeModel();
-	virtual ~ImageResizeModel() override {}
-
-	QString caption() const override { return "图像缩放组件"; }
-	QString name() const override { return "缩放"; }
+	ImageFlipModel();
+	virtual ~ImageFlipModel() override {}
+	QString caption() const override { return "图像翻转组件"; }
+	QString name() const override { return "翻转"; }
 	unsigned int nPorts(QtNodes::PortType portType) const override;
 	QtNodes::NodeDataType dataType(QtNodes::PortType portType, QtNodes::PortIndex portIndex) const override;
 	void setInData(std::shared_ptr<QtNodes::NodeData> nodeData, QtNodes::PortIndex portIndex) override;

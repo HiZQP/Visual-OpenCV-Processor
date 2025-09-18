@@ -26,9 +26,9 @@ public:
 	~ImageLoaderModel() override;
 
 	// 节点名称
-	QString caption() const override { return QUTF8("图像源"); }
+	QString caption() const override { return QUTF8("图片加载组件"); }
 	// 菜单名称
-	QString name() const override { return QUTF8("图片加载组件"); }
+	QString name() const override { return QUTF8("从文件加载"); }
 
 	// 端口数量
 	virtual unsigned int nPorts(QtNodes::PortType portType) const override;

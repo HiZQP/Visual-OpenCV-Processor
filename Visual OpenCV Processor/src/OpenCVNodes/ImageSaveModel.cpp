@@ -8,12 +8,12 @@
 
 ImageSaveModel::ImageSaveModel()
 {
-	_button = new QPushButton(QUTF8("浏览"));
+	_button = new QPushButton("浏览");
 	_label = new QLineEdit();
 	_name = new QLineEdit();
-	_name->setPlaceholderText(QUTF8("文件名"));
-	_label->setPlaceholderText(QUTF8("未选择"));
-	_imageLabel = new QLabel(QUTF8("无输出"));
+	_name->setPlaceholderText("文件名");
+	_label->setPlaceholderText("未选择");
+	_imageLabel = new QLabel("无输出");
 	_imageLabel->setAlignment(Qt::AlignCenter);
 	_imageLabel->setMinimumSize(200, 150);
 	_format = new QComboBox();
@@ -65,31 +65,24 @@ QtNodes::NodeDataType ImageSaveModel::dataType(QtNodes::PortType portType, QtNod
 
 void ImageSaveModel::setInData(std::shared_ptr<QtNodes::NodeData> nodeData, QtNodes::PortIndex portIndex)
 {
-	if (nodeData) {
-		auto imgData = std::dynamic_pointer_cast<ImageData>(nodeData);
-		if (imgData) {
-			QString filePath = _label->text();
-			QString fileName = _name->text() + _format->currentText();
+	auto imgData = std::dynamic_pointer_cast<ImageData>(nodeData);
+	if (imgData) {
+		QString filePath = _label->text();
+		QString fileName = _name->text() + _format->currentText();
 
-			if (!filePath.isEmpty() && !fileName.isEmpty() && _pathExists) {
-				std::string savePath = filePath.toStdString() + "/" + fileName.toStdString();
-				cv::imwrite(savePath, imgData->get());
-				cv::Mat rgbImage;
-				cv::cvtColor(imgData->get(), rgbImage, cv::COLOR_BGR2RGB);
-				QImage qimg((const uchar*)rgbImage.data, rgbImage.cols, rgbImage.rows, rgbImage.step, QImage::Format_RGB888);
-				_imageLabel->setPixmap(QPixmap::fromImage(qimg).scaled(_imageLabel->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
-				return;
-			}
-			else {
-				_imageLabel->setText(QUTF8("无输出"));
-				return;
-			}
+		if (!filePath.isEmpty() && !fileName.isEmpty() && _pathExists) {
+			std::string savePath = filePath.toStdString() + "/" + fileName.toStdString();
+			cv::imwrite(savePath, imgData->get());
+			cv::Mat rgbImage;
+			cv::cvtColor(imgData->get(), rgbImage, cv::COLOR_BGR2RGB);
+			QImage qimg((const uchar*)rgbImage.data, rgbImage.cols, rgbImage.rows, rgbImage.step, QImage::Format_RGB888);
+			_imageLabel->setPixmap(QPixmap::fromImage(qimg).scaled(_imageLabel->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
+			return;
+		}
+		else {
+			_imageLabel->setText("无输出");
+			return;
 		}
 	}
-	_imageLabel->setText(QUTF8("无输出"));
-}
-
-std::shared_ptr<QtNodes::NodeData> ImageSaveModel::outData(QtNodes::PortIndex port)
-{
-	return std::shared_ptr<QtNodes::NodeData>();
+	_imageLabel->setText("无输出");
 }

@@ -64,6 +64,33 @@
     <ClCompile Include="src\OpenCVNodes\ImageRotateModel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\OpenCVNodes\ImageFlipModel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OpenCVNodes\ImageConvertColorModel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OpenCVNodes\ImageBlurModel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OpenCVNodes\ImageGaussianBlurModel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OpenCVNodes\ImageImmedianBlurModel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OpenCVNodes\ImageImbilateralFilter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OpenCVNodes\ImageImthresholeModel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OpenCVNodes\ImageImadaptiveThresh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OpenCVNodes\ImageCannyModel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\logSystem\LogSystem.h">
@@ -96,6 +123,33 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="src\OpenCVNodes\ImageRotateModel.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="src\OpenCVNodes\ImageFlipModel.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="src\OpenCVNodes\ImageConvertColorModel.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="src\OpenCVNodes\ImageBlurModel.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="src\OpenCVNodes\ImageGaussianBlurModel.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="src\OpenCVNodes\ImageImmedianBlurModel.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="src\OpenCVNodes\ImageImbilateralFilter.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="src\OpenCVNodes\ImageImthresholeModel.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="src\OpenCVNodes\ImageImadaptiveThresh.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="src\OpenCVNodes\ImageCannyModel.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

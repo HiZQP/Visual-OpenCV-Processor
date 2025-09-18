@@ -3,29 +3,25 @@
 #include "NodeDataType.h"
 #include <QtNodes/NodeDelegateModel>
 
-#include <QLineEdit>
+#include <QSpinBox>
 #include <QComboBox>
-#include <QLabel>
 
-
-class ImageResizeModel : public QtNodes::NodeDelegateModel
+class ImageGaussianBlurModel : public QtNodes::NodeDelegateModel
 {
 	Q_OBJECT
 private:
 	QWidget* _widget;
-	QLineEdit* _width;
-	QLineEdit* _height;
-	QComboBox* _interpolation;
+	QSpinBox* _kernelSize;
+	QComboBox* _borderType;
 
 	cv::Mat _originalImage;
-	cv::Mat _resizedImage;
+	cv::Mat _blurredImage;
 	void calculate();
 public:
-	ImageResizeModel();
-	virtual ~ImageResizeModel() override {}
-
-	QString caption() const override { return "图像缩放组件"; }
-	QString name() const override { return "缩放"; }
+	ImageGaussianBlurModel();
+	virtual ~ImageGaussianBlurModel() override {}
+	QString caption() const override { return "图像高斯模糊组件"; }
+	QString name() const override { return "高斯模糊"; }
 	unsigned int nPorts(QtNodes::PortType portType) const override;
 	QtNodes::NodeDataType dataType(QtNodes::PortType portType, QtNodes::PortIndex portIndex) const override;
 	void setInData(std::shared_ptr<QtNodes::NodeData> nodeData, QtNodes::PortIndex portIndex) override;

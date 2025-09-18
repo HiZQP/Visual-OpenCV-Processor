@@ -67,12 +67,15 @@ void NumToStrModel::setInData(std::shared_ptr<QtNodes::NodeData> nodeData, QtNod
 		}
 	}
 	else {
-		_string = QUTF8("");
+		_string = "";
 		Q_EMIT dataUpdated(0);
 	}
 }
 
 std::shared_ptr<QtNodes::NodeData> NumToStrModel::outData(QtNodes::PortIndex port)
 {
+	if (_string.isEmpty()) {
+		return nullptr;
+	}
 	return std::make_shared<StringData>(_string);
 }

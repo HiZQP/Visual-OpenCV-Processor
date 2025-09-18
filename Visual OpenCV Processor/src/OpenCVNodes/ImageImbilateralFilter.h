@@ -5,27 +5,25 @@
 
 #include <QLineEdit>
 #include <QComboBox>
-#include <QLabel>
+#include <QSpinBox>
+#include <QDoubleSpinBox>
 
-
-class ImageResizeModel : public QtNodes::NodeDelegateModel
+class ImageImbilateralFilter : public QtNodes::NodeDelegateModel
 {
 	Q_OBJECT
 private:
 	QWidget* _widget;
-	QLineEdit* _width;
-	QLineEdit* _height;
-	QComboBox* _interpolation;
-
+	QSpinBox* _d;
+	QDoubleSpinBox* _sigmaColor;
+	QDoubleSpinBox* _sigmaSpace;
 	cv::Mat _originalImage;
-	cv::Mat _resizedImage;
+	cv::Mat _blurredImage;
 	void calculate();
 public:
-	ImageResizeModel();
-	virtual ~ImageResizeModel() override {}
-
-	QString caption() const override { return "图像缩放组件"; }
-	QString name() const override { return "缩放"; }
+	ImageImbilateralFilter();
+	virtual ~ImageImbilateralFilter() override {}
+	QString caption() const override { return "图像双边滤波组件"; }
+	QString name() const override { return "双边滤波"; }
 	unsigned int nPorts(QtNodes::PortType portType) const override;
 	QtNodes::NodeDataType dataType(QtNodes::PortType portType, QtNodes::PortIndex portIndex) const override;
 	void setInData(std::shared_ptr<QtNodes::NodeData> nodeData, QtNodes::PortIndex portIndex) override;

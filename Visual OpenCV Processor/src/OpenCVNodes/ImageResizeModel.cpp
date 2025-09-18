@@ -20,14 +20,14 @@ ImageResizeModel::ImageResizeModel()
 	_width = new QLineEdit("640");
 	_height = new QLineEdit("480");
 	_interpolation = new QComboBox();
-	_interpolation->addItem(QUTF8("最近邻插值"), cv::INTER_NEAREST);
-	_interpolation->addItem(QUTF8("双线性插值"), cv::INTER_LINEAR);
-	_interpolation->addItem(QUTF8("双三次插值"), cv::INTER_CUBIC);
-	_interpolation->addItem(QUTF8("区域插值"), cv::INTER_AREA);
-	_interpolation->addItem(QUTF8("Lanczos插值"), cv::INTER_LANCZOS4);
-	QLabel* label1 = new QLabel(QUTF8("宽（cols）："));
-	QLabel* label2 = new QLabel(QUTF8("高（rows）："));
-	QLabel* label3 = new QLabel(QUTF8("插值方式："));
+	_interpolation->addItem("最近邻插值", cv::INTER_NEAREST);
+	_interpolation->addItem("双线性插值", cv::INTER_LINEAR);
+	_interpolation->addItem("双三次插值", cv::INTER_CUBIC);
+	_interpolation->addItem("区域插值", cv::INTER_AREA);
+	_interpolation->addItem("Lanczos插值", cv::INTER_LANCZOS4);
+	QLabel* label1 = new QLabel("宽（cols）：");
+	QLabel* label2 = new QLabel("高（rows）：");
+	QLabel* label3 = new QLabel("插值方式：");
 	QGridLayout* layout = new QGridLayout();
 	layout->addWidget(label1, 0, 0);
 	layout->addWidget(_width, 0, 1);
@@ -111,5 +111,8 @@ void ImageResizeModel::setInData(std::shared_ptr<QtNodes::NodeData> nodeData, Qt
 
 std::shared_ptr<QtNodes::NodeData> ImageResizeModel::outData(QtNodes::PortIndex port)
 {
+	if (_resizedImage.empty()) {
+		return nullptr;
+	}
 	return std::make_shared<ImageData>(_resizedImage);
 }

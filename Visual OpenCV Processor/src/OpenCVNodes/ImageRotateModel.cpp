@@ -17,7 +17,7 @@ ImageRotateModel::ImageRotateModel()
 {
 	_widget = new QWidget();
 	_angle = new QLineEdit("0");
-	QLabel* label1 = new QLabel(QUTF8("旋转角度（度）："));
+	QLabel* label1 = new QLabel("旋转角度（度）：");
 	QGridLayout* layout = new QGridLayout();
 	layout->addWidget(label1, 0, 0);
 	layout->addWidget(_angle, 0, 1);
@@ -75,5 +75,8 @@ void ImageRotateModel::setInData(std::shared_ptr<QtNodes::NodeData> nodeData, Qt
 
 std::shared_ptr<QtNodes::NodeData> ImageRotateModel::outData(QtNodes::PortIndex port)
 {
+	if (_rotatedImage.empty()) {
+		return nullptr;
+	}
 	return std::make_shared<ImageData>(_rotatedImage);
 }

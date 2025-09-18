@@ -5,27 +5,23 @@
 
 #include <QLineEdit>
 #include <QComboBox>
-#include <QLabel>
+#include <QSpinBox>
 
-
-class ImageResizeModel : public QtNodes::NodeDelegateModel
+class ImageImmedianBlurModel : public QtNodes::NodeDelegateModel
 {
 	Q_OBJECT
 private:
 	QWidget* _widget;
-	QLineEdit* _width;
-	QLineEdit* _height;
-	QComboBox* _interpolation;
+	QSpinBox* _ksize;
 
 	cv::Mat _originalImage;
-	cv::Mat _resizedImage;
+	cv::Mat _blurredImage;
 	void calculate();
 public:
-	ImageResizeModel();
-	virtual ~ImageResizeModel() override {}
-
-	QString caption() const override { return "图像缩放组件"; }
-	QString name() const override { return "缩放"; }
+	ImageImmedianBlurModel();
+	virtual ~ImageImmedianBlurModel() override {}
+	QString caption() const override { return "图像中值滤波组件"; }
+	QString name() const override { return "中值滤波"; }
 	unsigned int nPorts(QtNodes::PortType portType) const override;
 	QtNodes::NodeDataType dataType(QtNodes::PortType portType, QtNodes::PortIndex portIndex) const override;
 	void setInData(std::shared_ptr<QtNodes::NodeData> nodeData, QtNodes::PortIndex portIndex) override;

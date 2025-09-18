@@ -65,6 +65,8 @@ NodeDataType ImageLoaderModel::dataType(PortType portType, PortIndex portIndex) 
 }
 
 std::shared_ptr<QtNodes::NodeData> ImageLoaderModel::outData(QtNodes::PortIndex port) {
+	if (m_image.empty())
+		return nullptr;
 	switch (port) {
 	case 0:
 		return std::make_shared<ImageData>(m_image);

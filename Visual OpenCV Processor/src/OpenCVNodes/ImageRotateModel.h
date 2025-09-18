@@ -19,8 +19,8 @@ public:
 	ImageRotateModel();
 	virtual ~ImageRotateModel() override {}
 
-	QString caption() const override { return QUTF8("旋转"); }
-	QString name() const override { return QUTF8("图像旋转组件"); }
+	QString caption() const override { return "图像旋转组件"; }
+	QString name() const override { return "旋转"; }
 	unsigned int nPorts(QtNodes::PortType portType) const override;
 	QtNodes::NodeDataType dataType(QtNodes::PortType portType, QtNodes::PortIndex portIndex) const override;
 	void setInData(std::shared_ptr<QtNodes::NodeData> nodeData, QtNodes::PortIndex portIndex) override;

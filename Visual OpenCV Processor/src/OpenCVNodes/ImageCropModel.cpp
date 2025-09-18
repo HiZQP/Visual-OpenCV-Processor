@@ -30,9 +30,9 @@ ImageCropModel::ImageCropModel()
 	layout->addWidget(_x, 0, 1);
 	layout->addWidget(new QLabel("左上坐标Y："), 1, 0);
 	layout->addWidget(_y, 1, 1);
-	layout->addWidget(new QLabel(QUTF8("宽：")), 2, 0);
+	layout->addWidget(new QLabel("宽："), 2, 0);
 	layout->addWidget(_width, 2, 1);
-	layout->addWidget(new QLabel(QUTF8("高：")), 3, 0);
+	layout->addWidget(new QLabel("高："), 3, 0);
 	layout->addWidget(_height, 3, 1);
 	_widget->setLayout(layout);
 	connect(_x, &QLineEdit::editingFinished, this, &ImageCropModel::calculate);
@@ -150,6 +150,9 @@ void ImageCropModel::setInData(std::shared_ptr<QtNodes::NodeData> nodeData, QtNo
 
 std::shared_ptr<QtNodes::NodeData> ImageCropModel::outData(QtNodes::PortIndex port)
 {
+	if (_croppedImage.empty()) {
+		return nullptr;
+	}
 	return std::make_shared<ImageData>(_croppedImage);
 }
 

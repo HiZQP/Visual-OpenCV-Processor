@@ -5,7 +5,7 @@
 
 #include <QLineEdit>
 
-class ImageCropModel :public QtNodes::NodeDelegateModel
+class ImageCropModel : public QtNodes::NodeDelegateModel
 {
 	Q_OBJECT
 private:
@@ -22,8 +22,8 @@ public:
 	ImageCropModel();
 	virtual ~ImageCropModel() override {}
 
-	QString caption() const override { return QUTF8("裁剪"); }
-	QString name() const override { return QUTF8("图像裁剪组件"); }
+	QString caption() const override { return "图像裁剪组件"; }
+	QString name() const override { return "裁剪"; }
 
 	unsigned int nPorts(QtNodes::PortType portType) const override;
 	QtNodes::NodeDataType dataType(QtNodes::PortType portType, QtNodes::PortIndex portIndex) const override;

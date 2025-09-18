@@ -27,14 +27,27 @@ std::shared_ptr<QtNodes::NodeDelegateModelRegistry> VisualOpenCVProcessor::regis
 {
 	auto ret = std::make_shared<QtNodes::NodeDelegateModelRegistry>();
 	// 在这里注册自定义的数据模型
-	ret->registerModel<ImageLoaderModel>(QUTF8("图像操作"));
-	ret->registerModel<ImageSaveModel>(QUTF8("图像操作"));
-	ret->registerModel<ImageResizeModel>(QUTF8("图像操作"));
-	ret->registerModel<ImageCropModel>(QUTF8("图像操作"));
-	ret->registerModel<ImageRotateModel>(QUTF8("图像操作"));
-	ret->registerModel<TextDisplayModel>(QUTF8("显示"));
-	ret->registerModel<StrToNumModel>(QUTF8("数据类型转换"));
-	ret->registerModel<NumToStrModel>(QUTF8("数据类型转换"));
+	ret->registerModel<ImageLoaderModel>("工具");
+	ret->registerModel<ImageSaveModel>("工具");
+
+	ret->registerModel<ImageResizeModel>("图像操作");
+	ret->registerModel<ImageCropModel>("图像操作");
+	ret->registerModel<ImageRotateModel>("图像操作");
+	ret->registerModel<ImageFlipModel>("图像操作");
+	ret->registerModel<ImageConvertColorModel>("图像操作");
+	ret->registerModel<ImageBlurModel>("图像操作");
+	ret->registerModel<ImageGaussianBlurModel>("图像操作");
+	ret->registerModel<ImageImmedianBlurModel>("图像操作");
+	ret->registerModel<ImageImbilateralFilter>("图像操作");
+	ret->registerModel<ImageImthresholeModel>("图像操作");
+	ret->registerModel<ImageImadaptiveThresh>("图像操作");
+	ret->registerModel<ImageCannyModel>("图像操作");
+
+	ret->registerModel<TextDisplayModel>("显示");
+	ret->registerModel<ImageDisplayModel>("显示");
+
+	ret->registerModel<StrToNumModel>("数据类型转换");
+	ret->registerModel<NumToStrModel>("数据类型转换");
 
     return ret;
 }

@@ -3,29 +3,27 @@
 #include "NodeDataType.h"
 #include <QtNodes/NodeDelegateModel>
 
-#include <QLineEdit>
 #include <QComboBox>
 #include <QLabel>
 
-
-class ImageResizeModel : public QtNodes::NodeDelegateModel
+class ImageConvertColorModel : public QtNodes::NodeDelegateModel
 {
 	Q_OBJECT
 private:
 	QWidget* _widget;
-	QLineEdit* _width;
-	QLineEdit* _height;
-	QComboBox* _interpolation;
+	QComboBox* _codeBox;
+	QLabel* _infoLabel;
 
-	cv::Mat _originalImage;
-	cv::Mat _resizedImage;
+	cv::Mat _inputImage;
+	cv::Mat _outputImage;
+
 	void calculate();
+	int isConversionCompatible(int conversionCode);
 public:
-	ImageResizeModel();
-	virtual ~ImageResizeModel() override {}
-
-	QString caption() const override { return "图像缩放组件"; }
-	QString name() const override { return "缩放"; }
+	ImageConvertColorModel();
+	virtual ~ImageConvertColorModel() override {}
+	QString caption() const override { return "图像颜色空间转换组件"; }
+	QString name() const override { return "颜色空间转换"; }
 	unsigned int nPorts(QtNodes::PortType portType) const override;
 	QtNodes::NodeDataType dataType(QtNodes::PortType portType, QtNodes::PortIndex portIndex) const override;
 	void setInData(std::shared_ptr<QtNodes::NodeData> nodeData, QtNodes::PortIndex portIndex) override;
