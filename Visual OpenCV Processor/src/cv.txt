@@ -1,0 +1,56 @@
+// OpenCV 基础操作指令定义
+#define CV_IMREAD_IMAGE        0x0001  // 读取图像
+#define CV_IMWRITE_IMAGE       0x0002  // 写入图像
+#define CV_IMSHOW_IMAGE        0x0003  // 显示图像
+#define CV_IMRESIZE            0x0004  // 调整图像尺寸
+#define CV_IMCROP              0x0005  // 图像裁剪
+#define CV_IMROTATE            0x0006  // 图像旋转
+#define CV_IMFLIP              0x0007  // 图像翻转
+#define CV_IMCONVERT_COLOR     0x0008  // 颜色空间转换
+#define CV_IMBLUR              0x0009  // 图像模糊
+#define CV_IMGAUSSIAN_BLUR     0x000A  // 高斯模糊
+#define CV_IMMEDIAN_BLUR       0x000B  // 中值模糊
+#define CV_IMBILATERAL_FILTER  0x000C  // 双边滤波
+#define CV_IMTHRESHOLD         0x000D  // 图像阈值处理
+#define CV_IMADAPTIVE_THRESH   0x000E  // 自适应阈值
+#define CV_IMCANNY             0x000F  // Canny边缘检测
+#define CV_IMSOBEL             0x0010  // Sobel算子
+#define CV_IMLAPLACIAN         0x0011  // Laplacian算子
+#define CV_IMHIST_EQUALIZE     0x0012  // 直方图均衡化
+#define CV_IMDRAW_CONTOURS     0x0013  // 绘制轮廓
+#define CV_IMFIND_CONTOURS     0x0014  // 查找轮廓
+#define CV_IMDRAW_SHAPES       0x0015  // 绘制几何形状
+#define CV_IMADD_TEXT          0x0016  // 添加文字
+#define CV_IMBITWISE_OP        0x0017  // 位运算操作
+#define CV_IMMORPH_OP          0x0018  // 形态学操作
+#define CV_IMWARP_PERSPECTIVE  0x0019  // 透视变换
+#define CV_IMAFFINE_TRANSFORM  0x001A  // 仿射变换
+#define CV_IMHOUGH_LINES       0x001B  // 霍夫直线检测
+#define CV_IMHOUGH_CIRCLES     0x001C  // 霍夫圆检测
+#define CV_IMFEATURE_DETECT    0x001D  // 特征检测
+#define CV_IMMATCH_TEMPLATE    0x001E  // 模板匹配
+#define CV_IMVIDEO_CAPTURE     0x001F  // 视频捕获
+#define CV_IMVIDEO_WRITE       0x0020  // 视频写入
+#define CV_IMGET_PROPERTY      0x0021  // 获取属性
+#define CV_IMSET_PROPERTY      0x0022  // 设置属性
+#define CV_IMWAIT_KEY          0x0023  // 等待按键
+#define CV_IMDESTROY_WINDOW    0x0024  // 销毁窗口
+
+// 高级功能指令
+#define CV_IMCALIB_CAMERA      0x0100  // 相机标定
+#define CV_IMSTEREO_CALIB      0x0101  // 立体标定
+#define CV_IMOPTICAL_FLOW      0x0102  // 光流计算
+#define CV_IMBACKGROUND_SUB    0x0103  // 背景减除
+#define CV_IMOBJECT_DETECT     0x0104  // 目标检测
+#define CV_IMFACE_DETECT       0x0105  // 人脸检测
+#define CV_IMSEGMENTATION      0x0106  // 图像分割
+#define CV_IMDNN_INFERENCE     0x0107  // 深度学习推理
+
+// 工具类指令
+#define CV_IMCREATE_TRACKBAR   0x0200  // 创建轨迹条
+#define CV_IMGET_TRACKBAR_POS  0x0201  // 获取轨迹条位置
+#define CV_IMCREATE_MAT        0x0202  // 创建矩阵
+#define CV_IMRELEASE_MAT       0x0203  // 释放矩阵
+#define CV_IMCOPY_MAT          0x0204  // 复制矩阵
+#define CV_IMZERO_MAT          0x0205  // 零矩阵
+#define CV_IMRANDOM_MAT        0x0206  // 随机矩阵

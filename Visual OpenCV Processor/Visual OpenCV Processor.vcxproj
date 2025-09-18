@@ -20,7 +20,7 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v145</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -69,13 +69,18 @@
     <ClCompile>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>$(SolutionDir)Visual OpenCV Processor\src;$(SolutionDir)Dependencies\OpenCV\include\opencv2;$(SolutionDir)Dependencies\OpenCV\include;$(SolutionDir)Dependencies\QtNodesLibrary\QtNodesLibrary_Debug\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <LanguageStandard_C>Default</LanguageStandard_C>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NODE_EDITOR_SHARED;QT_CORE_LIB;QT_WIDGETS_LIB;QT_GUI_LIB;QT_OPENGL_LIB;CMAKE_INTDIR="Debug"</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\OpenCV\x64\vc16\lib;$(SolutionDir)Dependencies\QtNodesLibrary\QtNodesLibrary_Debug\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>opencv_world4110d.lib;QtNodes.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+    </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
     <ClCompile>
@@ -109,12 +114,31 @@
     <QtRcc Include="src\VisualOpenCVProcessor.qrc" />
     <QtUic Include="src\VisualOpenCVProcessor.ui" />
     <QtMoc Include="src\VisualOpenCVProcessor.h" />
+    <ClCompile Include="src\OpenCVNodes\ImageCropModel.cpp" />
+    <ClCompile Include="src\OpenCVNodes\ImageRotateModel.cpp" />
+    <ClCompile Include="src\OpenCVNodes\ImageResizeModel.cpp" />
+    <ClCompile Include="src\OpenCVNodes\ImageSaveModel.cpp" />
+    <ClCompile Include="src\OpenCVNodes\DataTypeCastModel.cpp" />
+    <ClCompile Include="src\OpenCVNodes\DisplayModel.cpp" />
+    <ClCompile Include="src\OpenCVNodes\ImageLoaderModel.cpp" />
     <ClCompile Include="src\logSystem\LogSystem.cpp" />
     <ClCompile Include="src\VisualOpenCVProcessor.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="src\OpenCVNodes\ImageSaveModel.h" />
+    <QtMoc Include="src\OpenCVNodes\ImageResizeModel.h" />
+    <QtMoc Include="src\OpenCVNodes\ImageCropModel.h" />
+    <QtMoc Include="src\OpenCVNodes\ImageRotateModel.h" />
+    <ClInclude Include="src\OpenCVNodes\OpenCVNodes.h" />
+    <QtMoc Include="src\OpenCVNodes\DisplayModel.h" />
+    <QtMoc Include="src\OpenCVNodes\DataTypeCastModel.h" />
+    <ClInclude Include="src\NodeDataType.h" />
+    <QtMoc Include="src\OpenCVNodes\ImageLoaderModel.h" />
     <ClInclude Include="src\logSystem\LogSystem.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="src\cv.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
