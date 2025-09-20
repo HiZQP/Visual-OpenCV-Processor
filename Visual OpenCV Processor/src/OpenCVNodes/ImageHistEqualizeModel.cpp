@@ -3,28 +3,26 @@
 #include <QVBoxLayout>
 
 void ImageHistEqualizeModel::calculate() {
-	if (_originalImage.data) {
-		if (_originalImage.channels() == 1) {
-			cv::equalizeHist(_originalImage, _equalizedImage);
-		}
-		else if (_originalImage.channels() == 3) {
-			cv::Mat ycrcb;
-			cv::cvtColor(_originalImage, ycrcb, cv::COLOR_BGR2YCrCb);
-			std::vector<cv::Mat> channels;
-			cv::split(ycrcb, channels);
-			cv::equalizeHist(channels[0], channels[0]);
-			cv::merge(channels, ycrcb);
-			cv::cvtColor(ycrcb, _equalizedImage, cv::COLOR_YCrCb2BGR);
-		}
-		else {
-			_infoLabel->setText("仅支持单通道或三通道图像");
-			_equalizedImage.release();
-			Q_EMIT dataUpdated(0);
-			return;
-		}
-		_infoLabel->setText(QString("图像已处理，宽高：%1 x %2").arg(_equalizedImage.cols).arg(_equalizedImage.rows));
-		Q_EMIT dataUpdated(0);
+	if (_originalImage.channels() == 1) {
+		cv::equalizeHist(_originalImage, _equalizedImage);
 	}
+	else if (_originalImage.channels() == 3) {
+		cv::Mat ycrcb;
+		cv::cvtColor(_originalImage, ycrcb, cv::COLOR_BGR2YCrCb);
+		std::vector<cv::Mat> channels;
+		cv::split(ycrcb, channels);
+		cv::equalizeHist(channels[0], channels[0]);
+		cv::merge(channels, ycrcb);
+		cv::cvtColor(ycrcb, _equalizedImage, cv::COLOR_YCrCb2BGR);
+	}
+	else {
+		_infoLabel->setText("仅支持单通道或三通道图像");
+		_equalizedImage.release();
+		Q_EMIT dataUpdated(0);
+		return;
+	}
+	_infoLabel->setText(QString("图像已处理，宽高：%1 x %2").arg(_equalizedImage.cols).arg(_equalizedImage.rows));
+	Q_EMIT dataUpdated(0);
 }
 
 ImageHistEqualizeModel::ImageHistEqualizeModel()
@@ -59,10 +57,8 @@ void ImageHistEqualizeModel::setInData(std::shared_ptr<QtNodes::NodeData> nodeDa
 {
 	if (nodeData) {
 		auto imageData = std::dynamic_pointer_cast<ImageData>(nodeData);
-		if (imageData) {
-			_originalImage = imageData->get();
-			calculate();
-		}
+		_originalImage = imageData->get();
+		calculate();
 	}
 	else {
 		_originalImage.release();

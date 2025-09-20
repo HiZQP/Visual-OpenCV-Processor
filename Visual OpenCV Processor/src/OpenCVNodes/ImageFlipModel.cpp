@@ -5,12 +5,9 @@
 
 void ImageFlipModel::calculate()
 {
-	if (!_originalImage.empty())
-	{
-		int flipCode = _flipCodeComboBox->currentData().toInt();
-		cv::flip(_originalImage, _flippedImage, flipCode);
-		Q_EMIT dataUpdated(0);
-	}
+	int flipCode = _flipCodeComboBox->currentData().toInt();
+	cv::flip(_originalImage, _flippedImage, flipCode);
+	Q_EMIT dataUpdated(0);
 }
 
 ImageFlipModel::ImageFlipModel()
@@ -45,20 +42,15 @@ QtNodes::NodeDataType ImageFlipModel::dataType(QtNodes::PortType portType, QtNod
 
 void ImageFlipModel::setInData(std::shared_ptr<QtNodes::NodeData> nodeData, QtNodes::PortIndex portIndex)
 {
-	if (portIndex == 0)
-	{
+	if(nodeData) {
 		auto imageData = std::dynamic_pointer_cast<ImageData>(nodeData);
-		if (imageData)
-		{
-			_originalImage = imageData->get();
-			calculate();
-		}
-		else
-		{
-			_originalImage.release();
-			_flippedImage.release();
-			Q_EMIT dataUpdated(0);
-		}
+		_originalImage = imageData->get();
+		calculate();
+	}
+	else {
+		_originalImage.release();
+		_flippedImage.release();
+		Q_EMIT dataUpdated(0);
 	}
 }
 

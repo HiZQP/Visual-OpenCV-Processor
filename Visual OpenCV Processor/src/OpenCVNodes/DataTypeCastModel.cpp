@@ -61,13 +61,11 @@ void NumToStrModel::setInData(std::shared_ptr<QtNodes::NodeData> nodeData, QtNod
 {
 	if (nodeData) {
 		auto numData = std::dynamic_pointer_cast<NumberData>(nodeData);
-		if (numData) {
-			_string = QString::number(numData->get());
-			Q_EMIT dataUpdated(0);
-		}
+		_string = QString::number(numData->get());
+		Q_EMIT dataUpdated(0);
 	}
 	else {
-		_string = "";
+		_string.clear();
 		Q_EMIT dataUpdated(0);
 	}
 }

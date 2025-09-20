@@ -8,10 +8,8 @@ void ImageSobelModel::calculate() {
 	int scale = _scale->currentData().toInt();
 	int delta = _delta->currentData().toInt();
 	int ddepth = _ddepth->currentData().toInt();
-	if (_originalImage.data) {
-		cv::Sobel(_originalImage, _sobelImage, ddepth, 1, 1, ksize, scale, delta);
-		Q_EMIT dataUpdated(0);
-	}
+	cv::Sobel(_originalImage, _sobelImage, ddepth, 1, 1, ksize, scale, delta);
+	Q_EMIT dataUpdated(0);
 }
 
 ImageSobelModel::ImageSobelModel()
@@ -72,10 +70,13 @@ void ImageSobelModel::setInData(std::shared_ptr<QtNodes::NodeData> nodeData, QtN
 {
 	if (nodeData) {
 		auto imageData = std::dynamic_pointer_cast<ImageData>(nodeData);
-		if (imageData) {
-			_originalImage = imageData->get();
-			calculate();
-		}
+		_originalImage = imageData->get();
+		calculate();
+	}
+	else {
+		_originalImage.release();
+		_sobelImage.release();
+		Q_EMIT dataUpdated(0);
 	}
 }
 

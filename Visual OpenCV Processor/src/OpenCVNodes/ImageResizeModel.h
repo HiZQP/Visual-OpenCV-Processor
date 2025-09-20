@@ -3,7 +3,7 @@
 #include "NodeDataType.h"
 #include <QtNodes/NodeDelegateModel>
 
-#include <QLineEdit>
+#include <QSpinBox>
 #include <QComboBox>
 #include <QLabel>
 
@@ -13,8 +13,8 @@ class ImageResizeModel : public QtNodes::NodeDelegateModel
 	Q_OBJECT
 private:
 	QWidget* _widget;
-	QLineEdit* _width;
-	QLineEdit* _height;
+	QSpinBox* _width;
+	QSpinBox* _height;
 	QComboBox* _interpolation;
 
 	cv::Mat _originalImage;

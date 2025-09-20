@@ -13,7 +13,6 @@
 #include "ImageGaussianBlurModel.h"
 #include "ImageImmedianBlurModel.h"
 #include "ImageImbilateralFilter.h"
-#include "ImageImthresholeModel.h"
 #include "ImageImadaptiveThresh.h"
 #include "ImageCannyModel.h"
 #include "ImageSobelModel.h"
@@ -21,3 +20,4 @@
 #include "ImageHistEqualizeModel.h"
 #include "ImageFindContoursModel.h"
 #include "ImageDrawContoursModel.h"
+#include "ImageThresholdModel.h"

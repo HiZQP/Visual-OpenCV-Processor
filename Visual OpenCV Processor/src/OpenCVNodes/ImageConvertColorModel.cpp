@@ -17,16 +17,8 @@ void ImageConvertColorModel::calculate()
 		return;
 	}
 
+	_infoLabel->setText("输入合法");
 	cv::cvtColor(_inputImage, _outputImage, code);
-
-	if (_outputImage.empty()) {
-		Q_EMIT dataInvalidated(0);
-		return;
-	}
-	else {
-		_infoLabel->setText("输入合法");
-	}
-
 	Q_EMIT dataUpdated(0);
 }
 
@@ -113,19 +105,18 @@ QtNodes::NodeDataType ImageConvertColorModel::dataType(QtNodes::PortType portTyp
 
 void ImageConvertColorModel::setInData(std::shared_ptr<QtNodes::NodeData> nodeData, QtNodes::PortIndex portIndex)
 {
-	auto imageData = std::dynamic_pointer_cast<ImageData>(nodeData);
-	static bool isValid = false;
-	isValid = (imageData != nullptr);
-	if (isValid) {
-		_inputImage = imageData->get();
+	if(nodeData) {
+		auto imgData = std::dynamic_pointer_cast<ImageData>(nodeData);
+		_inputImage = imgData->get();
 		calculate();
 	}
 	else {
-		_infoLabel->setText("无输入");
 		_inputImage.release();
 		_outputImage.release();
-		Q_EMIT dataInvalidated(0);
+		_infoLabel->setText("无输入");
+		Q_EMIT dataUpdated(0);
 	}
+
 }
 
 std::shared_ptr<QtNodes::NodeData> ImageConvertColorModel::outData(QtNodes::PortIndex port)

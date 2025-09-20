@@ -12,10 +12,8 @@ void ImageImadaptiveThresh::calculate()
 		blockSize += 1;
 	_blockSize->setValue(blockSize);
 	int C = _C->value();
-	if (_originalImage.data) {
-		cv::adaptiveThreshold(_originalImage, _threshImage, 255, method, type, blockSize, C);
-		Q_EMIT dataUpdated(0);
-	}
+	cv::adaptiveThreshold(_originalImage, _threshImage, 255, method, type, blockSize, C);
+	Q_EMIT dataUpdated(0);
 }
 
 ImageImadaptiveThresh::ImageImadaptiveThresh()
@@ -88,7 +86,7 @@ void ImageImadaptiveThresh::setInData(std::shared_ptr<QtNodes::NodeData> nodeDat
 			infoText += info;
 			_info->setText(infoText);
 			_threshImage.release();
-			Q_EMIT dataInvalidated(0);
+			Q_EMIT dataUpdated(0);
 			return;
 		} else{
 			_info->setText("输入合法");
@@ -101,7 +99,7 @@ void ImageImadaptiveThresh::setInData(std::shared_ptr<QtNodes::NodeData> nodeDat
 		_originalImage.release();
 		_threshImage.release();
 		_info->setText("无输入");
-		Q_EMIT dataInvalidated(0);
+		Q_EMIT dataUpdated(0);
 	}
 
 }

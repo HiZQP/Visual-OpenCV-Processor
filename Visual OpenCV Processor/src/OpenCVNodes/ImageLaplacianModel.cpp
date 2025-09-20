@@ -8,10 +8,8 @@ void ImageLaplacianModel::calculate() {
 	int scale = _scale->currentData().toInt();
 	int delta = _delta->currentData().toInt();
 	int ddepth = _ddepth->currentData().toInt();
-	if (_originalImage.data) {
-		cv::Laplacian(_originalImage, _laplacianImage, ddepth, ksize, scale, delta);
-		Q_EMIT dataUpdated(0);
-	}
+	cv::Laplacian(_originalImage, _laplacianImage, ddepth, ksize, scale, delta);
+	Q_EMIT dataUpdated(0);
 }
 
 ImageLaplacianModel::ImageLaplacianModel()
@@ -74,6 +72,11 @@ void ImageLaplacianModel::setInData(std::shared_ptr<QtNodes::NodeData> nodeData,
 		auto imageData = std::dynamic_pointer_cast<ImageData>(nodeData);
 		_originalImage = imageData->get();
 		calculate();
+	}
+	else {
+		_originalImage.release();
+		_laplacianImage.release();
+		Q_EMIT dataInvalidated(0);
 	}
 }
 

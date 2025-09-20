@@ -4,13 +4,14 @@
 #include <QtNodes/NodeDelegateModel>
 
 #include <QLineEdit>
+#include <QDoubleSpinBox>
 
 class ImageRotateModel : public QtNodes::NodeDelegateModel
 {
 	Q_OBJECT
 private:
 	QWidget* _widget;
-	QLineEdit* _angle;
+	QDoubleSpinBox* _angle;
 
 	cv::Mat _originalImage;
 	cv::Mat _rotatedImage;

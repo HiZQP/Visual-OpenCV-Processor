@@ -4,18 +4,12 @@
 #include <QLabel>
 
 void ImageDrawContoursModel::calculate() {
-	if (_originalImage.data && !_contours.empty()) {
-		_outputImage = _originalImage.clone();
-		if (_drawAll->isChecked())
-			cv::drawContours(_outputImage, _contours, -1, cv::Scalar(0, 0, 255), 2);
-		else
-			cv::drawContours(_outputImage, _contours, _indexSpinBox->value(), cv::Scalar(0, 0, 255), 2);
-		Q_EMIT dataUpdated(0);
-	}
-	else {
-		_outputImage.release();
-		Q_EMIT dataUpdated(0);
-	}
+	_outputImage = _originalImage.clone();
+	if (_drawAll->isChecked())
+		cv::drawContours(_outputImage, _contours, -1, cv::Scalar(0, 0, 255), 2);
+	else
+		cv::drawContours(_outputImage, _contours, _indexSpinBox->value(), cv::Scalar(0, 0, 255), 2);
+	Q_EMIT dataUpdated(0);
 }
 
 ImageDrawContoursModel::ImageDrawContoursModel()
@@ -87,9 +81,20 @@ void ImageDrawContoursModel::setInData(std::shared_ptr<QtNodes::NodeData> nodeDa
 			_drawAll->setEnabled(false);
 			calculate();
 		}
-	}else if (portIndex == 2) {
-		_drawAll->setEnabled(true);
+	}
+	else if (portIndex == 0) {
+		_originalImage.release();
+		_outputImage.release();
+		Q_EMIT dataUpdated(0);
+	}
+	else if (portIndex == 1) {
+		_contours.clear();
+		_outputImage.release();
+		Q_EMIT dataUpdated(0);
+	}
+	else if (portIndex == 2) {
 		_indexSpinBox->setEnabled(true);
+		_drawAll->setEnabled(true);
 	}
 }
 

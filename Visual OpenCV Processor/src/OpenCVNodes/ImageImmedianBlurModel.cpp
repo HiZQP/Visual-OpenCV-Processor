@@ -9,10 +9,8 @@ void ImageImmedianBlurModel::calculate()
 	if (ksize % 2 == 0)
 		ksize += 1;
 	_ksize->setValue(ksize);
-	if (_originalImage.data) {
-		cv::medianBlur(_originalImage, _blurredImage, ksize);
-		Q_EMIT dataUpdated(0);
-	}
+	cv::medianBlur(_originalImage, _blurredImage, ksize);
+	Q_EMIT dataUpdated(0);
 }
 
 ImageImmedianBlurModel::ImageImmedianBlurModel()
@@ -52,6 +50,11 @@ void ImageImmedianBlurModel::setInData(std::shared_ptr<QtNodes::NodeData> nodeDa
 		auto imageData = std::dynamic_pointer_cast<ImageData>(nodeData);
 		_originalImage = imageData->get();
 		calculate();
+	}
+	else {
+		_originalImage.release();
+		_blurredImage.release();
+		Q_EMIT dataUpdated(0);
 	}
 }
 

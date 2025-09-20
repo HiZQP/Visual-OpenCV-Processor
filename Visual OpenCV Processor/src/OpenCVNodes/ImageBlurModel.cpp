@@ -10,10 +10,8 @@ void ImageBlurModel::calculate()
 		ksize += 1;
 	_ksize->setValue(ksize);
 	int borderType = _borderType->currentData().toInt();
-	if (_originalImage.data) {
-		cv::blur(_originalImage, _blurredImage, cv::Size(ksize, ksize), cv::Point(-1, -1), borderType);
-		Q_EMIT dataUpdated(0);
-	}
+	cv::blur(_originalImage, _blurredImage, cv::Size(ksize, ksize), cv::Point(-1, -1), borderType);
+	Q_EMIT dataUpdated(0);
 }
 
 ImageBlurModel::ImageBlurModel()
@@ -63,6 +61,11 @@ void ImageBlurModel::setInData(std::shared_ptr<QtNodes::NodeData> nodeData, QtNo
 		auto imageData = std::dynamic_pointer_cast<ImageData>(nodeData);
 		_originalImage = imageData->get();
 		calculate();
+	}
+	else {
+		_originalImage.release();
+		_blurredImage.release();
+		Q_EMIT dataUpdated(0);
 	}
 }
 

@@ -82,9 +82,6 @@
     <ClCompile Include="src\OpenCVNodes\ImageImbilateralFilter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\OpenCVNodes\ImageImthresholeModel.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\OpenCVNodes\ImageImadaptiveThresh.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -97,13 +94,16 @@
     <ClCompile Include="src\OpenCVNodes\ImageLaplacianModel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ImageHistEqualizeModel.cpp">
+    <ClCompile Include="src\OpenCVNodes\ImageHistEqualizeModel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ImageDrawContoursModel.cpp">
+    <ClCompile Include="src\OpenCVNodes\ImageDrawContoursModel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ImageFindContoursModel.cpp">
+    <ClCompile Include="src\OpenCVNodes\ImageFindContoursModel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OpenCVNodes\ImageThresholdModel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -158,9 +158,6 @@
     <QtMoc Include="src\OpenCVNodes\ImageImbilateralFilter.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="src\OpenCVNodes\ImageImthresholeModel.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <QtMoc Include="src\OpenCVNodes\ImageImadaptiveThresh.h">
       <Filter>Header Files</Filter>
     </QtMoc>
@@ -173,13 +170,16 @@
     <QtMoc Include="src\OpenCVNodes\ImageLaplacianModel.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="ImageHistEqualizeModel.h">
+    <QtMoc Include="src\OpenCVNodes\ImageHistEqualizeModel.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="ImageFindContoursModel.h">
+    <QtMoc Include="src\OpenCVNodes\ImageFindContoursModel.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="ImageDrawContoursModel.h">
+    <QtMoc Include="src\OpenCVNodes\ImageDrawContoursModel.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="src\OpenCVNodes\ImageThresholdModel.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

@@ -11,10 +11,8 @@ void ImageImbilateralFilter::calculate()
 	_d->setValue(d);
 	double sigmaColor = _sigmaColor->value();
 	double sigmaSpace = _sigmaSpace->value();
-	if (_originalImage.data) {
-		cv::bilateralFilter(_originalImage, _blurredImage, d, sigmaColor, sigmaSpace);
-		Q_EMIT dataUpdated(0);
-	}
+	cv::bilateralFilter(_originalImage, _blurredImage, d, sigmaColor, sigmaSpace);
+	Q_EMIT dataUpdated(0);
 }
 
 ImageImbilateralFilter::ImageImbilateralFilter()
@@ -72,6 +70,11 @@ void ImageImbilateralFilter::setInData(std::shared_ptr<QtNodes::NodeData> nodeDa
 		auto imageData = std::dynamic_pointer_cast<ImageData>(nodeData);
 		_originalImage = imageData->get();
 		calculate();
+	}
+	else {
+		_originalImage = cv::Mat();
+		_blurredImage = cv::Mat();
+		Q_EMIT dataInvalidated(0);
 	}
 }
 

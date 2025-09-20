@@ -3,17 +3,12 @@
 #include <QFormLayout>
 
 void ImageFindContoursModel::calculate() {
-	if (_originalImage.data) {
-		int mode = _wmode->currentData().toInt();
-		int method = _method->currentData().toInt();
-		_contours.clear();
-		cv::findContours(_originalImage, _contours, mode, method);
-		_infoLabel->setText(QString("检测到 %1 个轮廓").arg(_contours.size()));
-		Q_EMIT dataUpdated(0);
-	}
-	else {
-		_infoLabel->setText("无输入");
-	}
+	int mode = _wmode->currentData().toInt();
+	int method = _method->currentData().toInt();
+	_contours.clear();
+	cv::findContours(_originalImage, _contours, mode, method);
+	_infoLabel->setText(QString("检测到 %1 个轮廓").arg(_contours.size()));
+	Q_EMIT dataUpdated(0);
 }
 
 ImageFindContoursModel::ImageFindContoursModel()
@@ -62,7 +57,7 @@ void ImageFindContoursModel::setInData(std::shared_ptr<QtNodes::NodeData> nodeDa
 	// 检查是否为单通道二值图像
 	if (nodeData) {
 		auto imageData = std::dynamic_pointer_cast<ImageData>(nodeData);
-		if (imageData && imageData->get().data && imageData->get().channels() == 1) {
+		if (imageData->get().channels() == 1) {
 			_originalImage = imageData->get();
 			calculate();
 		}

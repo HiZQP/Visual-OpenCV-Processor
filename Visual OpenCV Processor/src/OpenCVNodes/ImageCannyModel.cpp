@@ -7,10 +7,8 @@ void ImageCannyModel::calculate()
 	int threshold1 = _threshold1->value();
 	int threshold2 = _threshold2->value();
 	bool L2gradient = _L2gradient->isChecked();
-	if (_originalImage.data) {
-		cv::Canny(_originalImage, _cannyImage, threshold1, threshold2, 3, L2gradient);
-		Q_EMIT dataUpdated(0);
-	}
+	cv::Canny(_originalImage, _cannyImage, threshold1, threshold2, 3, L2gradient);
+	Q_EMIT dataUpdated(0);
 }
 
 ImageCannyModel::ImageCannyModel()
@@ -64,6 +62,11 @@ void ImageCannyModel::setInData(std::shared_ptr<QtNodes::NodeData> nodeData, QtN
 		auto imageData = std::dynamic_pointer_cast<ImageData>(nodeData);
 		_originalImage = imageData->get();
 		calculate();
+	}
+	else {
+		_originalImage.release();
+		_cannyImage.release();
+		Q_EMIT dataUpdated(0);
 	}
 }
 

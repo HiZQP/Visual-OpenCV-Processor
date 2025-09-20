@@ -39,7 +39,6 @@ std::shared_ptr<QtNodes::NodeDelegateModelRegistry> VisualOpenCVProcessor::regis
 	ret->registerModel<ImageGaussianBlurModel>("图像操作");
 	ret->registerModel<ImageImmedianBlurModel>("图像操作");
 	ret->registerModel<ImageImbilateralFilter>("图像操作");
-	ret->registerModel<ImageImthresholeModel>("图像操作");
 	ret->registerModel<ImageImadaptiveThresh>("图像操作");
 	ret->registerModel<ImageCannyModel>("图像操作");
 	ret->registerModel<ImageSobelModel>("图像操作");
@@ -47,6 +46,7 @@ std::shared_ptr<QtNodes::NodeDelegateModelRegistry> VisualOpenCVProcessor::regis
 	ret->registerModel<ImageHistEqualizeModel>("图像操作");
 	ret->registerModel<ImageFindContoursModel>("图像操作");
 	ret->registerModel<ImageDrawContoursModel>("图像操作");
+	ret->registerModel<ImageThresholdModel>("图像操作");
 
 	ret->registerModel<TextDisplayModel>("显示");
 	ret->registerModel<ImageDisplayModel>("显示");

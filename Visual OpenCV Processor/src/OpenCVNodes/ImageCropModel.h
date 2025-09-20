@@ -3,17 +3,17 @@
 #include "NodeDataType.h"
 #include <QtNodes/NodeDelegateModel>
 
-#include <QLineEdit>
+#include <QSpinBox>
 
 class ImageCropModel : public QtNodes::NodeDelegateModel
 {
 	Q_OBJECT
 private:
 	QWidget* _widget;
-	QLineEdit* _x;
-	QLineEdit* _y;
-	QLineEdit* _width;
-	QLineEdit* _height;
+	QSpinBox* _x;
+	QSpinBox* _y;
+	QSpinBox* _width;
+	QSpinBox* _height;
 
 	cv::Mat _originalImage;
 	cv::Mat _croppedImage;

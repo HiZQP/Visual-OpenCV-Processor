@@ -7,24 +7,21 @@
 
 void ImageCropModel::calculate()
 {
-	if (!_originalImage.empty())
-	{
-		int x = std::max(0, std::min(_originalImage.cols - 1, _x->text().toInt()));
-		int y = std::max(0, std::min(_originalImage.rows - 1, _y->text().toInt()));
-		int w = std::max(1, std::min(_originalImage.cols - x, _width->text().toInt()));
-		int h = std::max(1, std::min(_originalImage.rows - y, _height->text().toInt()));
-		_croppedImage = _originalImage(cv::Rect(x, y, w, h)).clone();
-		Q_EMIT dataUpdated(0);
-	}
+	int x = std::max(0, std::min(_originalImage.cols - 1, _x->value()));
+	int y = std::max(0, std::min(_originalImage.rows - 1, _y->value()));
+	int w = std::max(1, std::min(_originalImage.cols - x, _width->value()));
+	int h = std::max(1, std::min(_originalImage.rows - y, _height->value()));
+	_croppedImage = _originalImage(cv::Rect(x, y, w, h)).clone();
+	Q_EMIT dataUpdated(0);
 }
 
 ImageCropModel::ImageCropModel()
 {
 	_widget = new QWidget();
-	_x = new QLineEdit("0");
-	_y = new QLineEdit("0");
-	_width = new QLineEdit("100");
-	_height = new QLineEdit("100");
+	_x = new QSpinBox();
+	_y = new QSpinBox();
+	_width = new QSpinBox();
+	_height = new QSpinBox();
 	auto layout = new QGridLayout();
 	layout->addWidget(new QLabel("左上坐标X："), 0, 0);
 	layout->addWidget(_x, 0, 1);
@@ -35,10 +32,10 @@ ImageCropModel::ImageCropModel()
 	layout->addWidget(new QLabel("高："), 3, 0);
 	layout->addWidget(_height, 3, 1);
 	_widget->setLayout(layout);
-	connect(_x, &QLineEdit::editingFinished, this, &ImageCropModel::calculate);
-	connect(_y, &QLineEdit::editingFinished, this, &ImageCropModel::calculate);
-	connect(_width, &QLineEdit::editingFinished, this, &ImageCropModel::calculate);
-	connect(_height, &QLineEdit::editingFinished, this, &ImageCropModel::calculate);
+	connect(_x, &QSpinBox::editingFinished, this, &ImageCropModel::calculate);
+	connect(_y, &QSpinBox::editingFinished, this, &ImageCropModel::calculate);
+	connect(_width, &QSpinBox::editingFinished, this, &ImageCropModel::calculate);
+	connect(_height, &QSpinBox::editingFinished, this, &ImageCropModel::calculate);
 }
 
 unsigned int ImageCropModel::nPorts(QtNodes::PortType portType) const
@@ -68,83 +65,56 @@ QtNodes::NodeDataType ImageCropModel::dataType(QtNodes::PortType portType, QtNod
 
 void ImageCropModel::setInData(std::shared_ptr<QtNodes::NodeData> nodeData, QtNodes::PortIndex portIndex)
 {
-	if (portIndex == 0)
-	{
-		auto imageData = std::dynamic_pointer_cast<ImageData>(nodeData);
-		if (imageData)
-		{
+	if (nodeData) {
+		if (portIndex == 0) {
+			auto imageData = std::dynamic_pointer_cast<ImageData>(nodeData);
 			_originalImage = imageData->get();
+			_width->setMaximum(_originalImage.cols);
+			_height->setMaximum(_originalImage.rows);
 			calculate();
-		}else
-		{
-			_originalImage.release();
-			_croppedImage.release();
-			Q_EMIT dataUpdated(0);
 		}
-	}
-	else if (portIndex == 1)
-	{
-		auto numberData = std::dynamic_pointer_cast<NumberData>(nodeData);
-		static bool isValid = false;
-		isValid = (numberData != nullptr);
-		if (isValid) {
+		else if (portIndex == 1) {
+			auto numberData = std::dynamic_pointer_cast<NumberData>(nodeData);
+			_x->setValue(static_cast<int>(numberData->get()));
 			_x->setReadOnly(true);
-			_x->setStyleSheet("QLineEdit{ color: gray; }");
-			_x->setText(QString::number(numberData->get()));
 			calculate();
 		}
-		else {
-			_x->setReadOnly(false);
-			_x->setStyleSheet("");
-		}
-	}
-	else if (portIndex == 2)
-	{
-		auto numberData = std::dynamic_pointer_cast<NumberData>(nodeData);
-		static bool isValid = false;
-		isValid = (numberData != nullptr);
-		if (isValid) {
+		else if (portIndex == 2) {
+			auto numberData = std::dynamic_pointer_cast<NumberData>(nodeData);
+			_y->setValue(static_cast<int>(numberData->get()));
 			_y->setReadOnly(true);
-			_y->setStyleSheet("QLineEdit{ color: gray; }");
-			_y->setText(QString::number(numberData->get()));
 			calculate();
 		}
-		else {
-			_y->setReadOnly(false);
-			_y->setStyleSheet("");
-		}
-	}
-	else if (portIndex == 3)
-	{
-		auto numberData = std::dynamic_pointer_cast<NumberData>(nodeData);
-		static bool isValid = false;
-		isValid = (numberData != nullptr);
-		if (isValid) {
+		else if (portIndex == 3) {
+			auto numberData = std::dynamic_pointer_cast<NumberData>(nodeData);
+			_width->setValue(static_cast<int>(numberData->get()));
 			_width->setReadOnly(true);
-			_width->setStyleSheet("QLineEdit{ color: gray; }");
-			_width->setText(QString::number(numberData->get()));
 			calculate();
 		}
-		else {
-			_width->setReadOnly(false);
-			_width->setStyleSheet("");
+		else if (portIndex == 4) {
+			auto numberData = std::dynamic_pointer_cast<NumberData>(nodeData);
+			_height->setValue(static_cast<int>(numberData->get()));
+			_height->setReadOnly(true);
+			calculate();
 		}
 	}
-	else if (portIndex == 4)
+	else if (portIndex == 0)
 	{
-		auto numberData = std::dynamic_pointer_cast<NumberData>(nodeData);
-		static bool isValid = false;
-		isValid = (numberData != nullptr);
-		if (isValid) {
-			_height->setReadOnly(true);
-			_height->setStyleSheet("QLineEdit{ color: gray; }");
-			_height->setText(QString::number(numberData->get()));
-			calculate();
-		}
-		else {
-			_height->setReadOnly(false);
-			_height->setStyleSheet("");
-		}
+		_originalImage.release();
+		_croppedImage.release();
+		Q_EMIT dataUpdated(0);
+	}
+	else if (portIndex == 1) {
+		_x->setReadOnly(false);
+	}
+	else if (portIndex == 2) {
+		_y->setReadOnly(false);
+	}
+	else if (portIndex == 3) {
+		_width->setReadOnly(false);
+	}
+	else if (portIndex == 4) {
+		_height->setReadOnly(false);
 	}
 }
 

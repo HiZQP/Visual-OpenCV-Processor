@@ -11,10 +11,8 @@ void ImageGaussianBlurModel::calculate()
 		ksize += 1;
 	_kernelSize->setValue(ksize);
 	int borderType = _borderType->currentData().toInt();
-	if (_originalImage.data) {
-		cv::GaussianBlur(_originalImage, _blurredImage, cv::Size(ksize, ksize), 0, 0, borderType);
-		Q_EMIT dataUpdated(0);
-	}
+	cv::GaussianBlur(_originalImage, _blurredImage, cv::Size(ksize, ksize), 0, 0, borderType);
+	Q_EMIT dataUpdated(0);
 }
 
 ImageGaussianBlurModel::ImageGaussianBlurModel()
@@ -64,10 +62,15 @@ QtNodes::NodeDataType ImageGaussianBlurModel::dataType(QtNodes::PortType portTyp
 
 void ImageGaussianBlurModel::setInData(std::shared_ptr<QtNodes::NodeData> nodeData, QtNodes::PortIndex portIndex)
 {
-	auto imageData = std::dynamic_pointer_cast<ImageData>(nodeData);
-	if (imageData) {
+	if (nodeData) {
+		auto imageData = std::dynamic_pointer_cast<ImageData>(nodeData);
 		_originalImage = imageData->get();
 		calculate();
+	}
+	else {
+		_originalImage.release();
+		_blurredImage.release();
+		Q_EMIT dataUpdated(0);
 	}
 }
 
