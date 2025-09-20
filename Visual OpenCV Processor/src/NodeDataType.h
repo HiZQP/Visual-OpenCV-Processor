@@ -4,6 +4,7 @@
 #include <opencv2/opencv.hpp>
 #include <memory>
 #include <string>
+#include <vector>
 
 class ImageData : public QtNodes::NodeData
 {
@@ -37,4 +38,15 @@ public:
 	StringData(const QString& str) : _string(str) {}
 	QtNodes::NodeDataType type() const override { return QtNodes::NodeDataType{ "String", "str" }; }
 	QString get() const { return _string; }
+};
+
+class ContoursData : public QtNodes::NodeData
+{
+private:
+	std::vector<std::vector<cv::Point>> _contours;
+public:
+	ContoursData() : _contours() {}
+	ContoursData(const std::vector<std::vector<cv::Point>>& contours) : _contours(contours) {}
+	QtNodes::NodeDataType type() const override { return QtNodes::NodeDataType{ "Contours", "contours" }; }
+	std::vector<std::vector<cv::Point>> get() const { return _contours; }
 };

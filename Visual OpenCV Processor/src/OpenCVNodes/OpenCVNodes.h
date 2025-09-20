@@ -16,3 +16,8 @@
 #include "ImageImthresholeModel.h"
 #include "ImageImadaptiveThresh.h"
 #include "ImageCannyModel.h"
+#include "ImageSobelModel.h"
+#include "ImageLaplacianModel.h"
+#include "ImageHistEqualizeModel.h"
+#include "ImageFindContoursModel.h"
+#include "ImageDrawContoursModel.h"

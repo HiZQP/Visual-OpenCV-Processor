@@ -14,9 +14,9 @@
 #define CV_IMTHRESHOLD         0x000D  
 #define CV_IMADAPTIVE_THRESH   0x000E  
 #define CV_IMCANNY             0x000F  
-#define CV_IMSOBEL             0x0010  // Sobel算子
-#define CV_IMLAPLACIAN         0x0011  // Laplacian算子
-#define CV_IMHIST_EQUALIZE     0x0012  // 直方图均衡化
+#define CV_IMSOBEL             0x0010  
+#define CV_IMLAPLACIAN         0x0011  
+#define CV_IMHIST_EQUALIZE     0x0012  
 #define CV_IMDRAW_CONTOURS     0x0013  // 绘制轮廓
 #define CV_IMFIND_CONTOURS     0x0014  // 查找轮廓
 #define CV_IMDRAW_SHAPES       0x0015  // 绘制几何形状

@@ -114,6 +114,11 @@
     <QtRcc Include="src\VisualOpenCVProcessor.qrc" />
     <QtUic Include="src\VisualOpenCVProcessor.ui" />
     <QtMoc Include="src\VisualOpenCVProcessor.h" />
+    <ClCompile Include="ImageDrawContoursModel.cpp" />
+    <ClCompile Include="ImageFindContoursModel.cpp" />
+    <ClCompile Include="ImageHistEqualizeModel.cpp" />
+    <ClCompile Include="src\OpenCVNodes\ImageLaplacianModel.cpp" />
+    <ClCompile Include="src\OpenCVNodes\ImageSobelModel.cpp" />
     <ClCompile Include="src\OpenCVNodes\ImageCannyModel.cpp" />
     <ClCompile Include="src\OpenCVNodes\ImageImadaptiveThresh.cpp" />
     <ClCompile Include="src\OpenCVNodes\ImageImthresholeModel.cpp" />
@@ -148,6 +153,11 @@
     <QtMoc Include="src\OpenCVNodes\ImageImthresholeModel.h" />
     <QtMoc Include="src\OpenCVNodes\ImageImadaptiveThresh.h" />
     <QtMoc Include="src\OpenCVNodes\ImageCannyModel.h" />
+    <QtMoc Include="src\OpenCVNodes\ImageSobelModel.h" />
+    <QtMoc Include="src\OpenCVNodes\ImageLaplacianModel.h" />
+    <QtMoc Include="ImageHistEqualizeModel.h" />
+    <QtMoc Include="ImageDrawContoursModel.h" />
+    <QtMoc Include="ImageFindContoursModel.h" />
     <ClInclude Include="src\OpenCVNodes\OpenCVNodes.h" />
     <QtMoc Include="src\OpenCVNodes\DisplayModel.h" />
     <QtMoc Include="src\OpenCVNodes\DataTypeCastModel.h" />

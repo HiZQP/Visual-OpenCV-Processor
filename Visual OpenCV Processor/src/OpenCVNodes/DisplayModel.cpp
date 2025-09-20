@@ -55,14 +55,66 @@ void ImageDisplayModel::setInData(std::shared_ptr<QtNodes::NodeData> nodeData, Q
 
 		QString sizeText = QString("宽高：%1 x %2").arg(imageData->get().cols).arg(imageData->get().rows);
 		_size->setText(sizeText);
-		cv::Mat rgbImage;
-		cv::cvtColor(imageData->get(), rgbImage, cv::COLOR_BGR2RGB);
-		QImage qimg((const uchar*)rgbImage.data, rgbImage.cols, rgbImage.rows, rgbImage.step, QImage::Format_RGB888);
-		_imageLabel->setPixmap(QPixmap::fromImage(qimg).scaled(_imageLabel->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
-	}
-	else {
-		_imageLabel->setText("无图像");
-		_size->setText("宽高：");
-		Q_EMIT dataUpdated(0);
-	}
+        cv::Mat displayImage;
+		const cv::Mat& inputImage = imageData->get();
+
+        if (inputImage.channels() == 1) {
+            if (inputImage.depth() == CV_8U) {
+                cv::cvtColor(inputImage, displayImage, cv::COLOR_GRAY2RGB);
+            }
+            else {
+                cv::Mat normalized;
+                cv::normalize(inputImage, normalized, 0, 255, cv::NORM_MINMAX, CV_8U);
+                cv::cvtColor(normalized, displayImage, cv::COLOR_GRAY2RGB);
+            }
+        }
+        else if (inputImage.channels() == 3) {
+            if (inputImage.depth() == CV_8U) {
+                cv::cvtColor(inputImage, displayImage, cv::COLOR_BGR2RGB);
+            }
+            else {
+                cv::Mat normalized;
+                cv::normalize(inputImage, normalized, 0, 255, cv::NORM_MINMAX, CV_8UC3);
+                cv::cvtColor(normalized, displayImage, cv::COLOR_BGR2RGB);
+            }
+        }
+        else {
+            if (inputImage.depth() == CV_8U) {
+                if (inputImage.channels() == 4) {
+                    cv::cvtColor(inputImage, displayImage, cv::COLOR_BGRA2RGB);
+                }
+                else {
+                    cv::Mat channels[3];
+                    for (int i = 0; i < 3 && i < inputImage.channels(); i++) {
+                        cv::extractChannel(inputImage, channels[i], i);
+                    }
+                    cv::merge(channels, std::min(3, inputImage.channels()), displayImage);
+                }
+            }
+            else {
+                cv::Mat normalized;
+                cv::normalize(inputImage, normalized, 0, 255, cv::NORM_MINMAX, CV_8U);
+                if (normalized.channels() == 4) {
+                    cv::cvtColor(normalized, displayImage, cv::COLOR_BGRA2RGB);
+                }
+                else {
+                    cv::Mat channels[3];
+                    for (int i = 0; i < 3 && i < normalized.channels(); i++) {
+                        cv::extractChannel(normalized, channels[i], i);
+                    }
+                    cv::merge(channels, std::min(3, normalized.channels()), displayImage);
+                }
+            }
+        }
+
+        QImage qimg((const uchar*)displayImage.data, displayImage.cols, displayImage.rows,
+            displayImage.step, QImage::Format_RGB888);
+        _imageLabel->setPixmap(QPixmap::fromImage(qimg).scaled(_imageLabel->size(),
+            Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    }
+    else {
+        _imageLabel->setText("无图像");
+        _size->setText("宽高：");
+        Q_EMIT dataUpdated(0);
+    }
 }

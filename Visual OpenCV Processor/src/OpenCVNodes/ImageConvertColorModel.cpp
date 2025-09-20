@@ -18,7 +18,7 @@ void ImageConvertColorModel::calculate()
 	if (channels != requiredChannels) {
 		_infoLabel->setText(QString("输入图像通道数为 %1 ，%2 需要 %3 通道").arg(channels).arg(_codeBox->currentText()).arg(requiredChannels));
 		_outputImage.release();
-		Q_EMIT dataInvalidated(0);
+		Q_EMIT dataUpdated(0);
 		return;
 	}
 
