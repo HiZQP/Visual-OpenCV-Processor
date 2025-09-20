@@ -7,7 +7,7 @@ void ImageFindContoursModel::calculate() {
 		int mode = _wmode->currentData().toInt();
 		int method = _method->currentData().toInt();
 		_contours.clear();
-		cv::findContours(_originalImage, _contours, static_cast<cv::RetrievalModes>(mode), static_cast<cv::ContourApproximationModes>(method));
+		cv::findContours(_originalImage, _contours, mode, method);
 		_infoLabel->setText(QString("检测到 %1 个轮廓").arg(_contours.size()));
 		Q_EMIT dataUpdated(0);
 	}

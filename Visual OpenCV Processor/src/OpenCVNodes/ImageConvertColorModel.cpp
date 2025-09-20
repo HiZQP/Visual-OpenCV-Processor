@@ -6,12 +6,7 @@
 
 void ImageConvertColorModel::calculate()
 {
-	if (_inputImage.empty()) {
-		_outputImage.release();
-		Q_EMIT dataInvalidated(0);
-		return;
-	}
-		// 检查转换兼容性
+	// 检查转换兼容性
 	int channels = _inputImage.channels();
 	int code = _codeBox->currentData().toInt();
 	int requiredChannels = isConversionCompatible(code);
@@ -43,6 +38,7 @@ int ImageConvertColorModel::isConversionCompatible(int conversionCode) {
 	case cv::COLOR_RGB2BGR565:
 	case cv::COLOR_BGR2GRAY:
 	case cv::COLOR_RGB2GRAY:
+	case cv::COLOR_BGR2HSV:
 		return 3;
 
 		// 需要4通道输入的转换
@@ -75,6 +71,7 @@ ImageConvertColorModel::ImageConvertColorModel()
 	_codeBox->addItem("BGR2RGBA", cv::COLOR_BGR2RGBA);
 	_codeBox->addItem("RGBA2BGR", cv::COLOR_RGBA2BGR);
 	_codeBox->addItem("BGR2RGB", cv::COLOR_BGR2RGB);
+	_codeBox->addItem("BGR2HSV", cv::COLOR_BGR2HSV);
 	_codeBox->addItem("RGB2BGR", cv::COLOR_RGB2BGR);
 	_codeBox->addItem("BGRA2RGBA", cv::COLOR_BGRA2RGBA);
 	_codeBox->addItem("RGBA2BGRA", cv::COLOR_RGBA2BGRA);
