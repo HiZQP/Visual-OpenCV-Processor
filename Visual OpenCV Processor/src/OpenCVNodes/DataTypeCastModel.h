@@ -30,3 +30,4 @@ public:
 	std::shared_ptr<QtNodes::NodeData> outData(QtNodes::PortIndex port) override;
 	QWidget* embeddedWidget() override { return nullptr; }
 };
+

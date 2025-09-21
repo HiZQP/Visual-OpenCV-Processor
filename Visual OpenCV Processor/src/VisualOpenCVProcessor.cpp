@@ -29,6 +29,7 @@ std::shared_ptr<QtNodes::NodeDelegateModelRegistry> VisualOpenCVProcessor::regis
 	// 在这里注册自定义的数据模型
 	ret->registerModel<ImageLoaderModel>("工具");
 	ret->registerModel<ImageSaveModel>("工具");
+	ret->registerModel<ColorPicker>("工具");
 
 	ret->registerModel<ImageResizeModel>("图像操作");
 	ret->registerModel<ImageCropModel>("图像操作");
@@ -47,6 +48,7 @@ std::shared_ptr<QtNodes::NodeDelegateModelRegistry> VisualOpenCVProcessor::regis
 	ret->registerModel<ImageFindContoursModel>("图像操作");
 	ret->registerModel<ImageDrawContoursModel>("图像操作");
 	ret->registerModel<ImageThresholdModel>("图像操作");
+	ret->registerModel<DrawLineModel>("图像操作");
 
 	ret->registerModel<TextDisplayModel>("显示");
 	ret->registerModel<ImageDisplayModel>("显示");

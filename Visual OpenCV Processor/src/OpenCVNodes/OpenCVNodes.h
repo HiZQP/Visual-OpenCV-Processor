@@ -21,3 +21,4 @@
 #include "ImageFindContoursModel.h"
 #include "ImageDrawContoursModel.h"
 #include "ImageThresholdModel.h"
+#include "DrawLineModel.h"

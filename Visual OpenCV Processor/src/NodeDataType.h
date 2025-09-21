@@ -2,6 +2,7 @@
 
 #include <QtNodes/NodeData>
 #include <opencv2/opencv.hpp>
+
 #include <memory>
 #include <string>
 #include <vector>
@@ -49,4 +50,26 @@ public:
 	ContoursData(const std::vector<std::vector<cv::Point>>& contours) : _contours(contours) {}
 	QtNodes::NodeDataType type() const override { return QtNodes::NodeDataType{ "Contours", "contours" }; }
 	std::vector<std::vector<cv::Point>> get() const { return _contours; }
+};
+
+class ScalarData : public QtNodes::NodeData
+{	
+private:
+	cv::Scalar _scalar;
+public:
+	ScalarData() : _scalar(cv::Scalar(0,0,0,0)) {}
+	ScalarData(const cv::Scalar& scalar) : _scalar(scalar) {}
+	QtNodes::NodeDataType type() const override { return QtNodes::NodeDataType{ "Scalar", "scalar" }; }
+	cv::Scalar get() const { return _scalar; }
+};
+
+class PointData : public QtNodes::NodeData
+{
+private:
+	cv::Point _point;
+public:
+	PointData() : _point(cv::Point(0, 0)) {}
+	PointData(const cv::Point& point) : _point(point) {}
+	QtNodes::NodeDataType type() const override { return QtNodes::NodeDataType{ "Point", "point" }; }
+	cv::Point get() const { return _point; }
 };

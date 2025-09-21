@@ -13,6 +13,7 @@
 #include <memory>
 
 #include "OpenCVNodes/OpenCVNodes.h"
+#include "ToolNodes/ToolNodes.h"
 
 class VisualOpenCVProcessor : public QMainWindow
 {

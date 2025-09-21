@@ -68,7 +68,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)Visual OpenCV Processor\src;$(SolutionDir)Dependencies\OpenCV\include\opencv2;$(SolutionDir)Dependencies\OpenCV\include;$(SolutionDir)Dependencies\QtNodesLibrary\QtNodesLibrary_Debug\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Visual OpenCV Processor\src;$(SolutionDir)Visual OpenCV Processor\src\ToolNodes;$(SolutionDir)Dependencies\OpenCV\include\opencv2;$(SolutionDir)Dependencies\OpenCV\include;$(SolutionDir)Dependencies\QtNodesLibrary\QtNodesLibrary_Debug\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard_C>Default</LanguageStandard_C>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NODE_EDITOR_SHARED;QT_CORE_LIB;QT_WIDGETS_LIB;QT_GUI_LIB;QT_OPENGL_LIB;CMAKE_INTDIR="Debug"</PreprocessorDefinitions>
     </ClCompile>
@@ -114,6 +114,7 @@
     <QtRcc Include="src\VisualOpenCVProcessor.qrc" />
     <QtUic Include="src\VisualOpenCVProcessor.ui" />
     <QtMoc Include="src\VisualOpenCVProcessor.h" />
+    <ClCompile Include="src\OpenCVNodes\DrawLineModel.cpp" />
     <ClCompile Include="src\OpenCVNodes\ImageDrawContoursModel.cpp" />
     <ClCompile Include="src\OpenCVNodes\ImageFindContoursModel.cpp" />
     <ClCompile Include="src\OpenCVNodes\ImageHistEqualizeModel.cpp" />
@@ -136,10 +137,13 @@
     <ClCompile Include="src\OpenCVNodes\DisplayModel.cpp" />
     <ClCompile Include="src\OpenCVNodes\ImageLoaderModel.cpp" />
     <ClCompile Include="src\logSystem\LogSystem.cpp" />
+    <ClCompile Include="src\ToolNodes\ColorPicker.cpp" />
     <ClCompile Include="src\VisualOpenCVProcessor.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\ToolNodes\ToolNodes.h" />
+    <QtMoc Include="src\ToolNodes\ColorPicker.h" />
     <QtMoc Include="src\OpenCVNodes\ImageSaveModel.h" />
     <QtMoc Include="src\OpenCVNodes\ImageResizeModel.h" />
     <QtMoc Include="src\OpenCVNodes\ImageCropModel.h" />
@@ -158,6 +162,7 @@
     <QtMoc Include="src\OpenCVNodes\ImageDrawContoursModel.h" />
     <QtMoc Include="src\OpenCVNodes\ImageFindContoursModel.h" />
     <QtMoc Include="src\OpenCVNodes\ImageThresholdModel.h" />
+    <QtMoc Include="src\OpenCVNodes\DrawLineModel.h" />
     <ClInclude Include="src\OpenCVNodes\OpenCVNodes.h" />
     <QtMoc Include="src\OpenCVNodes\DisplayModel.h" />
     <QtMoc Include="src\OpenCVNodes\DataTypeCastModel.h" />
