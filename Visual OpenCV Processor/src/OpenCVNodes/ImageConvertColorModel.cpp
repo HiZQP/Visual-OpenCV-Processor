@@ -6,20 +6,22 @@
 
 void ImageConvertColorModel::calculate()
 {
-	// 检查转换兼容性
-	int channels = _inputImage.channels();
-	int code = _codeBox->currentData().toInt();
-	int requiredChannels = isConversionCompatible(code);
-	if (channels != requiredChannels) {
-		_infoLabel->setText(QString("输入图像通道数为 %1 ，%2 需要 %3 通道").arg(channels).arg(_codeBox->currentText()).arg(requiredChannels));
-		_outputImage.release();
-		Q_EMIT dataUpdated(0);
-		return;
-	}
+	if (_inputImage.data) {
+		// 检查转换兼容性
+		int channels = _inputImage.channels();
+		int code = _codeBox->currentData().toInt();
+		int requiredChannels = isConversionCompatible(code);
+		if (channels != requiredChannels) {
+			_infoLabel->setText(QString("输入图像通道数为 %1 ，%2 需要 %3 通道").arg(channels).arg(_codeBox->currentText()).arg(requiredChannels));
+			_outputImage.release();
+			Q_EMIT dataUpdated(0);
+			return;
+		}
 
-	_infoLabel->setText("输入合法");
-	cv::cvtColor(_inputImage, _outputImage, code);
-	Q_EMIT dataUpdated(0);
+		_infoLabel->setText("输入合法");
+		cv::cvtColor(_inputImage, _outputImage, code);
+		Q_EMIT dataUpdated(0);
+	}
 }
 
 int ImageConvertColorModel::isConversionCompatible(int conversionCode) {

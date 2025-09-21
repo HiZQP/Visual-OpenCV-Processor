@@ -5,15 +5,17 @@
 
 void ImageImadaptiveThresh::calculate()
 {
-	int method = _method->currentData().toInt();
-	int type = _type->currentData().toInt();
-	int blockSize = _blockSize->value();
-	if (blockSize % 2 == 0)
-		blockSize += 1;
-	_blockSize->setValue(blockSize);
-	int C = _C->value();
-	cv::adaptiveThreshold(_originalImage, _threshImage, 255, method, type, blockSize, C);
-	Q_EMIT dataUpdated(0);
+	if (_originalImage.data) {
+		int method = _method->currentData().toInt();
+		int type = _type->currentData().toInt();
+		int blockSize = _blockSize->value();
+		if (blockSize % 2 == 0)
+			blockSize += 1;
+		_blockSize->setValue(blockSize);
+		int C = _C->value();
+		cv::adaptiveThreshold(_originalImage, _threshImage, 255, method, type, blockSize, C);
+		Q_EMIT dataUpdated(0);
+	}
 }
 
 ImageImadaptiveThresh::ImageImadaptiveThresh()

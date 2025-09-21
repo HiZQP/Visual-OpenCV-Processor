@@ -4,11 +4,13 @@
 
 void ImageRotateModel::calculate()
 {
-	double angle = _angle->value();
-	cv::Point2f center((float)(_originalImage.cols / 2), (float)(_originalImage.rows / 2));
-	cv::Mat rot = cv::getRotationMatrix2D(center, angle, 1.0);
-	cv::warpAffine(_originalImage, _rotatedImage, rot, _originalImage.size());
-	Q_EMIT dataUpdated(0);
+	if (_originalImage.data) {
+		double angle = _angle->value();
+		cv::Point2f center((float)(_originalImage.cols / 2), (float)(_originalImage.rows / 2));
+		cv::Mat rot = cv::getRotationMatrix2D(center, angle, 1.0);
+		cv::warpAffine(_originalImage, _rotatedImage, rot, _originalImage.size());
+		Q_EMIT dataUpdated(0);
+	}
 }
 
 ImageRotateModel::ImageRotateModel()

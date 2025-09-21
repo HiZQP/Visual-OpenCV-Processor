@@ -4,12 +4,14 @@
 #include <QLabel>
 
 void ImageDrawContoursModel::calculate() {
-	_outputImage = _originalImage.clone();
-	if (_drawAll->isChecked())
-		cv::drawContours(_outputImage, _contours, -1, cv::Scalar(0, 0, 255), 2);
-	else
-		cv::drawContours(_outputImage, _contours, _indexSpinBox->value(), cv::Scalar(0, 0, 255), 2);
-	Q_EMIT dataUpdated(0);
+	if (_originalImage.data) {
+		_outputImage = _originalImage.clone();
+		if (_drawAll->isChecked())
+			cv::drawContours(_outputImage, _contours, -1, cv::Scalar(0, 0, 255), 2);
+		else
+			cv::drawContours(_outputImage, _contours, _indexSpinBox->value(), cv::Scalar(0, 0, 255), 2);
+		Q_EMIT dataUpdated(0);
+	}
 }
 
 ImageDrawContoursModel::ImageDrawContoursModel()

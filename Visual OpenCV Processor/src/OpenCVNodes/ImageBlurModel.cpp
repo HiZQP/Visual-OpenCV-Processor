@@ -5,13 +5,15 @@
 
 void ImageBlurModel::calculate()
 {
-	int ksize = _ksize->value();
-	if (ksize % 2 == 0)
-		ksize += 1;
-	_ksize->setValue(ksize);
-	int borderType = _borderType->currentData().toInt();
-	cv::blur(_originalImage, _blurredImage, cv::Size(ksize, ksize), cv::Point(-1, -1), borderType);
-	Q_EMIT dataUpdated(0);
+	if (_originalImage.data) {
+		int ksize = _ksize->value();
+		if (ksize % 2 == 0)
+			ksize += 1;
+		_ksize->setValue(ksize);
+		int borderType = _borderType->currentData().toInt();
+		cv::blur(_originalImage, _blurredImage, cv::Size(ksize, ksize), cv::Point(-1, -1), borderType);
+		Q_EMIT dataUpdated(0);
+	}
 }
 
 ImageBlurModel::ImageBlurModel()

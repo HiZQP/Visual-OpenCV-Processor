@@ -4,11 +4,13 @@
 
 void ImageCannyModel::calculate()
 {
-	int threshold1 = _threshold1->value();
-	int threshold2 = _threshold2->value();
-	bool L2gradient = _L2gradient->isChecked();
-	cv::Canny(_originalImage, _cannyImage, threshold1, threshold2, 3, L2gradient);
-	Q_EMIT dataUpdated(0);
+	if (_originalImage.data) {
+		int threshold1 = _threshold1->value();
+		int threshold2 = _threshold2->value();
+		bool L2gradient = _L2gradient->isChecked();
+		cv::Canny(_originalImage, _cannyImage, threshold1, threshold2, 3, L2gradient);
+		Q_EMIT dataUpdated(0);
+	}
 }
 
 ImageCannyModel::ImageCannyModel()

@@ -5,12 +5,14 @@
 
 void ImageImmedianBlurModel::calculate()
 {
-	int ksize = _ksize->value();
-	if (ksize % 2 == 0)
-		ksize += 1;
-	_ksize->setValue(ksize);
-	cv::medianBlur(_originalImage, _blurredImage, ksize);
-	Q_EMIT dataUpdated(0);
+	if (_originalImage.data) {
+		int ksize = _ksize->value();
+		if (ksize % 2 == 0)
+			ksize += 1;
+		_ksize->setValue(ksize);
+		cv::medianBlur(_originalImage, _blurredImage, ksize);
+		Q_EMIT dataUpdated(0);
+	}
 }
 
 ImageImmedianBlurModel::ImageImmedianBlurModel()

@@ -6,13 +6,15 @@
 
 void ImageGaussianBlurModel::calculate()
 {
-	int ksize = _kernelSize->value();
-	if (ksize % 2 == 0) // ksize must be odd
-		ksize += 1;
-	_kernelSize->setValue(ksize);
-	int borderType = _borderType->currentData().toInt();
-	cv::GaussianBlur(_originalImage, _blurredImage, cv::Size(ksize, ksize), 0, 0, borderType);
-	Q_EMIT dataUpdated(0);
+	if (_originalImage.data) {
+		int ksize = _kernelSize->value();
+		if (ksize % 2 == 0) // ksize must be odd
+			ksize += 1;
+		_kernelSize->setValue(ksize);
+		int borderType = _borderType->currentData().toInt();
+		cv::GaussianBlur(_originalImage, _blurredImage, cv::Size(ksize, ksize), 0, 0, borderType);
+		Q_EMIT dataUpdated(0);
+	}
 }
 
 ImageGaussianBlurModel::ImageGaussianBlurModel()

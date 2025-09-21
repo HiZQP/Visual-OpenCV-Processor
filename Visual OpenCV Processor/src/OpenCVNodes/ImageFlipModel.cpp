@@ -5,9 +5,11 @@
 
 void ImageFlipModel::calculate()
 {
-	int flipCode = _flipCodeComboBox->currentData().toInt();
-	cv::flip(_originalImage, _flippedImage, flipCode);
-	Q_EMIT dataUpdated(0);
+	if (_originalImage.data) {
+		int flipCode = _flipCodeComboBox->currentData().toInt();
+		cv::flip(_originalImage, _flippedImage, flipCode);
+		Q_EMIT dataUpdated(0);
+	}
 }
 
 ImageFlipModel::ImageFlipModel()

@@ -4,12 +4,14 @@
 #include <QLabel>
 
 void ImageLaplacianModel::calculate() {
-	int ksize = _ksize->value();
-	int scale = _scale->currentData().toInt();
-	int delta = _delta->currentData().toInt();
-	int ddepth = _ddepth->currentData().toInt();
-	cv::Laplacian(_originalImage, _laplacianImage, ddepth, ksize, scale, delta);
-	Q_EMIT dataUpdated(0);
+	if (_originalImage.data) {
+		int ksize = _ksize->value();
+		int scale = _scale->currentData().toInt();
+		int delta = _delta->currentData().toInt();
+		int ddepth = _ddepth->currentData().toInt();
+		cv::Laplacian(_originalImage, _laplacianImage, ddepth, ksize, scale, delta);
+		Q_EMIT dataUpdated(0);
+	}
 }
 
 ImageLaplacianModel::ImageLaplacianModel()

@@ -5,14 +5,16 @@
 
 void ImageImbilateralFilter::calculate()
 {
-	int d = _d->value();
-	if (d % 2 == 0)
-		d += 1;
-	_d->setValue(d);
-	double sigmaColor = _sigmaColor->value();
-	double sigmaSpace = _sigmaSpace->value();
-	cv::bilateralFilter(_originalImage, _blurredImage, d, sigmaColor, sigmaSpace);
-	Q_EMIT dataUpdated(0);
+	if (_originalImage.data) {
+		int d = _d->value();
+		if (d % 2 == 0)
+			d += 1;
+		_d->setValue(d);
+		double sigmaColor = _sigmaColor->value();
+		double sigmaSpace = _sigmaSpace->value();
+		cv::bilateralFilter(_originalImage, _blurredImage, d, sigmaColor, sigmaSpace);
+		Q_EMIT dataUpdated(0);
+	}
 }
 
 ImageImbilateralFilter::ImageImbilateralFilter()

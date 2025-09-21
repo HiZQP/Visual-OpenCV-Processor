@@ -5,11 +5,13 @@
 
 void ImageResizeModel::calculate()
 {
-	int width = _width->value();
-	int height = _height->value();
-	int interpolation = _interpolation->currentData().toInt();
-	cv::resize(_originalImage, _resizedImage, cv::Size(width, height), 0, 0, interpolation);
-	Q_EMIT dataUpdated(0);
+	if (_originalImage.data) {
+		int width = _width->value();
+		int height = _height->value();
+		int interpolation = _interpolation->currentData().toInt();
+		cv::resize(_originalImage, _resizedImage, cv::Size(width, height), 0, 0, interpolation);
+		Q_EMIT dataUpdated(0);
+	}
 }
 
 ImageResizeModel::ImageResizeModel()

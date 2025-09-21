@@ -16,10 +16,6 @@ void ImageThresholdModel::calculate() {
 		cv::threshold(_originalImage, _outputImage, threshold, maxValue, type);
 		Q_EMIT dataUpdated(0);
 	}
-	else {
-		_outputImage.release();
-		Q_EMIT dataUpdated(0);
-	}
 }
 
 ImageThresholdModel::ImageThresholdModel()

@@ -7,12 +7,14 @@
 
 void ImageCropModel::calculate()
 {
-	int x = std::max(0, std::min(_originalImage.cols - 1, _x->value()));
-	int y = std::max(0, std::min(_originalImage.rows - 1, _y->value()));
-	int w = std::max(1, std::min(_originalImage.cols - x, _width->value()));
-	int h = std::max(1, std::min(_originalImage.rows - y, _height->value()));
-	_croppedImage = _originalImage(cv::Rect(x, y, w, h)).clone();
-	Q_EMIT dataUpdated(0);
+	if (_originalImage.data) {
+		int x = std::max(0, std::min(_originalImage.cols - 1, _x->value()));
+		int y = std::max(0, std::min(_originalImage.rows - 1, _y->value()));
+		int w = std::max(1, std::min(_originalImage.cols - x, _width->value()));
+		int h = std::max(1, std::min(_originalImage.rows - y, _height->value()));
+		_croppedImage = _originalImage(cv::Rect(x, y, w, h)).clone();
+		Q_EMIT dataUpdated(0);
+	}
 }
 
 ImageCropModel::ImageCropModel()
