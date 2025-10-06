@@ -5,7 +5,7 @@
 
 TextDisplayModel::TextDisplayModel()
 {
-	_text = new QLabel;
+	_text = std::make_unique<QLabel>();
 	_text->setText("无数据");
 }
 
@@ -38,7 +38,7 @@ ImageDisplayModel::ImageDisplayModel()
 	QVBoxLayout* layout = new QVBoxLayout;
 	layout->addWidget(_size);
 	layout->addWidget(_imageLabel);
-	_widget = new QWidget;
+	_widget = std::make_unique<QWidget>();
 	_widget->setLayout(layout);
 	_imageLabel->setMinimumSize(200, 200);
 }

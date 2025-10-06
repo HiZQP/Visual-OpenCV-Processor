@@ -16,7 +16,7 @@ void ImageDrawContoursModel::calculate() {
 
 ImageDrawContoursModel::ImageDrawContoursModel()
 {
-	_widget = new QWidget();
+	_widget = std::make_unique<QWidget>();
 	_drawAll = new QCheckBox("绘制所有轮廓");
 	_drawAll->setChecked(false);
 	_indexSpinBox = new QSpinBox();

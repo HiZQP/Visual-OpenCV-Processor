@@ -12,7 +12,7 @@ class ImageDrawContoursModel : public QtNodes::NodeDelegateModel
 {
 	Q_OBJECT
 private:
-	QWidget* _widget;
+	std::unique_ptr<QWidget> _widget;
 	QCheckBox* _drawAll;
 	QSpinBox* _indexSpinBox;
 
@@ -22,13 +22,20 @@ private:
 	void calculate();
 public:
 	ImageDrawContoursModel();
-	virtual ~ImageDrawContoursModel() override {}
+	~ImageDrawContoursModel() override = default;
+
+	// 明确禁止拷贝，允许移动
+	ImageDrawContoursModel(const ImageDrawContoursModel&) = delete;
+	ImageDrawContoursModel& operator=(const ImageDrawContoursModel&) = delete;
+	ImageDrawContoursModel(ImageDrawContoursModel&&) = default;
+	ImageDrawContoursModel& operator=(ImageDrawContoursModel&&) = default;
+
 	QString caption() const override { return "图像绘制轮廓组件"; }
 	QString name() const override { return "绘制轮廓"; }
 	unsigned int nPorts(QtNodes::PortType portType) const override;
 	QtNodes::NodeDataType dataType(QtNodes::PortType portType, QtNodes::PortIndex portIndex) const override;
 	void setInData(std::shared_ptr<QtNodes::NodeData> nodeData, QtNodes::PortIndex portIndex) override;
 	std::shared_ptr<QtNodes::NodeData> outData(QtNodes::PortIndex port) override;
-	QWidget* embeddedWidget() override { return _widget; }
+	QWidget* embeddedWidget() override { return _widget.get(); }
 };
 

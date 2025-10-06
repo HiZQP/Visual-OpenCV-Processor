@@ -11,35 +11,52 @@ void CameraReadModel::readFrame()
 	Q_EMIT dataUpdated(1);
 }
 
-CameraReadModel::CameraReadModel()
+void CameraReadModel::searchCameras()
 {
-	// 创建子节点并连接
-
-	_widget = new QWidget();
-	_cameraIndex = new QComboBox();
-	_pictureCaptureButton = new QPushButton();
-	for (int i = 0; i < 10; i++)
-	{
-		cv::VideoCapture cap(i);
-		if (cap.isOpened())
-		{
+	_cameraIndex->clear();
+	for (int i = 0; i < 10; ++i) {
+		cv::VideoCapture tempCap;
+		if (tempCap.open(i)) {
 			_cameraIndex->addItem(QString::number(i));
-			cap.release();
+			tempCap.release();
 		}
 	}
-	_cameraIndex->setCurrentIndex(0);
-	_cap.open(_cameraIndex->currentIndex());
-	_pictureCaptureButton->setText("捕获一帧");
+	if (_cameraIndex->count() == 0) {
+		_cameraIndex->addItem("未找到");
+		_pictureCaptureButton->setEnabled(false);
+	}
+	else {
+		_cap.release();
+		_cap.open(_cameraIndex->currentIndex());
+		_pictureCaptureButton->setEnabled(true);
+		_cameraFrame.release();
+		Q_EMIT dataUpdated(1);
+	}
+}
+
+CameraReadModel::CameraReadModel()
+{
+	_widget = std::make_unique<QWidget>();
+	_cameraIndex = new QComboBox();
+	_pictureCaptureButton = new QPushButton();
+	_pictureCaptureButton->setText("捕获");
+	_searchCameraButton = new QPushButton();
+	_searchCameraButton->setText("搜索摄像头");
+	_cameraIndex->addItem("未查找");
 	QHBoxLayout* layout = new QHBoxLayout();
+	QVBoxLayout* vLayout = new QVBoxLayout();
 	layout->addWidget(_cameraIndex);
 	layout->addWidget(_pictureCaptureButton);
-	_widget->setLayout(layout);
+	vLayout->addWidget(_searchCameraButton);
+	vLayout->addLayout(layout);
+	_widget->setLayout(vLayout);
 	connect(_pictureCaptureButton, &QPushButton::clicked, this, &CameraReadModel::readFrame);
+	connect(_searchCameraButton, &QPushButton::clicked, this, &CameraReadModel::searchCameras);
 	connect(_cameraIndex, &QComboBox::currentTextChanged, [this]() {
 		_cap.release();
 		_cap.open(_cameraIndex->currentIndex());
 		_cameraFrame.release();
-		Q_EMIT dataUpdated(0);
+		Q_EMIT dataUpdated(1);
 		});
 }
 
@@ -77,11 +94,6 @@ std::shared_ptr<QtNodes::NodeData> CameraReadModel::outData(QtNodes::PortIndex p
 }
 
 ///////////////////////////////////////////////////////////////////
-
-CaptureTriggerModel::CaptureTriggerModel()
-{
-	_cameraReadModel = nullptr;
-}
 
 unsigned int CaptureTriggerModel::nPorts(QtNodes::PortType portType) const
 {
