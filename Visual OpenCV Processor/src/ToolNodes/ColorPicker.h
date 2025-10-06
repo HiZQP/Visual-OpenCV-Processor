@@ -4,11 +4,16 @@
 #include <QColor>
 #include "NodeDataType.h"
 
+#include <QComboBox>
+#include <QPushButton>
+
 class ColorPicker : public QtNodes::NodeDelegateModel
 {
 	Q_OBJECT
 private:
 	QWidget* _widget;
+	QPushButton* _button;
+	QComboBox* _colorSpace;
 	cv::Scalar _color;
 	void calculate();
 public:

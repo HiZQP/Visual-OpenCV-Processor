@@ -64,11 +64,13 @@
     <IntDir>$(SolutionDir)bin-int\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)bin-int\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)Visual OpenCV Processor\src;$(SolutionDir)Visual OpenCV Processor\src\ToolNodes;$(SolutionDir)Dependencies\OpenCV\include\opencv2;$(SolutionDir)Dependencies\OpenCV\include;$(SolutionDir)Dependencies\QtNodesLibrary\QtNodesLibrary_Debug\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Visual OpenCV Processor\src;$(SolutionDir)Visual OpenCV Processor\src\DataType;$(SolutionDir)Visual OpenCV Processor\src\ToolNodes;$(SolutionDir)Dependencies\OpenCV\include\opencv2;$(SolutionDir)Dependencies\OpenCV\include;$(SolutionDir)Dependencies\QtNodesLibrary\QtNodesLibrary_Debug\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard_C>Default</LanguageStandard_C>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NODE_EDITOR_SHARED;QT_CORE_LIB;QT_WIDGETS_LIB;QT_GUI_LIB;QT_OPENGL_LIB;CMAKE_INTDIR="Debug"</PreprocessorDefinitions>
     </ClCompile>
@@ -80,7 +82,16 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <AdditionalIncludeDirectories>$(SolutionDir)Visual OpenCV Processor\src;$(SolutionDir)Visual OpenCV Processor\src\ToolNodes;$(SolutionDir)Dependencies\OpenCV\include\opencv2;$(SolutionDir)Dependencies\OpenCV\include;$(SolutionDir)Dependencies\QtNodesLibrary\QtNodesLibrary_Relese\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NODE_EDITOR_SHARED;QT_CORE_LIB;QT_WIDGETS_LIB;QT_GUI_LIB;QT_OPENGL_LIB;CMAKE_INTDIR="Relese"</PreprocessorDefinitions>
+      <LanguageStandard_C>Default</LanguageStandard_C>
     </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\OpenCV\x64\vc16\lib;$(SolutionDir)Dependencies\QtNodesLibrary\QtNodesLibrary_Relese\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opencv_world4110.lib;QtNodes.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
     <ClCompile>
@@ -114,6 +125,15 @@
     <QtRcc Include="src\VisualOpenCVProcessor.qrc" />
     <QtUic Include="src\VisualOpenCVProcessor.ui" />
     <QtMoc Include="src\VisualOpenCVProcessor.h" />
+    <ClCompile Include="CameraReadModel.cpp" />
+    <ClCompile Include="src\ParameterManager.cpp" />
+    <ClCompile Include="src\Math\BitwiseAnd.cpp" />
+    <ClCompile Include="src\Math\BitwiseOr.cpp" />
+    <ClCompile Include="InRange.cpp" />
+    <ClCompile Include="src\OpenCVNodes\DrawTextModel.cpp" />
+    <ClCompile Include="src\OpenCVNodes\ImageChannelExtract.cpp" />
+    <ClCompile Include="src\OpenCVNodes\DrawCircleModel.cpp" />
+    <ClCompile Include="src\OpenCVNodes\DrawRectangleModel.cpp" />
     <ClCompile Include="src\OpenCVNodes\DrawLineModel.cpp" />
     <ClCompile Include="src\OpenCVNodes\ImageDrawContoursModel.cpp" />
     <ClCompile Include="src\OpenCVNodes\ImageFindContoursModel.cpp" />
@@ -133,7 +153,7 @@
     <ClCompile Include="src\OpenCVNodes\ImageRotateModel.cpp" />
     <ClCompile Include="src\OpenCVNodes\ImageResizeModel.cpp" />
     <ClCompile Include="src\OpenCVNodes\ImageSaveModel.cpp" />
-    <ClCompile Include="src\OpenCVNodes\DataTypeCastModel.cpp" />
+    <ClCompile Include="src\DataType\DataTypeCastModel.cpp" />
     <ClCompile Include="src\OpenCVNodes\DisplayModel.cpp" />
     <ClCompile Include="src\OpenCVNodes\ImageLoaderModel.cpp" />
     <ClCompile Include="src\logSystem\LogSystem.cpp" />
@@ -142,6 +162,15 @@
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="src\OpenCVNodes\DrawRectangleModel.h" />
+    <QtMoc Include="src\OpenCVNodes\DrawCircleModel.h" />
+    <QtMoc Include="src\OpenCVNodes\DrawTextModel.h" />
+    <QtMoc Include="src\OpenCVNodes\ImageChannelExtract.h" />
+    <QtMoc Include="InRange.h" />
+    <QtMoc Include="src\Math\BitwiseOr.h" />
+    <QtMoc Include="src\Math\BitwiseAnd.h" />
+    <QtMoc Include="CameraReadModel.h" />
+    <ClInclude Include="src\ParameterManager.h" />
     <ClInclude Include="src\ToolNodes\ToolNodes.h" />
     <QtMoc Include="src\ToolNodes\ColorPicker.h" />
     <QtMoc Include="src\OpenCVNodes\ImageSaveModel.h" />
@@ -165,8 +194,8 @@
     <QtMoc Include="src\OpenCVNodes\DrawLineModel.h" />
     <ClInclude Include="src\OpenCVNodes\OpenCVNodes.h" />
     <QtMoc Include="src\OpenCVNodes\DisplayModel.h" />
-    <QtMoc Include="src\OpenCVNodes\DataTypeCastModel.h" />
-    <ClInclude Include="src\NodeDataType.h" />
+    <QtMoc Include="src\DataType\DataTypeCastModel.h" />
+    <ClInclude Include="src\DataType\NodeDataType.h" />
     <QtMoc Include="src\OpenCVNodes\ImageLoaderModel.h" />
     <ClInclude Include="src\logSystem\LogSystem.h" />
   </ItemGroup>

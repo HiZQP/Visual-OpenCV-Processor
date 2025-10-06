@@ -21,4 +21,13 @@
 #include "ImageFindContoursModel.h"
 #include "ImageDrawContoursModel.h"
 #include "ImageThresholdModel.h"
+#include "ImageChannelExtract.h"
+#include "InRange.h"
+#include "CameraReadModel.h"
 #include "DrawLineModel.h"
+#include "DrawRectangleModel.h"
+#include "DrawCircleModel.h"
+#include "DrawTextModel.h"
+
+#include "Math/BitwiseAnd.h"
+#include "Math/BitwiseOr.h"

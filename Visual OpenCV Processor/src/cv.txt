@@ -17,9 +17,9 @@
 #define CV_IMSOBEL             0x0010  
 #define CV_IMLAPLACIAN         0x0011  
 #define CV_IMHIST_EQUALIZE     0x0012  
-#define CV_IMDRAW_CONTOURS     0x0013  // 绘制轮廓
-#define CV_IMFIND_CONTOURS     0x0014  // 查找轮廓
-#define CV_IMDRAW_SHAPES       0x0015  // 绘制几何形状
+#define CV_IMDRAW_CONTOURS     0x0013  
+#define CV_IMFIND_CONTOURS     0x0014  
+#define CV_IMDRAW_SHAPES       0x0015  
 #define CV_IMADD_TEXT          0x0016  // 添加文字
 #define CV_IMBITWISE_OP        0x0017  // 位运算操作
 #define CV_IMMORPH_OP          0x0018  // 形态学操作

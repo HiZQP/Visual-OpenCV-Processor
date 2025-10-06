@@ -28,6 +28,8 @@ std::shared_ptr<QtNodes::NodeDelegateModelRegistry> VisualOpenCVProcessor::regis
 	auto ret = std::make_shared<QtNodes::NodeDelegateModelRegistry>();
 	// 在这里注册自定义的数据模型
 	ret->registerModel<ImageLoaderModel>("工具");
+	ret->registerModel<CameraReadModel>("工具");
+	ret->registerModel<CaptureTriggerModel>("工具");
 	ret->registerModel<ImageSaveModel>("工具");
 	ret->registerModel<ColorPicker>("工具");
 
@@ -48,14 +50,24 @@ std::shared_ptr<QtNodes::NodeDelegateModelRegistry> VisualOpenCVProcessor::regis
 	ret->registerModel<ImageFindContoursModel>("图像操作");
 	ret->registerModel<ImageDrawContoursModel>("图像操作");
 	ret->registerModel<ImageThresholdModel>("图像操作");
+	ret->registerModel<ImageChannelExtract>("图像操作");
+	ret->registerModel<InRange>("图像操作");
+
 	ret->registerModel<DrawLineModel>("图像操作");
+	ret->registerModel<DrawRectangleModel>("图像操作");
+	ret->registerModel<DrawCircleModel>("图像操作");
+	ret->registerModel<DrawTextModel>("图像操作");\
+
+	ret->registerModel<BitwiseAnd>("数学");
+	ret->registerModel<BitwiseOr>("数学");
 
 	ret->registerModel<TextDisplayModel>("显示");
 	ret->registerModel<ImageDisplayModel>("显示");
 
 	ret->registerModel<StrToNumModel>("数据类型转换");
 	ret->registerModel<NumToStrModel>("数据类型转换");
-
+	ret->registerModel<NumToPointModel>("数据类型转换");
+	ret->registerModel<PointToNumModel>("数据类型转换");
     return ret;
 }
 

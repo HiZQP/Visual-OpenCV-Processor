@@ -1,4 +1,5 @@
 #pragma once
+#include <opencv2/opencv.hpp>
 
 #include <QtNodes/NodeDelegateModel>
 
@@ -31,3 +32,31 @@ public:
 	QWidget* embeddedWidget() override { return nullptr; }
 };
 
+class NumToPointModel : public QtNodes::NodeDelegateModel {
+	Q_OBJECT
+private:
+	cv::Point2d _point;
+public:
+	QString caption() const override { return QStringLiteral("数字->点"); }
+	QString name() const override { return QStringLiteral("数字->点"); }
+	unsigned int nPorts(QtNodes::PortType portType) const override;
+	QtNodes::NodeDataType dataType(QtNodes::PortType portType, QtNodes::PortIndex portIndex) const override;
+	void setInData(std::shared_ptr<QtNodes::NodeData> nodeData, QtNodes::PortIndex portIndex) override;
+	std::shared_ptr<QtNodes::NodeData> outData(QtNodes::PortIndex port) override;
+	QWidget* embeddedWidget() override { return nullptr; }
+};
+
+class PointToNumModel : public QtNodes::NodeDelegateModel {
+	Q_OBJECT
+private:
+	double _numberX;
+	double _numberY;
+public:
+	QString caption() const override { return QStringLiteral("点->数字"); }
+	QString name() const override { return QStringLiteral("点->数字"); }
+	unsigned int nPorts(QtNodes::PortType portType) const override;
+	QtNodes::NodeDataType dataType(QtNodes::PortType portType, QtNodes::PortIndex portIndex) const override;
+	void setInData(std::shared_ptr<QtNodes::NodeData> nodeData, QtNodes::PortIndex portIndex) override;
+	std::shared_ptr<QtNodes::NodeData> outData(QtNodes::PortIndex port) override;
+	QWidget* embeddedWidget() override { return nullptr; }
+};

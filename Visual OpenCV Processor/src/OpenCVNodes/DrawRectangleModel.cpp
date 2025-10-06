@@ -1,9 +1,9 @@
-#include "DrawLineModel.h"
+#include "DrawRectangleModel.h"
 
 #include <QFormLayout>
 #include <QLabel>
 
-void DrawLineModel::calculate() {
+void DrawRectangleModel::calculate() {
 	if (!_originalImage.empty()) {
 		_outputImage = _originalImage.clone();
 		int x1 = _x1SpinBox->value();
@@ -13,12 +13,12 @@ void DrawLineModel::calculate() {
 		int thickness = _thicknessSpinBox->value();
 		int lineType = _lineTypeComboBox->currentData().toInt();
 		cv::Scalar color(_colorBSpinBox->value(), _colorGSpinBox->value(), _colorRSpinBox->value());
-		cv::line(_outputImage, cv::Point(x1, y1), cv::Point(x2, y2), color, thickness, lineType);
+		cv::rectangle(_outputImage, cv::Point(x1, y1), cv::Point(x2, y2), color, thickness, lineType);
 		Q_EMIT dataUpdated(0);
 	}
 }
 
-DrawLineModel::DrawLineModel()
+DrawRectangleModel::DrawRectangleModel()
 {
 	_widget = new QWidget();
 	_x1SpinBox = new QSpinBox();
@@ -74,18 +74,18 @@ DrawLineModel::DrawLineModel()
 	layout->addRow("线条粗细", _thicknessSpinBox);
 	layout->addRow("线条类型", _lineTypeComboBox);
 	_widget->setLayout(layout);
-	connect(_x1SpinBox, &QSpinBox::editingFinished, this, &DrawLineModel::calculate);
-	connect(_y1SpinBox, &QSpinBox::editingFinished, this, &DrawLineModel::calculate);
-	connect(_x2SpinBox, &QSpinBox::editingFinished, this, &DrawLineModel::calculate);
-	connect(_y2SpinBox, &QSpinBox::editingFinished, this, &DrawLineModel::calculate);
-	connect(_thicknessSpinBox, &QSpinBox::editingFinished, this, &DrawLineModel::calculate);
-	connect(_lineTypeComboBox, &QComboBox::currentTextChanged, this, &DrawLineModel::calculate);
-	connect(_colorBSpinBox, &QSpinBox::editingFinished, this, &DrawLineModel::calculate);
-	connect(_colorGSpinBox, &QSpinBox::editingFinished, this, &DrawLineModel::calculate);
-	connect(_colorRSpinBox, &QSpinBox::editingFinished, this, &DrawLineModel::calculate);
+	connect(_x1SpinBox, &QSpinBox::editingFinished, this, &DrawRectangleModel::calculate);
+	connect(_y1SpinBox, &QSpinBox::editingFinished, this, &DrawRectangleModel::calculate);
+	connect(_x2SpinBox, &QSpinBox::editingFinished, this, &DrawRectangleModel::calculate);
+	connect(_y2SpinBox, &QSpinBox::editingFinished, this, &DrawRectangleModel::calculate);
+	connect(_thicknessSpinBox, &QSpinBox::editingFinished, this, &DrawRectangleModel::calculate);
+	connect(_lineTypeComboBox, &QComboBox::currentTextChanged, this, &DrawRectangleModel::calculate);
+	connect(_colorBSpinBox, &QSpinBox::editingFinished, this, &DrawRectangleModel::calculate);
+	connect(_colorGSpinBox, &QSpinBox::editingFinished, this, &DrawRectangleModel::calculate);
+	connect(_colorRSpinBox, &QSpinBox::editingFinished, this, &DrawRectangleModel::calculate);
 }
 
-unsigned int DrawLineModel::nPorts(QtNodes::PortType portType) const
+unsigned int DrawRectangleModel::nPorts(QtNodes::PortType portType) const
 {
 	if (portType == QtNodes::PortType::In)
 		return 4;
@@ -93,7 +93,7 @@ unsigned int DrawLineModel::nPorts(QtNodes::PortType portType) const
 		return 1;
 }
 
-QtNodes::NodeDataType DrawLineModel::dataType(QtNodes::PortType portType, QtNodes::PortIndex portIndex) const
+QtNodes::NodeDataType DrawRectangleModel::dataType(QtNodes::PortType portType, QtNodes::PortIndex portIndex) const
 {
 	if (portType == QtNodes::PortType::In) {
 		if (portIndex == 0)
@@ -110,14 +110,15 @@ QtNodes::NodeDataType DrawLineModel::dataType(QtNodes::PortType portType, QtNode
 	}
 }
 
-void DrawLineModel::setInData(std::shared_ptr<QtNodes::NodeData> nodeData, QtNodes::PortIndex portIndex)
+void DrawRectangleModel::setInData(std::shared_ptr<QtNodes::NodeData> nodeData, QtNodes::PortIndex portIndex)
 {
 	if (nodeData) {
 		if (portIndex == 0) {
 			auto imageData = std::dynamic_pointer_cast<ImageData>(nodeData);
 			_originalImage = imageData->get();
 			calculate();
-		}else if (portIndex == 1) {
+		}
+		else if (portIndex == 1) {
 			auto pointData = std::dynamic_pointer_cast<PointData>(nodeData);
 			cv::Point point = pointData->get();
 			_x1SpinBox->setValue(point.x);
@@ -125,7 +126,8 @@ void DrawLineModel::setInData(std::shared_ptr<QtNodes::NodeData> nodeData, QtNod
 			_x1SpinBox->setEnabled(false);
 			_y1SpinBox->setEnabled(false);
 			calculate();
-		}else if (portIndex == 2) {
+		}
+		else if (portIndex == 2) {
 			auto pointData = std::dynamic_pointer_cast<PointData>(nodeData);
 			cv::Point point = pointData->get();
 			_x2SpinBox->setValue(point.x);
@@ -133,7 +135,8 @@ void DrawLineModel::setInData(std::shared_ptr<QtNodes::NodeData> nodeData, QtNod
 			_x2SpinBox->setEnabled(false);
 			_y2SpinBox->setEnabled(false);
 			calculate();
-		}else if (portIndex == 3) {
+		}
+		else if (portIndex == 3) {
 			auto scalarData = std::dynamic_pointer_cast<ScalarData>(nodeData);
 			cv::Scalar color = scalarData->get();
 			_colorBSpinBox->setValue(static_cast<int>(color[0]));
@@ -165,7 +168,7 @@ void DrawLineModel::setInData(std::shared_ptr<QtNodes::NodeData> nodeData, QtNod
 	}
 }
 
-std::shared_ptr<QtNodes::NodeData> DrawLineModel::outData(QtNodes::PortIndex port)
+std::shared_ptr<QtNodes::NodeData> DrawRectangleModel::outData(QtNodes::PortIndex port)
 {
 	if (_outputImage.empty())
 		return nullptr;

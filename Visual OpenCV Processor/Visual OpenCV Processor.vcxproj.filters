@@ -49,7 +49,7 @@
     <ClCompile Include="src\OpenCVNodes\DisplayModel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\OpenCVNodes\DataTypeCastModel.cpp">
+    <ClCompile Include="src\DataType\DataTypeCastModel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\OpenCVNodes\ImageSaveModel.cpp">
@@ -112,18 +112,48 @@
     <ClCompile Include="src\ToolNodes\ColorPicker.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\OpenCVNodes\DrawRectangleModel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OpenCVNodes\DrawCircleModel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OpenCVNodes\DrawTextModel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OpenCVNodes\ImageChannelExtract.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="InRange.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Math\BitwiseOr.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Math\BitwiseAnd.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraReadModel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ParameterManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\logSystem\LogSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\NodeDataType.h">
+    <ClInclude Include="src\DataType\NodeDataType.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\OpenCVNodes\OpenCVNodes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\ToolNodes\ToolNodes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ParameterManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -134,7 +164,7 @@
     <QtMoc Include="src\OpenCVNodes\DisplayModel.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="src\OpenCVNodes\DataTypeCastModel.h">
+    <QtMoc Include="src\DataType\DataTypeCastModel.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="src\OpenCVNodes\ImageSaveModel.h">
@@ -195,6 +225,30 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="src\OpenCVNodes\DrawLineModel.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="src\OpenCVNodes\DrawRectangleModel.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="src\OpenCVNodes\DrawCircleModel.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="src\OpenCVNodes\DrawTextModel.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="src\OpenCVNodes\ImageChannelExtract.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="InRange.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="src\Math\BitwiseOr.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="src\Math\BitwiseAnd.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="CameraReadModel.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
