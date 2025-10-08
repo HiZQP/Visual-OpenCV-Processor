@@ -1,26 +1,174 @@
 #pragma once
+
+#include <QWidget>
+#include "ui_ParameterManager.h"
+
+#include <opencv2/opencv.hpp>
 #include "NodeDataType.h"
+#include <QtNodes/NodeDelegateModel>
 
-class ParameterManager
+#include <QtNodes/DataFlowGraphModel>
+#include <unordered_map>
+#include <QMessageBox>
+#include <QPushButton>
+#include <QLabel>
+#include <QLineEdit>
+#include <QMenu>
+#include <QtNodes/NodeDelegateModelRegistry>
+
+template<typename T>
+class ParamGetModel;
+
+class ParameterManager : public QWidget, public std::enable_shared_from_this<ParameterManager>
 {
+	Q_OBJECT
 private:
-	ParameterManager() {}
-	~ParameterManager() {}
+	Ui::ParameterManagerClass ui;
 
-	std::unordered_map<QString, std::shared_ptr<QtNodes::NodeData>> paramMap;
+	std::shared_ptr<QtNodes::NodeDelegateModelRegistry> _registry;
+	std::shared_ptr<QtNodes::DataFlowGraphModel> _dataFlowGraph;
+
+	std::vector<QString> _paramTypes;
+	std::unordered_map<QString, std::unique_ptr<QtNodes::NodeData>> _params;
+
 public:
-	static ParameterManager& getInstance();
-	ParameterManager(const ParameterManager&) = delete; // ½ûÖ¹¿½±´¹¹Ôìº¯Êı
-	ParameterManager& operator=(const ParameterManager&) = delete; // ½ûÖ¹¸³Öµ²Ù×÷·û
+	ParameterManager(QWidget *parent, std::shared_ptr<QtNodes::NodeDelegateModelRegistry> _registry, std::shared_ptr<QtNodes::DataFlowGraphModel> dataFlowGraph);
+	~ParameterManager();
 
-	void setParam(const QString& key, std::shared_ptr<QtNodes::NodeData> value);
-	std::shared_ptr<QtNodes::NodeData> getParam(const QString& key);
+	ParameterManager(const ParameterManager&) = delete;
+	ParameterManager& operator=(const ParameterManager&) = delete;
+	ParameterManager(ParameterManager&&) = delete;
+	ParameterManager& operator=(ParameterManager&&) = delete;
 
-	void addParamNumber();
-	void addParamString();
-	void addParamImage();
-	void addParamContours();
-	void addParamScalar();
+	template<typename T>
+	typename std::enable_if<std::is_base_of<QtNodes::NodeData, T>::value, void>::type
+	registerParamType() {
+		T temp;
+		QString typeName = temp.type().name;
 
+		auto it = std::find(_paramTypes.begin(), _paramTypes.end(), typeName);
+		if (it == _paramTypes.end()) {
+			_paramTypes.push_back(typeName);
+			auto button = new QPushButton(typeName + "(" + temp.type().id + ")");
+			ui.paramAdd_verticalLayout->addWidget(button);
+			connect(button, &QPushButton::clicked, [this, typeName]() {
+				static int count = 0;
+				QString name = QString("%1_%2").arg(typeName).arg(++count);
+
+				// ä½¿ç”¨ weak_ptr æ¥é¿å…åœ¨æ„é€ å‡½æ•°ä¸­è°ƒç”¨ shared_from_this()
+				auto weakThis = std::weak_ptr<ParameterManager>(shared_from_this());
+
+				_registry->registerModel(
+					[name, weakThis]() -> std::unique_ptr<QtNodes::NodeDelegateModel> {
+						if (auto sharedThis = weakThis.lock()) {
+							return std::make_unique<ParamGetModel<T>>(name, sharedThis);
+						}
+						return nullptr;
+					},
+					"__HIDDEN__"
+				);
+
+				this->addParam<T>(name);
+				});
+		}
+	}
+
+	template<typename T>
+	typename std::enable_if<std::is_base_of<QtNodes::NodeData, T>::value, void>::type
+		addParam(const QString& name) {
+		auto button = new QPushButton();
+		button->setText(name);
+		auto layout = new QHBoxLayout();
+		button->setLayout(layout);
+
+		QMenu* menu = new QMenu();
+		auto getAction = menu->addAction("è·å–");
+		auto setAction = menu->addAction("ç¼–è¾‘");
+		auto deleteAction = menu->addAction("åˆ é™¤");
+		button->setMenu(menu);
+
+		ui.paramList_verticalLayout->addWidget(button);
+
+		_params[name] = std::make_unique<T>();
+
+		connect(button, &QPushButton::click, button, &QPushButton::showMenu);
+		connect(getAction, &QAction::triggered, [this, name]() {
+			auto it = _params.find(name);
+			if (it != _params.end()) {
+				auto id = _dataFlowGraph->addNode("Get " + name);
+				_dataFlowGraph->setNodeData(id, QtNodes::NodeRole::Position, QPointF(0, 0));
+			}
+			});
+		connect(deleteAction, &QAction::triggered, [this, name, button]() {
+			auto it = _params.find(name);
+			if (it != _params.end()) {
+				_params.erase(it);
+				button->deleteLater();
+			}
+			});
+	}
+
+	std::shared_ptr<QtNodes::NodeData> getParam(const QString& name) {
+		auto it = _params.find(name);
+		if (it != _params.end()) {
+			return std::shared_ptr<QtNodes::NodeData>(it->second.get());
+		}
+		return nullptr;
+	}
 };
 
+template<typename T>
+class ParamGetModel : public QtNodes::NodeDelegateModel
+{
+	static_assert(std::is_base_of<QtNodes::NodeData, T>::value, "T must be derived from ParamTypeBase");
+private:
+	QString _paramName;
+	std::weak_ptr<ParameterManager> _paramManager;
+public:
+
+	ParamGetModel() = default;
+	ParamGetModel(const QString& paramName, std::shared_ptr<ParameterManager> paramManager) : _paramName(paramName), _paramManager(paramManager) {}
+	QString name() const override { return "Get " + _paramName; }
+	QString caption() const override { return "Get " + _paramName; }
+	unsigned int nPorts(QtNodes::PortType portType) const override {
+		if (portType == QtNodes::PortType::In)
+			return 0;
+		else
+			return 1;
+	}
+	QtNodes::NodeDataType dataType(QtNodes::PortType portType, QtNodes::PortIndex portIndex) const override {
+		if (portType == QtNodes::PortType::Out && portIndex == 0) {
+			T temp;
+			return temp.type();
+		}
+		return QtNodes::NodeDataType{};
+	}
+	std::shared_ptr<QtNodes::NodeData> outData(QtNodes::PortIndex port) override {
+		if (port == 0) {
+			if (auto pm = _paramManager.lock()) {
+				auto param = pm->getParam(_paramName);
+				if (param) {
+					T* data = dynamic_cast<T*>(param.get());
+					return std::make_shared<T>(data->get());
+				}
+			}
+		}
+		return nullptr;
+	}
+	void setInData(std::shared_ptr<QtNodes::NodeData> nodeData, QtNodes::PortIndex portIndex) override {}
+	QWidget* embeddedWidget() override { return nullptr; }
+};
+
+
+//class ParamListButton : public QPushButton
+//{
+//	Q_OBJECT
+//private:
+//	QString _paramName;
+//public:
+//	ParamListButton(const QString& paramName, QWidget* parent = nullptr) : QPushButton(parent), _paramName(paramName) {
+//		setText(paramName);
+//	}
+//	QString paramName() const { return _paramName; }
+//
+//};

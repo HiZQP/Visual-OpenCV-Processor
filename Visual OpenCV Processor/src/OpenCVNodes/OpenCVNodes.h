@@ -23,6 +23,8 @@
 #include "ImageThresholdModel.h"
 #include "ImageChannelExtract.h"
 #include "InRange.h"
+#include "MorphologyModel.h"
+#include "WarpPerspectiveModel.h"
 #include "CameraReadModel.h"
 #include "DrawLineModel.h"
 #include "DrawRectangleModel.h"

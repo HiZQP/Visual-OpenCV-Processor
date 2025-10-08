@@ -5,10 +5,29 @@
 #include <QHBoxLayout>
 #include <QTimer>
 
-void CameraReadModel::readFrame()
+void CameraReadModel::capture()
 {
-	_cap >> _cameraFrame;
-	Q_EMIT dataUpdated(1);
+	if (_cap.isOpened()) {
+		_cap >> _cameraFrame;
+		Q_EMIT dataUpdated(1);
+	}
+	if (_isCapturingFrames) {
+		QTimer::singleShot(0, this, &CameraReadModel::capture);
+	}
+}
+
+void CameraReadModel::captureFrames()
+{
+	_isCapturingFrames = !_isCapturingFrames;
+	if (_isCapturingFrames) {
+		_pictureCaptureButton->setEnabled(false);
+		_videoCaptureButton->setText("停止捕获");
+		capture();
+	}
+	else {
+		_pictureCaptureButton->setEnabled(true);
+		_videoCaptureButton->setText("连续捕获");
+	}
 }
 
 void CameraReadModel::searchCameras()
@@ -29,6 +48,7 @@ void CameraReadModel::searchCameras()
 		_cap.release();
 		_cap.open(_cameraIndex->currentIndex());
 		_pictureCaptureButton->setEnabled(true);
+		_videoCaptureButton->setEnabled(true);
 		_cameraFrame.release();
 		Q_EMIT dataUpdated(1);
 	}
@@ -39,18 +59,26 @@ CameraReadModel::CameraReadModel()
 	_widget = std::make_unique<QWidget>();
 	_cameraIndex = new QComboBox();
 	_pictureCaptureButton = new QPushButton();
-	_pictureCaptureButton->setText("捕获");
+	_pictureCaptureButton->setText("捕获一帧");
+	_pictureCaptureButton->setEnabled(false);
+	_videoCaptureButton = new QPushButton();
+	_videoCaptureButton->setText("连续捕获");
+	_videoCaptureButton->setEnabled(false);
 	_searchCameraButton = new QPushButton();
 	_searchCameraButton->setText("搜索摄像头");
 	_cameraIndex->addItem("未查找");
 	QHBoxLayout* layout = new QHBoxLayout();
+	QHBoxLayout* captureLayout = new QHBoxLayout();
 	QVBoxLayout* vLayout = new QVBoxLayout();
 	layout->addWidget(_cameraIndex);
-	layout->addWidget(_pictureCaptureButton);
-	vLayout->addWidget(_searchCameraButton);
+	layout->addWidget(_searchCameraButton);
+	captureLayout->addWidget(_pictureCaptureButton);
+	captureLayout->addWidget(_videoCaptureButton);
 	vLayout->addLayout(layout);
+	vLayout->addLayout(captureLayout);
 	_widget->setLayout(vLayout);
-	connect(_pictureCaptureButton, &QPushButton::clicked, this, &CameraReadModel::readFrame);
+	connect(_pictureCaptureButton, &QPushButton::clicked, this, &CameraReadModel::capture);
+	connect(_videoCaptureButton, &QPushButton::clicked, this, &CameraReadModel::captureFrames);
 	connect(_searchCameraButton, &QPushButton::clicked, this, &CameraReadModel::searchCameras);
 	connect(_cameraIndex, &QComboBox::currentTextChanged, [this]() {
 		_cap.release();
@@ -124,7 +152,7 @@ void CaptureTriggerModel::setInData(std::shared_ptr<QtNodes::NodeData> nodeData,
 			// 使用单次定时器，在事件循环的下一个周期触发
 			QTimer::singleShot(0, [this]() {
 				if (_cameraReadModel) {
-					_cameraReadModel->readFrame();
+					_cameraReadModel->capture();
 				}
 				});
 		}

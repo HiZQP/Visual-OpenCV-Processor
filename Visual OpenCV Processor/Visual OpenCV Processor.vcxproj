@@ -122,11 +122,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CustomDataFlowGraphicsScene.cpp" />
+    <ClCompile Include="src\ParameterManager.cpp" />
+    <ClCompile Include="WarpPerspectiveModel.cpp" />
     <QtRcc Include="src\VisualOpenCVProcessor.qrc" />
-    <QtUic Include="src\VisualOpenCVProcessor.ui" />
     <QtMoc Include="src\VisualOpenCVProcessor.h" />
     <ClCompile Include="CameraReadModel.cpp" />
-    <ClCompile Include="src\ParameterManager.cpp" />
+    <ClCompile Include="src\OpenCVNodes\MorphologyModel.cpp" />
     <ClCompile Include="src\Math\BitwiseAnd.cpp" />
     <ClCompile Include="src\Math\BitwiseOr.cpp" />
     <ClCompile Include="InRange.cpp" />
@@ -160,8 +162,11 @@
     <ClCompile Include="src\ToolNodes\ColorPicker.cpp" />
     <ClCompile Include="src\VisualOpenCVProcessor.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <QtUic Include="src\ParameterManager.ui" />
+    <QtUic Include="src\VisualOpenCVProcessor.ui" />
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="WarpPerspectiveModel.h" />
     <QtMoc Include="src\OpenCVNodes\DrawRectangleModel.h" />
     <QtMoc Include="src\OpenCVNodes\DrawCircleModel.h" />
     <QtMoc Include="src\OpenCVNodes\DrawTextModel.h" />
@@ -170,7 +175,9 @@
     <QtMoc Include="src\Math\BitwiseOr.h" />
     <QtMoc Include="src\Math\BitwiseAnd.h" />
     <QtMoc Include="CameraReadModel.h" />
-    <ClInclude Include="src\ParameterManager.h" />
+    <QtMoc Include="src\OpenCVNodes\MorphologyModel.h" />
+    <QtMoc Include="src\ParameterManager.h" />
+    <QtMoc Include="CustomDataFlowGraphicsScene.h" />
     <ClInclude Include="src\ToolNodes\ToolNodes.h" />
     <QtMoc Include="src\ToolNodes\ColorPicker.h" />
     <QtMoc Include="src\OpenCVNodes\ImageSaveModel.h" />

@@ -2,23 +2,31 @@
 #include <opencv2/opencv.hpp>
 
 #include <QVBoxLayout>
-#define QUTF8(s) QString::fromUtf8(s) 
+#include <QHBoxLayout>
+#include <QDockWidget>
 
 void VisualOpenCVProcessor::setupMainWindowWidget(){
     setStyle();
-    m_registry = registerDataModels();
-    m_dataFlowGraphModel = std::make_shared<QtNodes::DataFlowGraphModel>(m_registry);
-    m_scene = std::make_unique<QtNodes::DataFlowGraphicsScene>(*m_dataFlowGraphModel, ui.centralWidget);
-    m_view = std::make_unique<QtNodes::GraphicsView>(m_scene.get());
-
-    QVBoxLayout* vLayout = new QVBoxLayout(ui.centralWidget);
-    vLayout->addWidget(m_view.get());
+    _registry = registerDataModels();
+    _dataFlowGraphModel = std::make_shared<QtNodes::DataFlowGraphModel>(_registry);
+    _scene = std::make_unique<VCVP::DataFlowGraphicsScene>(*_dataFlowGraphModel, ui.centralWidget);
+    _view = std::make_unique<QtNodes::GraphicsView>(_scene.get());
+	auto paramDock = new QDockWidget("参数管理", this);
+	_paramManager = std::make_shared<ParameterManager>(nullptr, _registry, _dataFlowGraphModel);
+	paramDock->setWidget(_paramManager.get());
+	paramDock->setDockLocation(Qt::LeftDockWidgetArea);
+	_paramManager->registerParamType<NumberData>();
 	
+	// 添加一个初始节点
+	//QtNodes::NodeId id = _dataFlowGraphModel->addNode("从文件加载");
+	//_dataFlowGraphModel->setNodeData(id, QtNodes::NodeRole::Position, QPointF(0, 0));
+    QHBoxLayout* hLayout = new QHBoxLayout(ui.centralWidget);
+    hLayout->addWidget(_view.get());
 }
 
 void VisualOpenCVProcessor::connects() {
-    connect(m_scene.get(), &QtNodes::DataFlowGraphicsScene::sceneLoaded, m_view.get(), &QtNodes::GraphicsView::centerScene);
-    connect(m_scene.get(), &QtNodes::DataFlowGraphicsScene::modified, this, [this]() {
+    connect(_scene.get(), &VCVP::DataFlowGraphicsScene::sceneLoaded, _view.get(), &QtNodes::GraphicsView::centerScene);
+    connect(_scene.get(), &VCVP::DataFlowGraphicsScene::modified, this, [this]() {
         ui.centralWidget->setWindowModified(true);
         });
 }
@@ -52,6 +60,8 @@ std::shared_ptr<QtNodes::NodeDelegateModelRegistry> VisualOpenCVProcessor::regis
 	ret->registerModel<ImageThresholdModel>("图像操作");
 	ret->registerModel<ImageChannelExtract>("图像操作");
 	ret->registerModel<InRange>("图像操作");
+	ret->registerModel<MorphologyModel>("图像操作");
+	ret->registerModel<WarpPerspectiveModel>("图像操作");
 
 	ret->registerModel<DrawLineModel>("图像操作");
 	ret->registerModel<DrawRectangleModel>("图像操作");
@@ -101,9 +111,8 @@ VisualOpenCVProcessor::VisualOpenCVProcessor(QWidget *parent)
 }
 
 VisualOpenCVProcessor::~VisualOpenCVProcessor() {
-    m_view.reset();     // 先释放view
-    m_scene.reset();    // 再释放scene
-    m_dataFlowGraphModel.reset();  // 然后释放graph model
-    m_registry.reset(); // 最后释放registry
+    _view.reset();     // 先释放view
+    _scene.reset();    // 再释放scene
+    _dataFlowGraphModel.reset();  // 然后释放graph model
+    _registry.reset(); // 最后释放registry
 }
-

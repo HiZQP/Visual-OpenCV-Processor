@@ -26,9 +26,6 @@
     <QtRcc Include="src\VisualOpenCVProcessor.qrc">
       <Filter>Resource Files</Filter>
     </QtRcc>
-    <QtUic Include="src\VisualOpenCVProcessor.ui">
-      <Filter>Form Files</Filter>
-    </QtUic>
     <QtMoc Include="src\VisualOpenCVProcessor.h">
       <Filter>Header Files</Filter>
     </QtMoc>
@@ -136,7 +133,16 @@
     <ClCompile Include="CameraReadModel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\OpenCVNodes\MorphologyModel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WarpPerspectiveModel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="src\ParameterManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CustomDataFlowGraphicsScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -151,9 +157,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\ToolNodes\ToolNodes.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ParameterManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -251,8 +254,28 @@
     <QtMoc Include="CameraReadModel.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="src\OpenCVNodes\MorphologyModel.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="WarpPerspectiveModel.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="src\ParameterManager.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="CustomDataFlowGraphicsScene.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <Text Include="src\cv.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtUic Include="src\VisualOpenCVProcessor.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="src\ParameterManager.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
   </ItemGroup>
 </Project>
