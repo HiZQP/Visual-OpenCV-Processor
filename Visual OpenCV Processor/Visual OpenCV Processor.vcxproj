@@ -123,6 +123,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CustomDataFlowGraphicsScene.cpp" />
+    <ClCompile Include="src\NodeEditorManager.cpp" />
     <ClCompile Include="src\ParameterManager.cpp" />
     <ClCompile Include="WarpPerspectiveModel.cpp" />
     <QtRcc Include="src\VisualOpenCVProcessor.qrc" />
@@ -178,6 +179,8 @@
     <QtMoc Include="src\OpenCVNodes\MorphologyModel.h" />
     <QtMoc Include="src\ParameterManager.h" />
     <QtMoc Include="CustomDataFlowGraphicsScene.h" />
+    <QtMoc Include="src\NodeEditorManager.h" />
+    <ClInclude Include="src\DataType\NodeDataType.h" />
     <ClInclude Include="src\ToolNodes\ToolNodes.h" />
     <QtMoc Include="src\ToolNodes\ColorPicker.h" />
     <QtMoc Include="src\OpenCVNodes\ImageSaveModel.h" />
@@ -202,7 +205,6 @@
     <ClInclude Include="src\OpenCVNodes\OpenCVNodes.h" />
     <QtMoc Include="src\OpenCVNodes\DisplayModel.h" />
     <QtMoc Include="src\DataType\DataTypeCastModel.h" />
-    <ClInclude Include="src\DataType\NodeDataType.h" />
     <QtMoc Include="src\OpenCVNodes\ImageLoaderModel.h" />
     <ClInclude Include="src\logSystem\LogSystem.h" />
   </ItemGroup>

@@ -145,18 +145,21 @@
     <ClCompile Include="CustomDataFlowGraphicsScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\NodeEditorManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\logSystem\LogSystem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\DataType\NodeDataType.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\OpenCVNodes\OpenCVNodes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\ToolNodes\ToolNodes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DataType\NodeDataType.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -264,6 +267,9 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="CustomDataFlowGraphicsScene.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="src\NodeEditorManager.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

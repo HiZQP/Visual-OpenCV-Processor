@@ -16,6 +16,7 @@
 
 #include "CustomDataFlowGraphicsScene.h"
 #include "ParameterManager.h"
+#include "NodeEditorManager.h"
 #include "ParamTypes.h"
 
 class VisualOpenCVProcessor : public QMainWindow
@@ -23,19 +24,13 @@ class VisualOpenCVProcessor : public QMainWindow
     Q_OBJECT
 private:
     Ui::VisualOpenCVProcessorClass ui;
-    std::shared_ptr<QtNodes::NodeDelegateModelRegistry> _registry;
-    std::shared_ptr<QtNodes::DataFlowGraphModel> _dataFlowGraphModel;
-    std::unique_ptr<VCVP::DataFlowGraphicsScene> _scene;
-    std::unique_ptr<QtNodes::GraphicsView> _view;
 
-	std::shared_ptr<ParameterManager> _paramManager;
+	std::shared_ptr<NodeEditorManager> _nodeEditorManager;
+    std::shared_ptr<ParameterManager> _paramManager;
 
-	void connects();
-    std::shared_ptr<QtNodes::NodeDelegateModelRegistry> registerDataModels();
-    void setStyle();
     void setupMainWindowWidget();
 public:
     VisualOpenCVProcessor(QWidget *parent = nullptr);
     ~VisualOpenCVProcessor();
-
+	QWidget* getCentralWidget() { return ui.centralWidget; }
 };

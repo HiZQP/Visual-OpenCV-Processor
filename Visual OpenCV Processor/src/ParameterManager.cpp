@@ -1,7 +1,7 @@
 #include "ParameterManager.h"
 
-ParameterManager::ParameterManager(QWidget* parent, std::shared_ptr<QtNodes::NodeDelegateModelRegistry> registry, std::shared_ptr<QtNodes::DataFlowGraphModel> dataFlowGraph)
-	: QWidget(parent), _registry(registry), _dataFlowGraph(dataFlowGraph)
+ParameterManager::ParameterManager(QObject* parent, std::shared_ptr<NodeEditorManager> nodeEditorManager)
+	: _nodeEditorManager(nodeEditorManager)
 {
 	ui.setupUi(this);
 	ui.paramAdd_verticalLayout->setAlignment(Qt::AlignTop);

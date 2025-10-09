@@ -15,24 +15,30 @@
 #include <QLineEdit>
 #include <QMenu>
 #include <QtNodes/NodeDelegateModelRegistry>
+#include "NodeEditorManager.h"
 
 template<typename T>
 class ParamGetModel;
 
 class ParameterManager : public QWidget, public std::enable_shared_from_this<ParameterManager>
 {
+public:
+	using RegistryItemPtr = std::unique_ptr<QtNodes::NodeDelegateModel>;
+	using RegistryItemCreator = std::function<RegistryItemPtr()>;
+
 	Q_OBJECT
+signals:
+	void registerParamType(QVariant creator);
+	void createNode(const QString& name);
 private:
 	Ui::ParameterManagerClass ui;
 
-	std::shared_ptr<QtNodes::NodeDelegateModelRegistry> _registry;
-	std::shared_ptr<QtNodes::DataFlowGraphModel> _dataFlowGraph;
-
 	std::vector<QString> _paramTypes;
-	std::unordered_map<QString, std::unique_ptr<QtNodes::NodeData>> _params;
+	std::unordered_map<QString, std::shared_ptr<QtNodes::NodeData>> _params;
+	std::shared_ptr<NodeEditorManager> _nodeEditorManager;
 
 public:
-	ParameterManager(QWidget *parent, std::shared_ptr<QtNodes::NodeDelegateModelRegistry> _registry, std::shared_ptr<QtNodes::DataFlowGraphModel> dataFlowGraph);
+	ParameterManager(QObject* parent, std::shared_ptr<NodeEditorManager> nodeEditorManager);
 	~ParameterManager();
 
 	ParameterManager(const ParameterManager&) = delete;
@@ -44,29 +50,27 @@ public:
 	typename std::enable_if<std::is_base_of<QtNodes::NodeData, T>::value, void>::type
 	registerParamType() {
 		T temp;
-		QString typeName = temp.type().name;
+		QtNodes::NodeDataType type = temp.type();
 
-		auto it = std::find(_paramTypes.begin(), _paramTypes.end(), typeName);
+		auto it = std::find(_paramTypes.begin(), _paramTypes.end(), type.name);
 		if (it == _paramTypes.end()) {
-			_paramTypes.push_back(typeName);
-			auto button = new QPushButton(typeName + "(" + temp.type().id + ")");
-			ui.paramAdd_verticalLayout->addWidget(button);
-			connect(button, &QPushButton::clicked, [this, typeName]() {
+			_paramTypes.push_back(type.name);
+			auto paramTypeButton = new QPushButton(type.name + "(" + type.id + ")");
+			ui.paramAdd_verticalLayout->addWidget(paramTypeButton);
+			connect(paramTypeButton, &QPushButton::clicked, [this, type]() {
 				static int count = 0;
-				QString name = QString("%1_%2").arg(typeName).arg(++count);
+				QString name = QString("%1_%2").arg(type.name).arg(++count);
 
 				// 使用 weak_ptr 来避免在构造函数中调用 shared_from_this()
 				auto weakThis = std::weak_ptr<ParameterManager>(shared_from_this());
 
-				_registry->registerModel(
-					[name, weakThis]() -> std::unique_ptr<QtNodes::NodeDelegateModel> {
-						if (auto sharedThis = weakThis.lock()) {
-							return std::make_unique<ParamGetModel<T>>(name, sharedThis);
-						}
-						return nullptr;
-					},
-					"__HIDDEN__"
-				);
+				RegistryItemCreator creator = [name, weakThis]() -> std::unique_ptr<QtNodes::NodeDelegateModel> {
+					if (auto sharedThis = weakThis.lock()) {
+						return std::make_unique<ParamGetModel<T>>(name, sharedThis);
+					}
+					return nullptr;
+					};
+				_nodeEditorManager->registerParamType(creator);
 
 				this->addParam<T>(name);
 				});
@@ -89,15 +93,13 @@ public:
 
 		ui.paramList_verticalLayout->addWidget(button);
 
-		_params[name] = std::make_unique<T>();
+		_params[name] = std::make_shared<T>(0);
 
 		connect(button, &QPushButton::click, button, &QPushButton::showMenu);
 		connect(getAction, &QAction::triggered, [this, name]() {
 			auto it = _params.find(name);
-			if (it != _params.end()) {
-				auto id = _dataFlowGraph->addNode("Get " + name);
-				_dataFlowGraph->setNodeData(id, QtNodes::NodeRole::Position, QPointF(0, 0));
-			}
+			if (it != _params.end())
+				_nodeEditorManager->createNode(name);
 			});
 		connect(deleteAction, &QAction::triggered, [this, name, button]() {
 			auto it = _params.find(name);
@@ -158,17 +160,3 @@ public:
 	void setInData(std::shared_ptr<QtNodes::NodeData> nodeData, QtNodes::PortIndex portIndex) override {}
 	QWidget* embeddedWidget() override { return nullptr; }
 };
-
-
-//class ParamListButton : public QPushButton
-//{
-//	Q_OBJECT
-//private:
-//	QString _paramName;
-//public:
-//	ParamListButton(const QString& paramName, QWidget* parent = nullptr) : QPushButton(parent), _paramName(paramName) {
-//		setText(paramName);
-//	}
-//	QString paramName() const { return _paramName; }
-//
-//};
