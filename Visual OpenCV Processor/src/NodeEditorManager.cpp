@@ -8,9 +8,9 @@ void NodeEditorManager::registerParamType(RegistryItemCreator creator)
 		_registry->registerModel(std::move(creator), "__HIDDEN__");
 }
 
-void NodeEditorManager::createNode(const QString& name)
+void NodeEditorManager::createNode(const QString& paramId)
 {
-	auto id = _dataFlowGraphModel->addNode("Get " + name);
+	auto id = _dataFlowGraphModel->addNode(paramId);
 	_dataFlowGraphModel->setNodeData(id, QtNodes::NodeRole::Position, QPointF(0, 0));
 }
 

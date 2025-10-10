@@ -37,5 +37,5 @@ public:
 	NodeEditorManager& operator=(NodeEditorManager&&) = delete;
 
 	void registerParamType(RegistryItemCreator creator);
-	void createNode(const QString& name);
+	void createNode(const QString& paramId);
 };
