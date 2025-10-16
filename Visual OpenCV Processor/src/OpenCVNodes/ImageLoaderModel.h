@@ -23,7 +23,7 @@ private:
 	
 public:
 	ImageLoaderModel();
-	~ImageLoaderModel() override;
+	~ImageLoaderModel() override = default;
 
 	// 节点名称
 	QString caption() const override { return QUTF8("图片加载组件"); }

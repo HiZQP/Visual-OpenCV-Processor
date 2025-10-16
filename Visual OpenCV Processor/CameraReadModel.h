@@ -17,11 +17,14 @@ private:
 	std::unique_ptr<QWidget> _widget;
 	QComboBox* _cameraIndex;
 	QPushButton* _pictureCaptureButton;
+	QPushButton* _videoCaptureButton;
 	QPushButton* _searchCameraButton;
+	bool _isCapturingFrames = false;
 
 	cv::VideoCapture _cap;
 	cv::Mat _cameraFrame;
-	void readFrame();
+	void capture();
+	void captureFrames();
 	void searchCameras();
 public:
 	CameraReadModel();

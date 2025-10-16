@@ -20,11 +20,11 @@
 #define CV_IMDRAW_CONTOURS     0x0013  
 #define CV_IMFIND_CONTOURS     0x0014  
 #define CV_IMDRAW_SHAPES       0x0015  
-#define CV_IMADD_TEXT          0x0016  // 添加文字
-#define CV_IMBITWISE_OP        0x0017  // 位运算操作
-#define CV_IMMORPH_OP          0x0018  // 形态学操作
-#define CV_IMWARP_PERSPECTIVE  0x0019  // 透视变换
-#define CV_IMAFFINE_TRANSFORM  0x001A  // 仿射变换
+#define CV_IMADD_TEXT          0x0016  
+#define CV_IMBITWISE_OP        0x0017  
+#define CV_IMMORPH_OP          0x0018  
+#define CV_IMWARP_PERSPECTIVE  0x0019  
+#define CV_IMAFFINE_TRANSFORM  0x001A X // 仿射变换
 #define CV_IMHOUGH_LINES       0x001B  // 霍夫直线检测
 #define CV_IMHOUGH_CIRCLES     0x001C  // 霍夫圆检测
 #define CV_IMFEATURE_DETECT    0x001D  // 特征检测

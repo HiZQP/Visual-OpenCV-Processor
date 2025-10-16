@@ -1,6 +1,8 @@
 #include "DataTypeCastModel.h"
 #include "NodeDataType.h"
 
+#include <QVBoxLayout>
+
 unsigned int StrToNumModel::nPorts(QtNodes::PortType portType) const
 {
 	if (portType == QtNodes::PortType::In)
@@ -168,4 +170,56 @@ std::shared_ptr<QtNodes::NodeData> PointToNumModel::outData(QtNodes::PortIndex p
 		return std::make_shared<NumberData>(_numberX);
 	else
 		return std::make_shared<NumberData>(_numberY);
+}
+
+PointToPointsModel::PointToPointsModel()
+{
+	_widget = new QWidget();
+	_addPointButton = new QPushButton();
+	_addPointButton->setText("+");
+	QVBoxLayout* layout = new QVBoxLayout();
+	layout->setAlignment(Qt::AlignTop);
+	layout->addWidget(_addPointButton);
+	_widget->setLayout(layout);
+
+	connect(_addPointButton, &QPushButton::clicked, [this]() {
+		pointInPortNum++;
+		_points.push_back(cv::Point2d(0.0, 0.0));
+		static QSize widgetSize(50, 30);
+		_widget->setMinimumSize(widgetSize.width(), widgetSize.height() + pointInPortNum * 30);
+		Q_EMIT portsAboutToBeDeleted(QtNodes::PortType::In, 0, pointInPortNum - 1);
+		Q_EMIT portsDeleted();
+		});
+}
+
+unsigned int PointToPointsModel::nPorts(QtNodes::PortType portType) const
+{
+	if (portType == QtNodes::PortType::In)
+		return pointInPortNum;
+	else
+		return 1;
+}
+
+QtNodes::NodeDataType PointToPointsModel::dataType(QtNodes::PortType portType, QtNodes::PortIndex portIndex) const
+{
+	if (portType == QtNodes::PortType::In)
+		return QtNodes::NodeDataType{ "Point", "点" };
+	else
+		return QtNodes::NodeDataType{ "Points", "点集" };
+}
+
+void PointToPointsModel::setInData(std::shared_ptr<QtNodes::NodeData> nodeData, QtNodes::PortIndex portIndex)
+{
+	if (nodeData) {
+		if (portIndex >= 0) {
+			auto pointData = std::dynamic_pointer_cast<PointData>(nodeData);
+			_points[portIndex] = pointData->get();
+			Q_EMIT dataUpdated(0);
+		}
+	}
+}
+
+std::shared_ptr<QtNodes::NodeData> PointToPointsModel::outData(QtNodes::PortIndex port)
+{
+	return std::make_shared<PointsData>(_points);
 }

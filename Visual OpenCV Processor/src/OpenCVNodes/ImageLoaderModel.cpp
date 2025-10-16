@@ -40,10 +40,6 @@ ImageLoaderModel::ImageLoaderModel()
 		});
 }
 
-ImageLoaderModel::~ImageLoaderModel() {
-
-}
-
 unsigned int ImageLoaderModel::nPorts(PortType portType) const {
 	if (portType == PortType::In)
 		return 0;

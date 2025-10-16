@@ -10,8 +10,8 @@ private:
 	std::unordered_map<QString, std::shared_ptr<QtNodes::NodeData>> paramMap;
 public:
 	static ParameterManager& getInstance();
-	ParameterManager(const ParameterManager&) = delete; // ½ûÖ¹¿½±´¹¹Ôìº¯Êı
-	ParameterManager& operator=(const ParameterManager&) = delete; // ½ûÖ¹¸³Öµ²Ù×÷·û
+	ParameterManager(const ParameterManager&) = delete; // ç¦æ­¢æ‹·è´æ„é€ å‡½æ•°
+	ParameterManager& operator=(const ParameterManager&) = delete; // ç¦æ­¢èµ‹å€¼æ“ä½œç¬¦
 
 	void setParam(const QString& key, std::shared_ptr<QtNodes::NodeData> value);
 	std::shared_ptr<QtNodes::NodeData> getParam(const QString& key);
