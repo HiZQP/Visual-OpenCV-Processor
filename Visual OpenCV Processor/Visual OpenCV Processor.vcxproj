@@ -123,12 +123,17 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <QtRcc Include="src\VisualOpenCVProcessor.qrc" />
+    <QtUic Include="src\Math\AddWeightedNode.ui" />
+    <QtUic Include="src\OpenCVNodes\MatCreateNode.ui" />
+    <QtUic Include="src\OpenCVNodes\ResizeNode.ui" />
     <QtUic Include="src\VisualOpenCVProcessor.ui" />
     <QtMoc Include="src\VisualOpenCVProcessor.h" />
+    <ClCompile Include="src\Math\AddWeightedNode.cpp" />
     <ClCompile Include="CameraReadModel.cpp" />
     <ClCompile Include="CustomDataFlowGraphicsScene.cpp" />
     <ClCompile Include="HoughLinesNode.cpp" />
     <ClCompile Include="DrawLinesNode.cpp" />
+    <ClCompile Include="src\OpenCVNodes\MatCreateNode.cpp" />
     <ClCompile Include="src\NodeEditorManager.cpp" />
     <ClCompile Include="src\OpenCVNodes\MorphologyModel.cpp" />
     <ClCompile Include="src\OpenCVNodes\WarpPerspectiveModel.cpp" />
@@ -157,7 +162,7 @@
     <ClCompile Include="src\OpenCVNodes\ImageCropModel.cpp" />
     <ClCompile Include="src\OpenCVNodes\ImageGaussianBlurModel.cpp" />
     <ClCompile Include="src\OpenCVNodes\ImageRotateModel.cpp" />
-    <ClCompile Include="src\OpenCVNodes\ImageResizeModel.cpp" />
+    <ClCompile Include="src\OpenCVNodes\ResizeNode.cpp" />
     <ClCompile Include="src\OpenCVNodes\ImageSaveModel.cpp" />
     <ClCompile Include="src\DataType\DataTypeCastModel.cpp" />
     <ClCompile Include="src\OpenCVNodes\DisplayModel.cpp" />
@@ -183,11 +188,13 @@
     <QtMoc Include="src\DataType\DataNodeModel.h" />
     <QtMoc Include="HoughLinesNode.h" />
     <QtMoc Include="DrawLinesNode.h" />
+    <QtMoc Include="src\OpenCVNodes\MatCreateNode.h" />
+    <QtMoc Include="src\Math\AddWeightedNode.h" />
     <ClInclude Include="src\ParameterManager.h" />
     <ClInclude Include="src\ToolNodes\ToolNodes.h" />
     <QtMoc Include="src\ToolNodes\ColorPicker.h" />
     <QtMoc Include="src\OpenCVNodes\ImageSaveModel.h" />
-    <QtMoc Include="src\OpenCVNodes\ImageResizeModel.h" />
+    <QtMoc Include="src\OpenCVNodes\ResizeNode.h" />
     <QtMoc Include="src\OpenCVNodes\ImageCropModel.h" />
     <QtMoc Include="src\OpenCVNodes\ImageRotateModel.h" />
     <QtMoc Include="src\OpenCVNodes\ImageFlipModel.h" />

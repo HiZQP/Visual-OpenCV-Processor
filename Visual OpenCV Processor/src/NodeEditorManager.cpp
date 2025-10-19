@@ -25,7 +25,7 @@ std::shared_ptr<QtNodes::NodeDelegateModelRegistry> NodeEditorManager::registerD
 	ret->registerModel<ImageSaveModel>("工具");
 	ret->registerModel<ColorPicker>("工具");
 
-	ret->registerModel<ImageResizeModel>("图像操作");
+	ret->registerModel<ResizeNode>("图像操作");
 	ret->registerModel<ImageCropModel>("图像操作");
 	ret->registerModel<ImageRotateModel>("图像操作");
 	ret->registerModel<ImageFlipModel>("图像操作");
@@ -52,9 +52,11 @@ std::shared_ptr<QtNodes::NodeDelegateModelRegistry> NodeEditorManager::registerD
 	ret->registerModel<DrawTextModel>("图像操作");
 	ret->registerModel<HoughLinesNode>("图像操作");
 	ret->registerModel<DrawLinesNode>("图像操作");
+	ret->registerModel<MatCreateNode>("图像操作");
 
 	ret->registerModel<BitwiseAnd>("数学");
 	ret->registerModel<BitwiseOr>("数学");
+	ret->registerModel<AddWeightedNode>("数学");
 
 	ret->registerModel<TextDisplayModel>("显示");
 	ret->registerModel<ImageDisplayModel>("显示");

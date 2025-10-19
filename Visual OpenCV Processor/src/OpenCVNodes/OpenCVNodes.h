@@ -4,7 +4,7 @@
 #include "DisplayModel.h"
 #include "ImageLoaderModel.h"
 #include "ImageSaveModel.h"
-#include "ImageResizeModel.h"
+#include "ResizeNode.h"
 #include "ImageCropModel.h"
 #include "ImageRotateModel.h"
 #include "ImageFlipModel.h"
@@ -32,6 +32,9 @@
 #include "DrawTextModel.h"
 #include "HoughLinesNode.h"
 #include "DrawLinesNode.h"
+#include "MatCreateNode.h"
+
 
 #include "Math/BitwiseAnd.h"
 #include "Math/BitwiseOr.h"
+#include "Math/AddWeightedNode.h"

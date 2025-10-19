@@ -55,7 +55,7 @@
     <ClCompile Include="src\OpenCVNodes\ImageSaveModel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\OpenCVNodes\ImageResizeModel.cpp">
+    <ClCompile Include="src\OpenCVNodes\ResizeNode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\OpenCVNodes\ImageCropModel.cpp">
@@ -157,6 +157,12 @@
     <ClCompile Include="DrawLinesNode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\OpenCVNodes\MatCreateNode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Math\AddWeightedNode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\logSystem\LogSystem.h">
@@ -188,7 +194,7 @@
     <QtMoc Include="src\OpenCVNodes\ImageSaveModel.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="src\OpenCVNodes\ImageResizeModel.h">
+    <QtMoc Include="src\OpenCVNodes\ResizeNode.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="src\OpenCVNodes\ImageCropModel.h">
@@ -290,8 +296,25 @@
     <QtMoc Include="DrawLinesNode.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="src\OpenCVNodes\MatCreateNode.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="src\Math\AddWeightedNode.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <Text Include="src\cv.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtUic Include="src\OpenCVNodes\MatCreateNode.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="src\Math\AddWeightedNode.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="src\OpenCVNodes\ResizeNode.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
   </ItemGroup>
 </Project>
