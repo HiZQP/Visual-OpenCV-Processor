@@ -87,6 +87,7 @@
       <AdditionalIncludeDirectories>$(SolutionDir)Visual OpenCV Processor\src\DataType;$(SolutionDir)Visual OpenCV Processor\src;$(SolutionDir)Visual OpenCV Processor\src\ToolNodes;$(SolutionDir)Dependencies\OpenCV\include\opencv2;$(SolutionDir)Dependencies\OpenCV\include;$(SolutionDir)Dependencies\QtNodesLibrary\QtNodesLibrary_Relese\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NODE_EDITOR_SHARED;QT_CORE_LIB;QT_WIDGETS_LIB;QT_GUI_LIB;QT_OPENGL_LIB;CMAKE_INTDIR="Relese"</PreprocessorDefinitions>
       <LanguageStandard_C>Default</LanguageStandard_C>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\OpenCV\x64\vc16\lib;$(SolutionDir)Dependencies\QtNodesLibrary\QtNodesLibrary_Relese\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -123,16 +124,18 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <QtRcc Include="src\VisualOpenCVProcessor.qrc" />
+    <QtUic Include="BCGAdjustment.ui" />
     <QtUic Include="src\Math\AddWeightedNode.ui" />
     <QtUic Include="src\OpenCVNodes\MatCreateNode.ui" />
     <QtUic Include="src\OpenCVNodes\ResizeNode.ui" />
     <QtUic Include="src\VisualOpenCVProcessor.ui" />
     <QtMoc Include="src\VisualOpenCVProcessor.h" />
+    <ClCompile Include="BCGAdjustment.cpp" />
     <ClCompile Include="src\Math\AddWeightedNode.cpp" />
-    <ClCompile Include="CameraReadModel.cpp" />
-    <ClCompile Include="CustomDataFlowGraphicsScene.cpp" />
-    <ClCompile Include="HoughLinesNode.cpp" />
-    <ClCompile Include="DrawLinesNode.cpp" />
+    <ClCompile Include="src\OpenCVNodes\CameraReadModel.cpp" />
+    <ClCompile Include="src\CustomDataFlowGraphicsScene.cpp" />
+    <ClCompile Include="src\OpenCVNodes\HoughLinesNode.cpp" />
+    <ClCompile Include="src\OpenCVNodes\DrawLinesNode.cpp" />
     <ClCompile Include="src\OpenCVNodes\MatCreateNode.cpp" />
     <ClCompile Include="src\NodeEditorManager.cpp" />
     <ClCompile Include="src\OpenCVNodes\MorphologyModel.cpp" />
@@ -140,7 +143,7 @@
     <ClCompile Include="src\ParameterManager.cpp" />
     <ClCompile Include="src\Math\BitwiseAnd.cpp" />
     <ClCompile Include="src\Math\BitwiseOr.cpp" />
-    <ClCompile Include="InRange.cpp" />
+    <ClCompile Include="src\OpenCVNodes\InRange.cpp" />
     <ClCompile Include="src\OpenCVNodes\DrawTextModel.cpp" />
     <ClCompile Include="src\OpenCVNodes\ImageChannelExtract.cpp" />
     <ClCompile Include="src\OpenCVNodes\DrawCircleModel.cpp" />
@@ -177,19 +180,20 @@
     <QtMoc Include="src\OpenCVNodes\DrawCircleModel.h" />
     <QtMoc Include="src\OpenCVNodes\DrawTextModel.h" />
     <QtMoc Include="src\OpenCVNodes\ImageChannelExtract.h" />
-    <QtMoc Include="InRange.h" />
+    <QtMoc Include="src\OpenCVNodes\InRange.h" />
     <QtMoc Include="src\Math\BitwiseOr.h" />
     <QtMoc Include="src\Math\BitwiseAnd.h" />
-    <QtMoc Include="CameraReadModel.h" />
+    <QtMoc Include="src\OpenCVNodes\CameraReadModel.h" />
     <QtMoc Include="src\OpenCVNodes\WarpPerspectiveModel.h" />
     <QtMoc Include="src\NodeEditorManager.h" />
-    <QtMoc Include="CustomDataFlowGraphicsScene.h" />
+    <QtMoc Include="src\CustomDataFlowGraphicsScene.h" />
     <QtMoc Include="src\OpenCVNodes\MorphologyModel.h" />
     <QtMoc Include="src\DataType\DataNodeModel.h" />
-    <QtMoc Include="HoughLinesNode.h" />
-    <QtMoc Include="DrawLinesNode.h" />
+    <QtMoc Include="src\OpenCVNodes\HoughLinesNode.h" />
+    <QtMoc Include="src\OpenCVNodes\DrawLinesNode.h" />
     <QtMoc Include="src\OpenCVNodes\MatCreateNode.h" />
     <QtMoc Include="src\Math\AddWeightedNode.h" />
+    <QtMoc Include="BCGAdjustment.h" />
     <ClInclude Include="src\ParameterManager.h" />
     <ClInclude Include="src\ToolNodes\ToolNodes.h" />
     <QtMoc Include="src\ToolNodes\ColorPicker.h" />

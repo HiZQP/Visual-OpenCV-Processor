@@ -53,6 +53,7 @@ std::shared_ptr<QtNodes::NodeDelegateModelRegistry> NodeEditorManager::registerD
 	ret->registerModel<HoughLinesNode>("图像操作");
 	ret->registerModel<DrawLinesNode>("图像操作");
 	ret->registerModel<MatCreateNode>("图像操作");
+	ret->registerModel<BCGAdjustment>("图像操作");
 
 	ret->registerModel<BitwiseAnd>("数学");
 	ret->registerModel<BitwiseOr>("数学");

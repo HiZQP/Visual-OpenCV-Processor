@@ -33,6 +33,7 @@
 #include "HoughLinesNode.h"
 #include "DrawLinesNode.h"
 #include "MatCreateNode.h"
+#include "BCGAdjustment.h"
 
 
 #include "Math/BitwiseAnd.h"

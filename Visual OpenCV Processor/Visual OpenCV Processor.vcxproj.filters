@@ -124,7 +124,7 @@
     <ClCompile Include="src\OpenCVNodes\ImageChannelExtract.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="InRange.cpp">
+    <ClCompile Include="src\OpenCVNodes\InRange.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Math\BitwiseOr.cpp">
@@ -133,7 +133,7 @@
     <ClCompile Include="src\Math\BitwiseAnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CameraReadModel.cpp">
+    <ClCompile Include="src\OpenCVNodes\CameraReadModel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\ParameterManager.cpp">
@@ -145,22 +145,25 @@
     <ClCompile Include="src\NodeEditorManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CustomDataFlowGraphicsScene.cpp">
+    <ClCompile Include="src\CustomDataFlowGraphicsScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\OpenCVNodes\MorphologyModel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="HoughLinesNode.cpp">
+    <ClCompile Include="src\OpenCVNodes\HoughLinesNode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DrawLinesNode.cpp">
+    <ClCompile Include="src\OpenCVNodes\DrawLinesNode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\OpenCVNodes\MatCreateNode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Math\AddWeightedNode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BCGAdjustment.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -263,7 +266,7 @@
     <QtMoc Include="src\OpenCVNodes\ImageChannelExtract.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="InRange.h">
+    <QtMoc Include="src\OpenCVNodes\InRange.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="src\Math\BitwiseOr.h">
@@ -272,7 +275,7 @@
     <QtMoc Include="src\Math\BitwiseAnd.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="CameraReadModel.h">
+    <QtMoc Include="src\OpenCVNodes\CameraReadModel.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="src\OpenCVNodes\WarpPerspectiveModel.h">
@@ -281,7 +284,7 @@
     <QtMoc Include="src\NodeEditorManager.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="CustomDataFlowGraphicsScene.h">
+    <QtMoc Include="src\CustomDataFlowGraphicsScene.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="src\OpenCVNodes\MorphologyModel.h">
@@ -290,16 +293,19 @@
     <QtMoc Include="src\DataType\DataNodeModel.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="HoughLinesNode.h">
+    <QtMoc Include="src\OpenCVNodes\HoughLinesNode.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="DrawLinesNode.h">
+    <QtMoc Include="src\OpenCVNodes\DrawLinesNode.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="src\OpenCVNodes\MatCreateNode.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="src\Math\AddWeightedNode.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="BCGAdjustment.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
@@ -314,6 +320,9 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="src\OpenCVNodes\ResizeNode.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="BCGAdjustment.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>
