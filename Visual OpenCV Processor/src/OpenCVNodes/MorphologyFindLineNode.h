@@ -2,29 +2,23 @@
 #include <opencv2/opencv.hpp>
 #include "NodeDataType.h"
 #include <QtNodes/NodeDelegateModel>
+#include "ui_MorphologyFindLineNode.h"
 
-#include <QLineEdit>
-#include <QComboBox>
-#include <QSpinBox>
-
-class ImageThresholdModel : public QtNodes::NodeDelegateModel
+class MorphologyFindLineNode : public QtNodes::NodeDelegateModel
 {
 	Q_OBJECT
 private:
+	Ui::MorphologyFindLineNode _ui;
 	QWidget* _widget;
-	QSpinBox* _thresholdSpinBox;
-	QSpinBox* _maxValueSpinBox;
-	QComboBox* _typeComboBox;
 
-
-	cv::Mat _originalImage;
+	cv::Mat _inputImage;
 	cv::Mat _outputImage;
 	void calculate();
 public:
-	ImageThresholdModel();
-	virtual ~ImageThresholdModel() override {}
-	QString caption() const override { return "图像二值化组件"; }
-	QString name() const override { return "二值化"; }
+	MorphologyFindLineNode();
+	virtual ~MorphologyFindLineNode() override {}
+	QString caption() const override { return "形态学直线检测"; }
+	QString name() const override { return "形态学直线检测"; }
 	unsigned int nPorts(QtNodes::PortType portType) const override;
 	QtNodes::NodeDataType dataType(QtNodes::PortType portType, QtNodes::PortIndex portIndex) const override;
 	void setInData(std::shared_ptr<QtNodes::NodeData> nodeData, QtNodes::PortIndex portIndex) override;

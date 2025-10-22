@@ -124,13 +124,18 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <QtRcc Include="src\VisualOpenCVProcessor.qrc" />
-    <QtUic Include="BCGAdjustment.ui" />
+    <QtUic Include="src\OpenCVNodes\BCGAdjustment.ui" />
+    <QtUic Include="src\OpenCVNodes\MorphologyFindLineNode.ui" />
     <QtUic Include="src\Math\AddWeightedNode.ui" />
+    <QtUic Include="src\OpenCVNodes\ColorSpaceConversionNode.ui" />
+    <QtUic Include="src\OpenCVNodes\HSVColorSegmentationNode.ui" />
     <QtUic Include="src\OpenCVNodes\MatCreateNode.ui" />
     <QtUic Include="src\OpenCVNodes\ResizeNode.ui" />
+    <QtUic Include="src\OpenCVNodes\ThresholdNode.ui" />
     <QtUic Include="src\VisualOpenCVProcessor.ui" />
     <QtMoc Include="src\VisualOpenCVProcessor.h" />
-    <ClCompile Include="BCGAdjustment.cpp" />
+    <ClCompile Include="src\OpenCVNodes\BCGAdjustment.cpp" />
+    <ClCompile Include="src\OpenCVNodes\MorphologyFindLineNode.cpp" />
     <ClCompile Include="src\Math\AddWeightedNode.cpp" />
     <ClCompile Include="src\OpenCVNodes\CameraReadModel.cpp" />
     <ClCompile Include="src\CustomDataFlowGraphicsScene.cpp" />
@@ -143,7 +148,7 @@
     <ClCompile Include="src\ParameterManager.cpp" />
     <ClCompile Include="src\Math\BitwiseAnd.cpp" />
     <ClCompile Include="src\Math\BitwiseOr.cpp" />
-    <ClCompile Include="src\OpenCVNodes\InRange.cpp" />
+    <ClCompile Include="src\OpenCVNodes\HSVColorSegmentationNode.cpp" />
     <ClCompile Include="src\OpenCVNodes\DrawTextModel.cpp" />
     <ClCompile Include="src\OpenCVNodes\ImageChannelExtract.cpp" />
     <ClCompile Include="src\OpenCVNodes\DrawCircleModel.cpp" />
@@ -152,7 +157,7 @@
     <ClCompile Include="src\OpenCVNodes\ImageDrawContoursModel.cpp" />
     <ClCompile Include="src\OpenCVNodes\ImageFindContoursModel.cpp" />
     <ClCompile Include="src\OpenCVNodes\ImageHistEqualizeModel.cpp" />
-    <ClCompile Include="src\OpenCVNodes\ImageThresholdModel.cpp" />
+    <ClCompile Include="src\OpenCVNodes\ThresholdNode.cpp" />
     <ClCompile Include="src\OpenCVNodes\ImageLaplacianModel.cpp" />
     <ClCompile Include="src\OpenCVNodes\ImageSobelModel.cpp" />
     <ClCompile Include="src\OpenCVNodes\ImageCannyModel.cpp" />
@@ -160,7 +165,7 @@
     <ClCompile Include="src\OpenCVNodes\ImageImbilateralFilter.cpp" />
     <ClCompile Include="src\OpenCVNodes\ImageImmedianBlurModel.cpp" />
     <ClCompile Include="src\OpenCVNodes\ImageBlurModel.cpp" />
-    <ClCompile Include="src\OpenCVNodes\ImageConvertColorModel.cpp" />
+    <ClCompile Include="src\OpenCVNodes\ColorSpaceConversionNode.cpp" />
     <ClCompile Include="src\OpenCVNodes\ImageFlipModel.cpp" />
     <ClCompile Include="src\OpenCVNodes\ImageCropModel.cpp" />
     <ClCompile Include="src\OpenCVNodes\ImageGaussianBlurModel.cpp" />
@@ -180,7 +185,7 @@
     <QtMoc Include="src\OpenCVNodes\DrawCircleModel.h" />
     <QtMoc Include="src\OpenCVNodes\DrawTextModel.h" />
     <QtMoc Include="src\OpenCVNodes\ImageChannelExtract.h" />
-    <QtMoc Include="src\OpenCVNodes\InRange.h" />
+    <QtMoc Include="src\OpenCVNodes\HSVColorSegmentationNode.h" />
     <QtMoc Include="src\Math\BitwiseOr.h" />
     <QtMoc Include="src\Math\BitwiseAnd.h" />
     <QtMoc Include="src\OpenCVNodes\CameraReadModel.h" />
@@ -193,7 +198,8 @@
     <QtMoc Include="src\OpenCVNodes\DrawLinesNode.h" />
     <QtMoc Include="src\OpenCVNodes\MatCreateNode.h" />
     <QtMoc Include="src\Math\AddWeightedNode.h" />
-    <QtMoc Include="BCGAdjustment.h" />
+    <QtMoc Include="src\OpenCVNodes\BCGAdjustment.h" />
+    <QtMoc Include="src\OpenCVNodes\MorphologyFindLineNode.h" />
     <ClInclude Include="src\ParameterManager.h" />
     <ClInclude Include="src\ToolNodes\ToolNodes.h" />
     <QtMoc Include="src\ToolNodes\ColorPicker.h" />
@@ -202,7 +208,7 @@
     <QtMoc Include="src\OpenCVNodes\ImageCropModel.h" />
     <QtMoc Include="src\OpenCVNodes\ImageRotateModel.h" />
     <QtMoc Include="src\OpenCVNodes\ImageFlipModel.h" />
-    <QtMoc Include="src\OpenCVNodes\ImageConvertColorModel.h" />
+    <QtMoc Include="src\OpenCVNodes\ColorSpaceConversionNode.h" />
     <QtMoc Include="src\OpenCVNodes\ImageBlurModel.h" />
     <QtMoc Include="src\OpenCVNodes\ImageGaussianBlurModel.h" />
     <QtMoc Include="src\OpenCVNodes\ImageImmedianBlurModel.h" />
@@ -214,7 +220,7 @@
     <QtMoc Include="src\OpenCVNodes\ImageHistEqualizeModel.h" />
     <QtMoc Include="src\OpenCVNodes\ImageDrawContoursModel.h" />
     <QtMoc Include="src\OpenCVNodes\ImageFindContoursModel.h" />
-    <QtMoc Include="src\OpenCVNodes\ImageThresholdModel.h" />
+    <QtMoc Include="src\OpenCVNodes\ThresholdNode.h" />
     <QtMoc Include="src\OpenCVNodes\DrawLineModel.h" />
     <ClInclude Include="src\OpenCVNodes\OpenCVNodes.h" />
     <QtMoc Include="src\OpenCVNodes\DisplayModel.h" />

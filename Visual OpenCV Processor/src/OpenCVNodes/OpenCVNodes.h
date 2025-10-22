@@ -8,7 +8,7 @@
 #include "ImageCropModel.h"
 #include "ImageRotateModel.h"
 #include "ImageFlipModel.h"
-#include "ImageConvertColorModel.h"
+#include "ColorSpaceConversionNode.h"
 #include "ImageBlurModel.h"
 #include "ImageGaussianBlurModel.h"
 #include "ImageImmedianBlurModel.h"
@@ -20,9 +20,9 @@
 #include "ImageHistEqualizeModel.h"
 #include "ImageFindContoursModel.h"
 #include "ImageDrawContoursModel.h"
-#include "ImageThresholdModel.h"
+#include "ThresholdNode.h"
 #include "ImageChannelExtract.h"
-#include "InRange.h"
+#include "HSVColorSegmentationNode.h"
 #include "WarpPerspectiveModel.h"
 #include "MorphologyModel.h"
 #include "CameraReadModel.h"
@@ -34,6 +34,7 @@
 #include "DrawLinesNode.h"
 #include "MatCreateNode.h"
 #include "BCGAdjustment.h"
+#include "MorphologyFindLineNode.h"
 
 
 #include "Math/BitwiseAnd.h"

@@ -2,6 +2,7 @@
 #include "NodeDataType.h"
 
 #include <QVBoxLayout>
+#include <QTimer>
 
 unsigned int StrToNumModel::nPorts(QtNodes::PortType portType) const
 {
@@ -187,8 +188,11 @@ PointToPointsModel::PointToPointsModel()
 		_points.push_back(cv::Point2d(0.0, 0.0));
 		static QSize widgetSize(50, 30);
 		_widget->setMinimumSize(widgetSize.width(), widgetSize.height() + pointInPortNum * 30);
-		Q_EMIT portsAboutToBeDeleted(QtNodes::PortType::In, 0, pointInPortNum - 1);
-		Q_EMIT portsDeleted();
+		Q_EMIT portsAboutToBeInserted(QtNodes::PortType::In, 0, pointInPortNum - 1);
+		QTimer::singleShot(200, [this]() {
+			Q_EMIT portsInserted();
+			emit embeddedWidgetSizeUpdated();
+			});
 		});
 }
 
@@ -202,8 +206,9 @@ unsigned int PointToPointsModel::nPorts(QtNodes::PortType portType) const
 
 QtNodes::NodeDataType PointToPointsModel::dataType(QtNodes::PortType portType, QtNodes::PortIndex portIndex) const
 {
-	if (portType == QtNodes::PortType::In)
+	if (portType == QtNodes::PortType::In) {
 		return QtNodes::NodeDataType{ "Point", "点" };
+	}
 	else
 		return QtNodes::NodeDataType{ "Points", "点集" };
 }

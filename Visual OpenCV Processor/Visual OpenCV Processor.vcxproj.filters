@@ -67,7 +67,7 @@
     <ClCompile Include="src\OpenCVNodes\ImageFlipModel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\OpenCVNodes\ImageConvertColorModel.cpp">
+    <ClCompile Include="src\OpenCVNodes\ColorSpaceConversionNode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\OpenCVNodes\ImageBlurModel.cpp">
@@ -103,7 +103,7 @@
     <ClCompile Include="src\OpenCVNodes\ImageFindContoursModel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\OpenCVNodes\ImageThresholdModel.cpp">
+    <ClCompile Include="src\OpenCVNodes\ThresholdNode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\OpenCVNodes\DrawLineModel.cpp">
@@ -124,7 +124,7 @@
     <ClCompile Include="src\OpenCVNodes\ImageChannelExtract.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\OpenCVNodes\InRange.cpp">
+    <ClCompile Include="src\OpenCVNodes\HSVColorSegmentationNode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Math\BitwiseOr.cpp">
@@ -163,7 +163,10 @@
     <ClCompile Include="src\Math\AddWeightedNode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BCGAdjustment.cpp">
+    <ClCompile Include="src\OpenCVNodes\BCGAdjustment.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OpenCVNodes\MorphologyFindLineNode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -209,7 +212,7 @@
     <QtMoc Include="src\OpenCVNodes\ImageFlipModel.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="src\OpenCVNodes\ImageConvertColorModel.h">
+    <QtMoc Include="src\OpenCVNodes\ColorSpaceConversionNode.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="src\OpenCVNodes\ImageBlurModel.h">
@@ -245,7 +248,7 @@
     <QtMoc Include="src\OpenCVNodes\ImageDrawContoursModel.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="src\OpenCVNodes\ImageThresholdModel.h">
+    <QtMoc Include="src\OpenCVNodes\ThresholdNode.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="src\ToolNodes\ColorPicker.h">
@@ -266,7 +269,7 @@
     <QtMoc Include="src\OpenCVNodes\ImageChannelExtract.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="src\OpenCVNodes\InRange.h">
+    <QtMoc Include="src\OpenCVNodes\HSVColorSegmentationNode.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="src\Math\BitwiseOr.h">
@@ -305,7 +308,10 @@
     <QtMoc Include="src\Math\AddWeightedNode.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="BCGAdjustment.h">
+    <QtMoc Include="src\OpenCVNodes\BCGAdjustment.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="src\OpenCVNodes\MorphologyFindLineNode.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
@@ -322,7 +328,19 @@
     <QtUic Include="src\OpenCVNodes\ResizeNode.ui">
       <Filter>Form Files</Filter>
     </QtUic>
-    <QtUic Include="BCGAdjustment.ui">
+    <QtUic Include="src\OpenCVNodes\BCGAdjustment.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="src\OpenCVNodes\MorphologyFindLineNode.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="src\OpenCVNodes\ThresholdNode.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="src\OpenCVNodes\ColorSpaceConversionNode.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="src\OpenCVNodes\HSVColorSegmentationNode.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>

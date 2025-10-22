@@ -24,16 +24,20 @@ std::shared_ptr<QtNodes::NodeDelegateModelRegistry> NodeEditorManager::registerD
 	ret->registerModel<CaptureTriggerModel>("工具");
 	ret->registerModel<ImageSaveModel>("工具");
 	ret->registerModel<ColorPicker>("工具");
+	ret->registerModel<ColorSpaceConversionNode>("工具");
+
+	ret->registerModel<ImageBlurModel>("图像平滑");
+	ret->registerModel<ImageGaussianBlurModel>("图像平滑");
+	ret->registerModel<ImageImmedianBlurModel>("图像平滑");
+	ret->registerModel<ImageImbilateralFilter>("图像平滑");
+
+	ret->registerModel<MorphologyModel>("形态学");
+	ret->registerModel<MorphologyFindLineNode>("形态学");
 
 	ret->registerModel<ResizeNode>("图像操作");
 	ret->registerModel<ImageCropModel>("图像操作");
 	ret->registerModel<ImageRotateModel>("图像操作");
 	ret->registerModel<ImageFlipModel>("图像操作");
-	ret->registerModel<ImageConvertColorModel>("图像操作");
-	ret->registerModel<ImageBlurModel>("图像操作");
-	ret->registerModel<ImageGaussianBlurModel>("图像操作");
-	ret->registerModel<ImageImmedianBlurModel>("图像操作");
-	ret->registerModel<ImageImbilateralFilter>("图像操作");
 	ret->registerModel<ImageImadaptiveThresh>("图像操作");
 	ret->registerModel<ImageCannyModel>("图像操作");
 	ret->registerModel<ImageSobelModel>("图像操作");
@@ -41,10 +45,9 @@ std::shared_ptr<QtNodes::NodeDelegateModelRegistry> NodeEditorManager::registerD
 	ret->registerModel<ImageHistEqualizeModel>("图像操作");
 	ret->registerModel<ImageFindContoursModel>("图像操作");
 	ret->registerModel<ImageDrawContoursModel>("图像操作");
-	ret->registerModel<ImageThresholdModel>("图像操作");
+	ret->registerModel<ThresholdNode>("图像操作");
 	ret->registerModel<ImageChannelExtract>("图像操作");
-	ret->registerModel<InRange>("图像操作");
-	ret->registerModel<MorphologyModel>("图像操作");
+	ret->registerModel<HSVColorSegmentationNode>("图像操作");
 	ret->registerModel<WarpPerspectiveModel>("图像操作");
 	ret->registerModel<DrawLineModel>("图像操作");
 	ret->registerModel<DrawRectangleModel>("图像操作");

@@ -2,28 +2,27 @@
 #include <opencv2/opencv.hpp>
 #include "NodeDataType.h"
 #include <QtNodes/NodeDelegateModel>
+#include "ui_ThresholdNode.h"
 
+#include <QLineEdit>
 #include <QComboBox>
-#include <QLabel>
+#include <QSpinBox>
 
-class ImageConvertColorModel : public QtNodes::NodeDelegateModel
+class ThresholdNode : public QtNodes::NodeDelegateModel
 {
 	Q_OBJECT
 private:
+	Ui::ThresholdNode _ui;
 	QWidget* _widget;
-	QComboBox* _codeBox;
-	QLabel* _infoLabel;
 
-	cv::Mat _inputImage;
+	cv::Mat _originalImage;
 	cv::Mat _outputImage;
-
 	void calculate();
-	int isConversionCompatible(int conversionCode);
 public:
-	ImageConvertColorModel();
-	virtual ~ImageConvertColorModel() override {}
-	QString caption() const override { return "图像颜色空间转换组件"; }
-	QString name() const override { return "颜色空间转换"; }
+	ThresholdNode();
+	virtual ~ThresholdNode() override {}
+	QString caption() const override { return "图像基本阈值化组件"; }
+	QString name() const override { return "基本阈值化"; }
 	unsigned int nPorts(QtNodes::PortType portType) const override;
 	QtNodes::NodeDataType dataType(QtNodes::PortType portType, QtNodes::PortIndex portIndex) const override;
 	void setInData(std::shared_ptr<QtNodes::NodeData> nodeData, QtNodes::PortIndex portIndex) override;
