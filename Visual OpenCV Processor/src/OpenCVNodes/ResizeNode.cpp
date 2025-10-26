@@ -1,8 +1,6 @@
 #include "ResizeNode.h"
 #include "NodeDataType.h"
 
-#include <QGridLayout>
-
 void ResizeNode::calculate()
 {
 	if (_ratio) {

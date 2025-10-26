@@ -1,8 +1,5 @@
 #include "HSVColorSegmentationNode.h"
 
-#include <QFormLayout>
-#include <QLabel>
-
 void HSVColorSegmentationNode::calculate()
 {
 	if (!_originalImage.data) {
@@ -22,13 +19,11 @@ void HSVColorSegmentationNode::calculate()
 	}
 
 	QElapsedTimer timer;
-	cv::Scalar low(_ui.lowerH_spinBox->value(), _ui.lowerS_spinBox->value(), _ui.lowerV_spinBox->value());
-	cv::Scalar high(_ui.upperH_spinBox->value(), _ui.upperS_spinBox->value(), _ui.upperV_spinBox->value());
+	cv::Scalar low(_ui.lowerH_spinBox->value() / 2, _ui.lowerS_spinBox->value(), _ui.lowerV_spinBox->value());
+	cv::Scalar high(_ui.upperH_spinBox->value() / 2, _ui.upperS_spinBox->value(), _ui.upperV_spinBox->value());
 
 	timer.start();
-	cv::Mat mask;
-	cv::inRange(_originalImage, low, high, mask);
-	cv::bitwise_and(_originalImage, _originalImage, _outputImage, mask);
+	cv::inRange(_originalImage, low, high, _outputImage);
 	double elapsed = timer.nsecsElapsed();
 
 	_ui.info_label->setStyleSheet("QLabel { color : green; }");
@@ -67,9 +62,9 @@ QtNodes::NodeDataType HSVColorSegmentationNode::dataType(QtNodes::PortType portT
 		if (portIndex == 0)
 			return QtNodes::NodeDataType{ "Image", "图像输入" };
 		else if (portIndex == 1)
-			return QtNodes::NodeDataType{ "Scalar", "高阈值" };
+			return QtNodes::NodeDataType{ "Scalar", "上界" };
 		else
-			return QtNodes::NodeDataType{ "Scalar", "低阈值" };
+			return QtNodes::NodeDataType{ "Scalar", "下界" };
 	}
 	else
 		return QtNodes::NodeDataType{ "Image", "图像输出" };
@@ -108,16 +103,15 @@ void HSVColorSegmentationNode::setInData(std::shared_ptr<QtNodes::NodeData> node
 		_outputImage.release();
 	}
 	else if (portIndex == 1) {
-		_ui.lowerV_spinBox->setEnabled(true);
-		_ui.lowerS_spinBox->setEnabled(true);
-		_ui.lowerH_spinBox->setEnabled(true);
+		_ui.upperH_spinBox->setEnabled(true);
+		_ui.upperS_spinBox->setEnabled(true);
+		_ui.upperV_spinBox->setEnabled(true);
 	}
 	else if (portIndex == 2) {
-		_ui.upperV_spinBox->setEnabled(true);
-		_ui.upperS_spinBox->setEnabled(true);
-		_ui.upperH_spinBox->setEnabled(true);
+		_ui.lowerH_spinBox->setEnabled(true);
+		_ui.lowerS_spinBox->setEnabled(true);
+		_ui.lowerV_spinBox->setEnabled(true);
 	}
-
 	calculate();
 }
 

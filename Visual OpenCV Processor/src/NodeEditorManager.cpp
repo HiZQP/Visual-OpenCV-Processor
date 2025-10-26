@@ -3,6 +3,7 @@
 #include "OpenCVNodes/OpenCVNodes.h"
 #include "ToolNodes/ToolNodes.h"
 #include "DataNodeModel.h"
+#include "Math/MathNodes.h"
 
 void NodeEditorManager::registerParamType(RegistryItemCreator creator)
 {
@@ -19,12 +20,13 @@ std::shared_ptr<QtNodes::NodeDelegateModelRegistry> NodeEditorManager::registerD
 {
 	auto ret = std::make_shared<QtNodes::NodeDelegateModelRegistry>();
 	// 在这里注册自定义的数据模型
-	ret->registerModel<ImageLoaderModel>("工具");
-	ret->registerModel<CameraReadModel>("工具");
-	ret->registerModel<CaptureTriggerModel>("工具");
+	ret->registerModel<FileImageLoaderNode>("工具");
+	ret->registerModel<CameraCaptureNode>("工具");
+	ret->registerModel<CaptureTriggerNode>("工具");
 	ret->registerModel<ImageSaveModel>("工具");
-	ret->registerModel<ColorPicker>("工具");
+	ret->registerModel<ColorPickerNode>("工具");
 	ret->registerModel<ColorSpaceConversionNode>("工具");
+	ret->registerModel<MakeBorderNode>("工具");
 
 	ret->registerModel<ImageBlurModel>("图像平滑");
 	ret->registerModel<ImageGaussianBlurModel>("图像平滑");
@@ -34,33 +36,40 @@ std::shared_ptr<QtNodes::NodeDelegateModelRegistry> NodeEditorManager::registerD
 	ret->registerModel<MorphologyModel>("形态学");
 	ret->registerModel<MorphologyFindLineNode>("形态学");
 
+	ret->registerModel<DrawLineModel>("绘制");
+	ret->registerModel<DrawRectangleModel>("绘制");
+	ret->registerModel<DrawCircleModel>("绘制");
+	ret->registerModel<DrawTextModel>("绘制");
+	ret->registerModel<HoughLinesNode>("图像操作");
+	ret->registerModel<DrawLinesNode>("绘制");
+	ret->registerModel<ImageDrawContoursModel>("绘制");
+	ret->registerModel<DrawCirclesNode>("绘制");
+
 	ret->registerModel<ResizeNode>("图像操作");
 	ret->registerModel<ImageCropModel>("图像操作");
 	ret->registerModel<ImageRotateModel>("图像操作");
 	ret->registerModel<ImageFlipModel>("图像操作");
 	ret->registerModel<ImageImadaptiveThresh>("图像操作");
 	ret->registerModel<ImageCannyModel>("图像操作");
-	ret->registerModel<ImageSobelModel>("图像操作");
-	ret->registerModel<ImageLaplacianModel>("图像操作");
+	ret->registerModel<SobelEdgeDetectionNode>("图像操作");
+	ret->registerModel<LaplacianEdgeDetectionModel>("图像操作");
 	ret->registerModel<ImageHistEqualizeModel>("图像操作");
 	ret->registerModel<ImageFindContoursModel>("图像操作");
-	ret->registerModel<ImageDrawContoursModel>("图像操作");
 	ret->registerModel<ThresholdNode>("图像操作");
 	ret->registerModel<ImageChannelExtract>("图像操作");
 	ret->registerModel<HSVColorSegmentationNode>("图像操作");
 	ret->registerModel<WarpPerspectiveModel>("图像操作");
-	ret->registerModel<DrawLineModel>("图像操作");
-	ret->registerModel<DrawRectangleModel>("图像操作");
-	ret->registerModel<DrawCircleModel>("图像操作");
-	ret->registerModel<DrawTextModel>("图像操作");
-	ret->registerModel<HoughLinesNode>("图像操作");
-	ret->registerModel<DrawLinesNode>("图像操作");
 	ret->registerModel<MatCreateNode>("图像操作");
 	ret->registerModel<BCGAdjustment>("图像操作");
+	ret->registerModel<HoughCirclesNode>("图像操作");
 
 	ret->registerModel<BitwiseAnd>("数学");
 	ret->registerModel<BitwiseOr>("数学");
 	ret->registerModel<AddWeightedNode>("数学");
+	ret->registerModel<AdditionModel>("数学");
+	ret->registerModel<SubtractionModel>("数学");
+	ret->registerModel<MultiplicationModel>("数学");
+	ret->registerModel<DivisionModel>("数学");
 
 	ret->registerModel<TextDisplayModel>("显示");
 	ret->registerModel<ImageDisplayModel>("显示");
@@ -73,6 +82,7 @@ std::shared_ptr<QtNodes::NodeDelegateModelRegistry> NodeEditorManager::registerD
 
 	ret->registerModel<NumberNodeModel>("数据节点");
 	ret->registerModel<StringNodeModel>("数据节点");
+	ret->registerModel<PointNodeModel>("数据节点");
 	return ret;
 }
 

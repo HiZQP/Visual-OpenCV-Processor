@@ -24,8 +24,8 @@ public:
     WarpPerspectiveModel();
     virtual ~WarpPerspectiveModel() = default;
 
-    QString caption() const override { return "透视变换"; }
-    QString name() const override { return "WarpPerspectiveNode"; }
+    QString caption() const override { return "透视变换组件"; }
+    QString name() const override { return "透视变换"; }
     unsigned int nPorts(QtNodes::PortType portType) const override;
     QtNodes::NodeDataType dataType(QtNodes::PortType portType, QtNodes::PortIndex portIndex) const override;
     void setInData(std::shared_ptr<QtNodes::NodeData> nodeData, QtNodes::PortIndex portIndex) override;

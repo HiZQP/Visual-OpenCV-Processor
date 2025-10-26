@@ -20,7 +20,7 @@ private:
 	cv::Scalar _color;
 	cv::Mat _originalImage;
 	cv::Mat _outputImage;
-	std::vector<cv::Vec4i> _lines;
+	std::vector<cv::Vec4f> _lines;
 	void calculate();
 	void openColorDialog();
 public:

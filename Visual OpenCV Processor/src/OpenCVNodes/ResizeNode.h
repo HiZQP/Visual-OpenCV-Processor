@@ -4,11 +4,6 @@
 #include <QtNodes/NodeDelegateModel>
 #include "ui_ResizeNode.h"
 
-#include <QSpinBox>
-#include <QComboBox>
-#include <QLabel>
-
-
 class ResizeNode : public QtNodes::NodeDelegateModel
 {
 	Q_OBJECT

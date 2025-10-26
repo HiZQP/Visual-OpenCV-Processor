@@ -82,7 +82,7 @@ QtNodes::NodeDataType HoughLinesNode::dataType(QtNodes::PortType portType, QtNod
 	if (portType == QtNodes::PortType::In)
 		return QtNodes::NodeDataType{ "Image", "图像输入" };
 	else
-		return QtNodes::NodeDataType{ "Lines", "线段集" };
+		return QtNodes::NodeDataType{ "Vector", "线段集" };
 }
 
 void HoughLinesNode::setInData(std::shared_ptr<QtNodes::NodeData> nodeData, QtNodes::PortIndex portIndex)
@@ -111,7 +111,7 @@ void HoughLinesNode::setInData(std::shared_ptr<QtNodes::NodeData> nodeData, QtNo
 std::shared_ptr<QtNodes::NodeData> HoughLinesNode::outData(QtNodes::PortIndex port)
 {
 	if (!_lines.empty()) {
-		return std::make_shared<LinesData>(_lines);
+		return std::make_shared<VectorData>(_lines);
 	}
 	else {
 		return nullptr;

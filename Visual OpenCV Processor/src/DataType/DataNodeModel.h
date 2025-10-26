@@ -3,7 +3,7 @@
 #include "NodeDataType.h"
 
 #include <QDoubleSpinBox>
-#include <QHBoxLayout>
+#include <QFormLayout>
 #include <QLineEdit>
 
 class DataNodeModel : public QtNodes::NodeDelegateModel {
@@ -74,26 +74,32 @@ public:
 class PointNodeModel : public DataNodeModel {
 	Q_OBJECT
 private:
+	QWidget* _widget;
 	QDoubleSpinBox* _spinBoxX;
 	QDoubleSpinBox* _spinBoxY;
-	double _x;
-	double _y;
-	void setX(double x) { _x = x; Q_EMIT dataUpdated(0); }
-	void setY(double y) { _y = y; Q_EMIT dataUpdated(0); }
 public:
-	PointNodeModel() : _x(0.0), _y(0.0) {
+	PointNodeModel() {
+		_widget = new QWidget();
+		QFormLayout* layout = new QFormLayout();
 		_spinBoxX = new QDoubleSpinBox();
-		_spinBoxX->setMinimum(-1e+10);
-		_spinBoxX->setMaximum(1e+10);
-		_spinBoxX->setDecimals(4);
-		_spinBoxX->setSingleStep(0.1);
-		connect(_spinBoxX, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, &PointNodeModel::setX);
+		_spinBoxX->setMinimum(-9999);
+		_spinBoxX->setMaximum(9999);
+		_spinBoxX->setDecimals(2);
+		_spinBoxX->setSingleStep(1);
 		_spinBoxY = new QDoubleSpinBox();
-		_spinBoxY->setMinimum(-1e+10);
-		_spinBoxY->setMaximum(1e+10);
-		_spinBoxY->setDecimals(4);
-		_spinBoxY->setSingleStep(0.1);
-		connect(_spinBoxY, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, &PointNodeModel::setY);
+		_spinBoxY->setMinimum(-9999);
+		_spinBoxY->setMaximum(9999);
+		_spinBoxY->setDecimals(2);
+		_spinBoxY->setSingleStep(1);
+		layout->addRow(QStringLiteral("X:"), _spinBoxX);
+		layout->addRow(QStringLiteral("Y:"), _spinBoxY);
+		_widget->setLayout(layout);
+		connect(_spinBoxX, QOverload<double>::of(&QDoubleSpinBox::valueChanged), [this]() {
+			emit dataUpdated(0);
+			});
+		connect(_spinBoxY, QOverload<double>::of(&QDoubleSpinBox::valueChanged), [this]() {
+			emit dataUpdated(0);
+			});
 	}
 	~PointNodeModel() = default;
 	QString caption() const override { return QStringLiteral("点"); }
@@ -103,14 +109,7 @@ public:
 			return QtNodes::NodeDataType{ "Point", "点" };
 	}
 	std::shared_ptr<QtNodes::NodeData> outData(QtNodes::PortIndex port) override {
-		return std::make_shared<ScalarData>(cv::Scalar(_x, _y));
+		return std::make_shared<PointData>(cv::Point2d(_spinBoxX->value(), _spinBoxY->value()));
 	}
-	QWidget* embeddedWidget() override {
-		QWidget* widget = new QWidget();
-		QHBoxLayout* layout = new QHBoxLayout();
-		layout->addWidget(_spinBoxX);
-		layout->addWidget(_spinBoxY);
-		widget->setLayout(layout);
-		return widget;
-	}
+	QWidget* embeddedWidget() override { return _widget; }
 };

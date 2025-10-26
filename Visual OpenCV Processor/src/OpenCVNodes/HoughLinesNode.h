@@ -21,7 +21,7 @@ private:
 	QLabel* _infoLabel;
 
 	cv::Mat _originalImage;
-	std::vector<cv::Vec4i> _lines;
+	std::vector<cv::Vec4f> _lines;
 	void calculate();
 public:
 	HoughLinesNode();

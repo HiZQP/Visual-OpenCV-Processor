@@ -2,26 +2,21 @@
 #include <opencv2/opencv.hpp>
 #include "NodeDataType.h"
 #include <QtNodes/NodeDelegateModel>
+#include "ui_LaplacianEdgeDetectionModel.h"
 
-#include <QLineEdit>
-#include <QComboBox>
-#include <QSpinBox>
-
-class ImageLaplacianModel : public QtNodes::NodeDelegateModel
+class LaplacianEdgeDetectionModel : public QtNodes::NodeDelegateModel
 {
 	Q_OBJECT
 private:
+	Ui::LaplacianEdgeDetectionModel _ui;
 	QWidget* _widget;
-	QSpinBox* _ksize;
-	QComboBox* _scale;
-	QComboBox* _delta;
-	QComboBox* _ddepth;
+	
 	cv::Mat _originalImage;
-	cv::Mat _laplacianImage;
+	cv::Mat _outputImage;
 	void calculate();
 public:
-	ImageLaplacianModel();
-	virtual ~ImageLaplacianModel() override {}
+	LaplacianEdgeDetectionModel();
+	virtual ~LaplacianEdgeDetectionModel() override {}
 	QString caption() const override { return "图像Laplacian边缘检测组件"; }
 	QString name() const override { return "Laplacian边缘检测"; }
 	unsigned int nPorts(QtNodes::PortType portType) const override;

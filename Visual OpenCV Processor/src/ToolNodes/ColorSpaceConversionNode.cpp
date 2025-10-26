@@ -1,9 +1,5 @@
 #include "ColorSpaceConversionNode.h"
 
-#include <QHBoxLayout>
-#include <QVBoxLayout>
-#include <QLabel>
-
 void ColorSpaceConversionNode::calculate()
 {
 	if (!_inputImage.data) {

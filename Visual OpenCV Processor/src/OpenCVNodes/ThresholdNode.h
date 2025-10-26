@@ -4,10 +4,6 @@
 #include <QtNodes/NodeDelegateModel>
 #include "ui_ThresholdNode.h"
 
-#include <QLineEdit>
-#include <QComboBox>
-#include <QSpinBox>
-
 class ThresholdNode : public QtNodes::NodeDelegateModel
 {
 	Q_OBJECT

@@ -97,13 +97,13 @@ public:
 	cv::Vec4i get() const { return _line; }
 };
 
-class LinesData : public QtNodes::NodeData
+class VectorData : public QtNodes::NodeData
 {
 private:
-	std::vector<cv::Vec4i> _lines;
+	std::vector<cv::Vec4f> _lines;
 public:
-	LinesData() : _lines() {}
-	LinesData(const std::vector<cv::Vec4i>& lines) : _lines(lines) {}
-	QtNodes::NodeDataType type() const override { return QtNodes::NodeDataType{ "Lines", "线段集" }; }
-	std::vector<cv::Vec4i> get() const { return _lines; }
+	VectorData() : _lines() {}
+	VectorData(const std::vector<cv::Vec4f>& lines) : _lines(lines) {}
+	QtNodes::NodeDataType type() const override { return QtNodes::NodeDataType{ "Vector", "向量集" }; }
+	std::vector<cv::Vec4f> get() const { return _lines; }
 };

@@ -1,26 +1,26 @@
 #pragma once
 #include <opencv2/opencv.hpp>
 #include <QtNodes/NodeDelegateModel>
-#include <QColor>
 #include "NodeDataType.h"
+#include "ui_ColorPickerNode.h"
 
-#include <QComboBox>
-#include <QPushButton>
+#include <QColor>
 
-class ColorPicker : public QtNodes::NodeDelegateModel
+class ColorPickerNode : public QtNodes::NodeDelegateModel
 {
 	Q_OBJECT
 private:
+	Ui::ColorPickerNode _ui;
 	QWidget* _widget;
-	QPushButton* _button;
-	QComboBox* _colorSpace;
+
 	cv::Scalar _color;
+	QColor _qcolor;
 	void calculate();
 public:
-	ColorPicker();
-	virtual ~ColorPicker() override {}
-	QString caption() const override { return "颜色选择器"; }
-	QString name() const override { return "颜色选择器"; }
+	ColorPickerNode();
+	virtual ~ColorPickerNode() override {}
+	QString caption() const override { return "拾色器"; }
+	QString name() const override { return "拾色器"; }
 	unsigned int nPorts(QtNodes::PortType portType) const override;
 	QtNodes::NodeDataType dataType(QtNodes::PortType portType, QtNodes::PortIndex portIndex) const override;
 	void setInData(std::shared_ptr<QtNodes::NodeData> nodeData, QtNodes::PortIndex portIndex) override {}

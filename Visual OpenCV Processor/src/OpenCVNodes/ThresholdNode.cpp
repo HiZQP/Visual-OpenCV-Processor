@@ -1,9 +1,5 @@
 #include "ThresholdNode.h"
 
-#include <QFormLayout>
-#include <QLabel>
-
-
 void ThresholdNode::calculate() {
 	if (!_originalImage.data) {
 		_ui.info_label->setStyleSheet("QLabel { color : orange; }");

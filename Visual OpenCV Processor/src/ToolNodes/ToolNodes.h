@@ -1,2 +1,5 @@
 #pragma once
-#include "ToolNodes/ColorPicker.h"
+#include "ColorPickerNode.h"
+#include "FileImageLoaderNode.h"
+#include "CameraCaptureNode.h"
+#include "MakeBorderNode.h"

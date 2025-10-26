@@ -73,7 +73,7 @@ QtNodes::NodeDataType DrawLinesNode::dataType(QtNodes::PortType portType, QtNode
 		if (portIndex == 0)
 			return QtNodes::NodeDataType{"Image", "输入图像"};
 		else if (portIndex == 1)
-			return QtNodes::NodeDataType{"Lines", "线段集"};
+			return QtNodes::NodeDataType{"Vector", "线段集"};
 	}
 	else {
 		if (portIndex == 0)
@@ -91,7 +91,7 @@ void DrawLinesNode::setInData(std::shared_ptr<QtNodes::NodeData> nodeData, QtNod
 			calculate();
 		}
 		else if (portIndex == 1) {
-			auto linesData = std::dynamic_pointer_cast<LinesData>(nodeData);
+			auto linesData = std::dynamic_pointer_cast<VectorData>(nodeData);
 			_lines = linesData->get();
 			calculate();
 		}

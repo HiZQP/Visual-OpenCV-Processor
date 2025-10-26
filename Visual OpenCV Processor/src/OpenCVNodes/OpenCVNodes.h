@@ -2,7 +2,6 @@
 
 #include "DataTypeCastModel.h"
 #include "DisplayModel.h"
-#include "ImageLoaderModel.h"
 #include "ImageSaveModel.h"
 #include "ResizeNode.h"
 #include "ImageCropModel.h"
@@ -15,8 +14,8 @@
 #include "ImageImbilateralFilter.h"
 #include "ImageImadaptiveThresh.h"
 #include "ImageCannyModel.h"
-#include "ImageSobelModel.h"
-#include "ImageLaplacianModel.h"
+#include "SobelEdgeDetectionNode.h"
+#include "LaplacianEdgeDetectionModel.h"
 #include "ImageHistEqualizeModel.h"
 #include "ImageFindContoursModel.h"
 #include "ImageDrawContoursModel.h"
@@ -25,7 +24,6 @@
 #include "HSVColorSegmentationNode.h"
 #include "WarpPerspectiveModel.h"
 #include "MorphologyModel.h"
-#include "CameraReadModel.h"
 #include "DrawLineModel.h"
 #include "DrawRectangleModel.h"
 #include "DrawCircleModel.h"
@@ -35,8 +33,5 @@
 #include "MatCreateNode.h"
 #include "BCGAdjustment.h"
 #include "MorphologyFindLineNode.h"
-
-
-#include "Math/BitwiseAnd.h"
-#include "Math/BitwiseOr.h"
-#include "Math/AddWeightedNode.h"
+#include "HoughCirclesNode.h"
+#include "DrawCirclesNode.h"

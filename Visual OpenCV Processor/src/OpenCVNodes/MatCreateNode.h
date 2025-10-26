@@ -2,7 +2,6 @@
 #include <opencv2/opencv.hpp>
 #include "NodeDataType.h"
 #include <QtNodes/NodeDelegateModel>
-
 #include "ui_MatCreateNode.h"
 
 class MatCreateNode : public QtNodes::NodeDelegateModel
